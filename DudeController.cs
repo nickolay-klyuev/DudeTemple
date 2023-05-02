@@ -10,6 +10,12 @@ public partial class DudeController : CharacterBody3D
 	Camera3D DudeFace;
 
 	[Export]
+	RayCast3D DudeHand;
+
+	[Export]
+	Label InteractUI;
+
+	[Export]
 	private float _speed = 5.0f;
 
 	[Export]
@@ -20,8 +26,24 @@ public partial class DudeController : CharacterBody3D
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
+	private bool _bIsDisabled = false;
+
+	private CollisionShape3D _dudeCollision;
+
+	public override void _Ready()
+	{
+		InteractUI.Visible = false;
+
+		_dudeCollision = GetChild<CollisionShape3D>(0);
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
+		if (_bIsDisabled)
+		{
+			return;
+		}
+
 		// Sprint check
 		float currentSpeed;
 		if (Input.IsActionPressed("Sprint"))
@@ -62,10 +84,17 @@ public partial class DudeController : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		InteractProcess();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		if (_bIsDisabled)
+		{
+			return;
+		}
+
 		// Turn dude around by mouse X axis
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
@@ -74,5 +103,43 @@ public partial class DudeController : CharacterBody3D
 			RotateY(-mouseMotion.Relative.X * TurnModifier);
 			DudeFace.RotateX(-mouseMotion.Relative.Y * TurnModifier);
 		}
+	}
+
+	private void InteractProcess()
+	{
+		if (DudeHand.IsColliding())
+		{
+			InteractUI.Visible = true;
+
+			IInteractable interactableObject = DudeHand.GetCollider() as IInteractable;
+			if (interactableObject != null && Input.IsActionJustPressed("Interact"))
+			{
+				interactableObject.Interact();
+			}
+		}
+		else
+		{
+			InteractUI.Visible = false;
+		}
+	}
+
+	// Change Dude's behave for different game modes
+	public void OnGameModeChanged(TempleState.GameMode gameMode)
+	{
+		if (gameMode == TempleState.GameMode.Walking)
+		{
+			SetDisabled(false);
+		}
+		else if (gameMode == TempleState.GameMode.RollingBalls)
+		{
+			InteractUI.Visible = false;
+			SetDisabled(true);
+		}
+	}
+
+	private void SetDisabled(bool bIsDisabled)
+	{
+		_bIsDisabled = bIsDisabled;
+		_dudeCollision.Disabled = _bIsDisabled;
 	}
 }

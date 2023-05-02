@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://6qw3gie53svf"]
+
+[ext_resource type="PackedScene" uid="uid://b1ec7pxs575sm" path="res://Pins/SimpleCandlePin/SimpleCandlePin.tscn" id="1_xr1ca"]
+
+[node name="SimpleCandlePins" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 0)
+
+[node name="SimpleCandlePin" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.388646, 0.206394, 0.14165)
+
+[node name="SimpleCandlePin2" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.386831, 0.206394, 0.483468)
+
+[node name="SimpleCandlePin3" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.383448, 0.206394, -0.165047)
+
+[node name="SimpleCandlePin4" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389422, 0.206394, -0.485596)
+
+[node name="SimpleCandlePin5" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243439, 0.206394, 0.32437)
+
+[node name="SimpleCandlePin6" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225, 0.206, 0)
+
+[node name="SimpleCandlePin7" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225235, 0.206394, -0.355465)
+
+[node name="SimpleCandlePin8" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111032, 0.206394, -0.189017)
+
+[node name="SimpleCandlePin9" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112633, 0.206394, 0.19559)
+
+[node name="SimpleCandlePin10" parent="." instance=ExtResource("1_xr1ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.206, 0)
