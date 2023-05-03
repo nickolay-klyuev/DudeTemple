@@ -21,6 +21,9 @@ public partial class BowlingGameManager : Node3D
 	[Export]
 	VBoxContainer PowerMeterUI;
 
+	[Export]
+	TextureRect EndLineView;
+
 	[ExportGroup("Settings")]
 	[Export]
 	private float _moveBallSensitivity = 1.0f;
@@ -49,7 +52,7 @@ public partial class BowlingGameManager : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		PowerMeterUI.Visible = false;
+		SetBowlingUIVisibility(false);
 
 		const string powerMeterScaleName = "PowerMeterScale";
 
@@ -110,6 +113,7 @@ public partial class BowlingGameManager : Node3D
 			{
 				_bowlingBall.Freeze = false;
 				_bowlingBall.ApplyImpulse(new Vector3(_baseThrowPower * _currentThrowPower, 0.0f, 0.0f));
+				//_bowlingBall.ApplyTorqueImpulse(new Vector3(500.0f, 0.0f, 0.0f));
 				_bIsBallLanched = true;
 				PowerMeterUI.Visible = false;
 			}
@@ -183,7 +187,7 @@ public partial class BowlingGameManager : Node3D
 		{
 			_bIsBowlingLaneClean = false;
 
-			PowerMeterUI.Visible = true;
+			SetBowlingUIVisibility(true);
 
 			SpawnBall();
 			SpawnPins();
@@ -192,10 +196,16 @@ public partial class BowlingGameManager : Node3D
 		{
 			_bIsBowlingLaneClean = true;
 
-			PowerMeterUI.Visible = false;
+			SetBowlingUIVisibility(false);
 
 			_bowlingBall.QueueFree();
 			_bowlingPins.QueueFree();
 		}
+	}
+
+	private void SetBowlingUIVisibility(bool bIsVisible)
+	{
+		PowerMeterUI.Visible = bIsVisible;
+		EndLineView.Visible = bIsVisible;
 	}
 }

@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ec7pxs575sm"]
+[gd_scene load_steps=5 format=3 uid="uid://b1ec7pxs575sm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nk8xv"]
+friction = 0.2
 rough = true
 bounce = 0.7
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_in6cl"]
+albedo_color = Color(0, 0.686275, 0.839216, 1)
+roughness = 0.7
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_wntr0"]
+material = SubResource("StandardMaterial3D_in6cl")
 top_radius = 0.037
 bottom_radius = 0.037
 height = 0.4
