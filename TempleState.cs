@@ -29,7 +29,7 @@ public partial class TempleState : Node3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (_currentGameMode == GameMode.RollingBalls && Input.IsActionJustPressed("Return"))
+		if (_currentGameMode == GameMode.RollingBalls && Input.IsActionJustPressed("Interact"))
 		{
 			ChangeGameMode(GameMode.Walking);
 		}

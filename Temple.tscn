@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b8l5mnur7ugi1"]
+[gd_scene load_steps=38 format=3 uid="uid://b8l5mnur7ugi1"]
 
 [ext_resource type="Script" path="res://DudeController.cs" id="1_ap5d1"]
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://PlayerViewManager.cs" id="6_ql2ml"]
 [ext_resource type="Script" path="res://BowlingGameManager.cs" id="7_rl7pp"]
 [ext_resource type="PackedScene" uid="uid://be5qpiblt04st" path="res://BowlingBall.tscn" id="8_ncw30"]
+[ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rhnba"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -395,6 +396,8 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PinsMachine/StaticBody3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625377, 0.75326, 0)
 shape = SubResource("ConvexPolygonShape3D_xh1hp")
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_gpxng")]
 
 [connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]
 [connection signal="GameModeChanged" from="." to="PlayerViewManager" method="ChangeCameraForGameMode"]
