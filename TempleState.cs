@@ -29,7 +29,8 @@ public partial class TempleState : Node3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (_currentGameMode == GameMode.RollingBalls && Input.IsActionJustPressed("Interact"))
+		// TODO: Don't need to use another one action to close bowling. Need to make good input controller.
+		if (_currentGameMode == GameMode.RollingBalls && Input.IsActionJustPressed("CloseBowling"))
 		{
 			ChangeGameMode(GameMode.Walking);
 		}
