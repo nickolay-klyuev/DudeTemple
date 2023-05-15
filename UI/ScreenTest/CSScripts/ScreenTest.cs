@@ -1,13 +1,10 @@
 using Godot;
 using System;
 
-public partial class StartBowlingHandler : Area3D, IInteractable
+public partial class ScreenTest : Control
 {
-	[Signal]
-	public delegate void StartBowlingTriggeredEventHandler(int lineIndex);
-
 	[Export]
-	private int _lineIndex = 0;
+	Label _scoreLabel;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -19,8 +16,8 @@ public partial class StartBowlingHandler : Area3D, IInteractable
 	{
 	}
 
-	public void Interact()
+	public void UpdateScoreLabel(int newScore)
 	{
-		EmitSignal(SignalName.StartBowlingTriggered, _lineIndex);
+		_scoreLabel.Text = newScore.ToString();
 	}
 }

@@ -24,6 +24,13 @@ public partial class BowlingGameManager : Node3D
 	[Export]
 	TextureRect EndLineView;
 
+	[ExportSubgroup("Utils")]
+	[Export]
+	private Timer _scoreCountdownTimer;
+
+	[Export]
+	private ScoreDataHolder _scoreDataHolderRef;
+
 	[ExportGroup("Settings")]
 	[Export]
 	private float _moveBallSensitivity = 1.0f;
@@ -52,6 +59,8 @@ public partial class BowlingGameManager : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		SubscribeToEndLaneTriggers();
+
 		SetBowlingUIVisibility(false);
 
 		const string powerMeterScaleName = "PowerMeterScale";
@@ -207,5 +216,39 @@ public partial class BowlingGameManager : Node3D
 	{
 		PowerMeterUI.Visible = bIsVisible;
 		EndLineView.Visible = bIsVisible;
+	}
+
+	private void SubscribeToEndLaneTriggers()
+	{
+		_scoreCountdownTimer.Timeout += CountScore;
+
+		Array<Node> LaneEndTriggers = GetTree().GetNodesInGroup("LaneEndTrigger");
+
+		foreach (Area3D Trigger in LaneEndTriggers)
+		{
+			Trigger.BodyEntered += TriggerScoreCountdown;
+		}
+	}
+
+	private void TriggerScoreCountdown(Node3D body)
+	{
+		_scoreCountdownTimer.Start();
+	}
+
+	private void CountScore()
+	{
+		// TODO: Count score like that can give mistakes but rare. Maybe change it in the future.
+		int hitPins = 0;
+		foreach (Node3D pin in _bowlingPins.GetChildren())
+		{
+			float angleRad = 0.1745f; // 10 degrees
+			
+			if (Mathf.Abs(pin.Rotation.X) > angleRad || Mathf.Abs(pin.Rotation.Z) > angleRad)
+			{
+				hitPins++;
+			}
+		}
+
+		_scoreDataHolderRef.AddScore(hitPins);
 	}
 }

@@ -6,6 +6,12 @@ public partial class TempleState : Node3D
 	[Signal]
 	public delegate void GameModeChangedEventHandler(GameMode currentGameMode);
 
+	[Export]
+	private Node3D _bowlingGameRef;
+
+	[Export]
+	private Camera3D _endLineCameraRef;
+
 	public enum GameMode
 	{
 		Walking,
@@ -42,8 +48,12 @@ public partial class TempleState : Node3D
 		EmitSignal(SignalName.GameModeChanged, (int)_currentGameMode);
 	}
 
-	public void StartBowling()
+	public void StartBowling(int lineIndex)
 	{
+		// TODO: Maybe it will be good to do refactor in the future.
+		_bowlingGameRef.Position = new Vector3(0.0f, 0.0f, 2.0f * lineIndex);
+		_endLineCameraRef.Position = new Vector3(_endLineCameraRef.Position.X, _endLineCameraRef.Position.Y, 2.0f * lineIndex);
+
 		ChangeGameMode(GameMode.RollingBalls);
 	}
 }

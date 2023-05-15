@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bbasi3gngb4go"]
+[gd_scene load_steps=22 format=3 uid="uid://bbasi3gngb4go"]
 
 [ext_resource type="Texture2D" uid="uid://dvv7glpcyrlbd" path="res://bowling-lane-first-try.png" id="1_es3vy"]
 
@@ -60,6 +60,9 @@ size = Vector3(2, 0.5, 2.15)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xh1hp"]
 points = PackedVector3Array(1, 0.25, 1.075, 1, -0.25, 1.075, 1, 0.25, -1.075, -1, 0.25, 1.075, -1, -0.25, 1.075, 1, -0.25, -1.075, -1, 0.25, -1.075, -1, -0.25, -1.075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iev24"]
+size = Vector3(1, 1, 1.7)
 
 [node name="BowlingLane_1" type="Node3D"]
 
@@ -187,3 +190,11 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PinsMachine/StaticBody3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625377, 0.75326, 0)
 shape = SubResource("ConvexPolygonShape3D_xh1hp")
+
+[node name="LaneEndTriggerArea" type="Area3D" parent="." groups=["LaneEndTrigger"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.98276, 0.315897, 0)
+collision_layer = 0
+collision_mask = 1024
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LaneEndTriggerArea"]
+shape = SubResource("BoxShape3D_iev24")

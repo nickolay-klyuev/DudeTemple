@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b8l5mnur7ugi1"]
+[gd_scene load_steps=32 format=3 uid="uid://b8l5mnur7ugi1"]
 
 [ext_resource type="Script" path="res://DudeController.cs" id="1_ap5d1"]
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
@@ -9,14 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://be5qpiblt04st" path="res://BowlingBall.tscn" id="8_ncw30"]
 [ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
-[ext_resource type="Texture2D" uid="uid://hrynlb0ulqvj" path="res://heather_mason__silent_hill_by_alienally_dfg3w6h.png" id="10_rb2bk"]
-[ext_resource type="Texture2D" uid="uid://b61bjwpogn3rt" path="res://4729b43c2f8529d08435ec04e2867c331ad917b5_s2_n2.jpg" id="11_t7vv2"]
+[ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://UI/ScreenTest/ScreenTest.tscn" id="10_hv4nn"]
+[ext_resource type="Script" path="res://Score/CSScripts/ScoreDataHolder.cs" id="11_3ld55"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_mode = 1
 ambient_light_source = 2
-ambient_light_color = Color(0.207843, 0.207843, 0.207843, 1)
-ambient_light_energy = 0.01
+ambient_light_color = Color(0.258824, 0, 0.101961, 1)
+ambient_light_energy = 0.2
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.5
+glow_bloom = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
 height = 1.8
@@ -24,7 +28,7 @@ height = 1.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_0dj8r"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7idmr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_80ma2"]
 viewport_path = NodePath("BowlingGame/EndLineViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl01h"]
@@ -66,8 +70,28 @@ points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
 [sub_resource type="PlaneMesh" id="PlaneMesh_1arfw"]
 size = Vector2(40, 20)
 
-[node name="Temple" type="Node3D"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_o4v64"]
+viewport_path = NodePath("ScreenTest/ScreenTestViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8xssg"]
+viewport_path = NodePath("ScreenTest/ScreenTestViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avsxf"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_o4v64")
+emission_enabled = true
+emission_texture = SubResource("ViewportTexture_8xssg")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ixssc"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(7, 5)
+material = SubResource("StandardMaterial3D_avsxf")
+size = Vector2(1, 0.7)
+
+[node name="Temple" type="Node3D" node_paths=PackedStringArray("_bowlingGameRef", "_endLineCameraRef")]
 script = ExtResource("1_hpo4a")
+_bowlingGameRef = NodePath("BowlingGame")
+_endLineCameraRef = NodePath("BowlingGame/EndLineViewport/EndLineCamera")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f4q88")
@@ -110,13 +134,92 @@ size_flags_horizontal = 4
 text = "Press E to interact"
 metadata/_edit_use_anchors_ = true
 
-[node name="StartGameArea" type="Area3D" parent="."]
+[node name="StartBowlingTriggers" type="Node3D" parent="."]
+
+[node name="StartGameArea" type="Area3D" parent="StartBowlingTriggers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
 collision_layer = 2048
 collision_mask = 2048
 script = ExtResource("5_68h4b")
 
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartGameArea"]
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0dj8r")
+
+[node name="StartGameArea2" type="Area3D" parent="StartBowlingTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 2)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("5_68h4b")
+_lineIndex = 1
+
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0dj8r")
+
+[node name="StartGameArea3" type="Area3D" parent="StartBowlingTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 4)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("5_68h4b")
+_lineIndex = 2
+
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0dj8r")
+
+[node name="StartGameArea4" type="Area3D" parent="StartBowlingTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 6)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("5_68h4b")
+_lineIndex = 3
+
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0dj8r")
+
+[node name="StartGameArea5" type="Area3D" parent="StartBowlingTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 8)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("5_68h4b")
+_lineIndex = 4
+
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0dj8r")
+
+[node name="StartGameArea6" type="Area3D" parent="StartBowlingTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 10)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("5_68h4b")
+_lineIndex = 5
+
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0dj8r")
+
+[node name="StartGameArea7" type="Area3D" parent="StartBowlingTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 12)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("5_68h4b")
+_lineIndex = 6
+
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0dj8r")
+
+[node name="StartGameArea8" type="Area3D" parent="StartBowlingTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 14)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("5_68h4b")
+_lineIndex = 7
+
+[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 shape = SubResource("BoxShape3D_0dj8r")
 
@@ -126,7 +229,7 @@ script = ExtResource("6_ql2ml")
 DudeCamera = NodePath("../Dude/DudeFaceCamera")
 BowlingCamera = NodePath("../BowlingGame/BowlingCamera")
 
-[node name="BowlingGame" type="Node3D" parent="." node_paths=PackedStringArray("SpawnBallLocation", "SpawnPinsLocation", "PowerMeterUI", "EndLineView")]
+[node name="BowlingGame" type="Node3D" parent="." node_paths=PackedStringArray("SpawnBallLocation", "SpawnPinsLocation", "PowerMeterUI", "EndLineView", "_scoreCountdownTimer", "_scoreDataHolderRef")]
 script = ExtResource("7_rl7pp")
 BowlingBallScene = ExtResource("8_ncw30")
 SpawnBallLocation = NodePath("BallSpawnLocation")
@@ -134,7 +237,10 @@ BowlingPinsScene = ExtResource("6_buwsq")
 SpawnPinsLocation = NodePath("PinsSpawnLocation")
 PowerMeterUI = NodePath("PowerMeter")
 EndLineView = NodePath("EndLineView")
+_scoreCountdownTimer = NodePath("ScoreCountdownTimer")
+_scoreDataHolderRef = NodePath("../ScoreDataHolder")
 _moveBallSensitivity = 0.2
+_baseThrowPower = 8.0
 
 [node name="BallSpawnLocation" type="Node3D" parent="BowlingGame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.94376, 0.663973, 0)
@@ -215,12 +321,16 @@ horizontal_alignment = 1
 [node name="EndLineView" type="TextureRect" parent="BowlingGame"]
 offset_right = 512.0
 offset_bottom = 512.0
-texture = SubResource("ViewportTexture_7idmr")
+texture = SubResource("ViewportTexture_80ma2")
 
 [node name="EndLineViewport" type="SubViewport" parent="BowlingGame"]
 
 [node name="EndLineCamera" type="Camera3D" parent="BowlingGame/EndLineViewport"]
 transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, 7.54898, 0.821305, 0)
+
+[node name="ScoreCountdownTimer" type="Timer" parent="BowlingGame"]
+wait_time = 3.0
+one_shot = true
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_gpxng")]
 
@@ -355,16 +465,6 @@ shape = SubResource("ConvexPolygonShape3D_ga3vx")
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 7.45856)
 mesh = SubResource("PlaneMesh_1arfw")
 
-[node name="PosterTest" type="Decal" parent="RoomMain"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -12.3914, 1.59299, -1.33488)
-size = Vector3(3, 1, 2)
-texture_albedo = ExtResource("10_rb2bk")
-
-[node name="PosterTest_2" type="Decal" parent="RoomMain"]
-transform = Transform3D(0.992538, -3.26189e-10, -0.121939, -0.121939, -5.33011e-09, -0.992538, -3.26192e-10, 1, -5.33011e-09, -16.1925, 1.9779, -1.34271)
-size = Vector3(3, 1, 2)
-texture_albedo = ExtResource("11_t7vv2")
-
 [node name="Lighting" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lighting"]
@@ -437,7 +537,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 14.0459)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
+[node name="ScreenTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -13.7417, 1.55752, 15.1995)
+mesh = SubResource("PlaneMesh_ixssc")
+
+[node name="ScreenTestViewport" type="SubViewport" parent="ScreenTest"]
+disable_3d = true
+size = Vector2i(1024, 512)
+
+[node name="ScreenTest" parent="ScreenTest/ScreenTestViewport" instance=ExtResource("10_hv4nn")]
+
+[node name="ScoreDataHolder" type="Node" parent="."]
+script = ExtResource("11_3ld55")
+
 [connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]
 [connection signal="GameModeChanged" from="." to="PlayerViewManager" method="ChangeCameraForGameMode"]
 [connection signal="GameModeChanged" from="." to="BowlingGame" method="OnGameModeChanged"]
-[connection signal="StartBowlingTriggered" from="StartGameArea" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea2" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea3" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea4" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea5" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea6" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea7" to="." method="StartBowling"]
+[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea8" to="." method="StartBowling"]
+[connection signal="ScoreChanged" from="ScoreDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTest" method="UpdateScoreLabel"]
