@@ -6,11 +6,8 @@ public partial class TempleState : Node3D
 	[Signal]
 	public delegate void GameModeChangedEventHandler(GameMode currentGameMode);
 
-	[Export]
-	private Node3D _bowlingGameRef;
-
-	[Export]
-	private Camera3D _endLineCameraRef;
+	[Signal]
+	public delegate void ActiveBowlingLineChangedEventHandler(int activeLineIndex);
 
 	public enum GameMode
 	{
@@ -19,6 +16,8 @@ public partial class TempleState : Node3D
 	}
 
 	private GameMode _currentGameMode;
+	
+	private int _activeLineIndex;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -48,12 +47,20 @@ public partial class TempleState : Node3D
 		EmitSignal(SignalName.GameModeChanged, (int)_currentGameMode);
 	}
 
+	private void SetActiveLine(int lineIndex)
+	{
+		_activeLineIndex = lineIndex;
+		EmitSignal(SignalName.ActiveBowlingLineChanged, _activeLineIndex);
+	}
+
 	public void StartBowling(int lineIndex)
 	{
-		// TODO: Maybe it will be good to do refactor in the future.
-		_bowlingGameRef.Position = new Vector3(0.0f, 0.0f, 2.0f * lineIndex);
-		_endLineCameraRef.Position = new Vector3(_endLineCameraRef.Position.X, _endLineCameraRef.Position.Y, 2.0f * lineIndex);
-
+		SetActiveLine(lineIndex);
 		ChangeGameMode(GameMode.RollingBalls);
+	}
+
+	public void OnScoreCounted(int score)
+	{
+		ChangeGameMode(GameMode.Walking);
 	}
 }

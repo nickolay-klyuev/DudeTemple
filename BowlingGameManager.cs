@@ -29,7 +29,7 @@ public partial class BowlingGameManager : Node3D
 	private Timer _scoreCountdownTimer;
 
 	[Export]
-	private ScoreDataHolder _scoreDataHolderRef;
+	private Camera3D _endLineCameraRef;
 
 	[ExportGroup("Settings")]
 	[Export]
@@ -41,6 +41,8 @@ public partial class BowlingGameManager : Node3D
 	[Export]
 	private float _baseThrowPower = 10.0f;
 
+	[Signal]
+	public delegate void ScoreCountedEventHandler(int score);
 
 	private RigidBody3D _bowlingBall;
 	private Node3D _bowlingPins;
@@ -190,26 +192,40 @@ public partial class BowlingGameManager : Node3D
 		}
 	}
 
+	public void OnActiveBowlingLineChanged(int activeLineIndex)
+	{
+		if (_bIsBowlingLaneClean)
+		{
+			Position = new Vector3(0.0f, 0.0f, 2.0f * activeLineIndex);
+			_endLineCameraRef.Position = new Vector3(_endLineCameraRef.Position.X, _endLineCameraRef.Position.Y, 2.0f * activeLineIndex);
+		}
+	}
+
 	public void OnGameModeChanged(TempleState.GameMode gameMode)
 	{
 		if (gameMode == TempleState.GameMode.RollingBalls)
 		{
-			_bIsBowlingLaneClean = false;
-
 			SetBowlingUIVisibility(true);
 
-			SpawnBall();
-			SpawnPins();
+			if (_bIsBowlingLaneClean)
+			{
+				_bIsBowlingLaneClean = false;
+
+				SpawnBall();
+				SpawnPins();
+			}
 		}
-		else if (!_bIsBowlingLaneClean)
+		else
 		{
-			_bIsBowlingLaneClean = true;
-
 			SetBowlingUIVisibility(false);
-
-			_bowlingBall.QueueFree();
-			_bowlingPins.QueueFree();
 		}
+	}
+
+	private void CleanBowlingLane()
+	{
+		_bIsBowlingLaneClean = true;
+		_bowlingBall.QueueFree();
+		_bowlingPins.QueueFree();
 	}
 
 	private void SetBowlingUIVisibility(bool bIsVisible)
@@ -221,6 +237,7 @@ public partial class BowlingGameManager : Node3D
 	private void SubscribeToEndLaneTriggers()
 	{
 		_scoreCountdownTimer.Timeout += CountScore;
+		_scoreCountdownTimer.Timeout += CleanBowlingLane;
 
 		Array<Node> LaneEndTriggers = GetTree().GetNodesInGroup("LaneEndTrigger");
 
@@ -249,6 +266,6 @@ public partial class BowlingGameManager : Node3D
 			}
 		}
 
-		_scoreDataHolderRef.AddScore(hitPins);
+		EmitSignal(SignalName.ScoreCounted, hitPins);
 	}
 }

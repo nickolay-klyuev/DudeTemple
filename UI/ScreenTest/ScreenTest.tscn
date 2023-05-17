@@ -1,13 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwx8hymuqd3jp"]
+[gd_scene load_steps=2 format=3 uid="uid://cwx8hymuqd3jp"]
 
 [ext_resource type="Script" path="res://UI/ScreenTest/CSScripts/ScreenTest.cs" id="1_ir5xf"]
-
-[sub_resource type="Environment" id="Environment_8t2a5"]
-background_mode = 3
-glow_enabled = true
-glow_intensity = 1.5
-glow_bloom = 0.5
-glow_blend_mode = 1
 
 [node name="ScreenTest" type="Control" node_paths=PackedStringArray("_scoreLabel")]
 layout_mode = 3
@@ -19,9 +12,6 @@ grow_vertical = 2
 script = ExtResource("1_ir5xf")
 _scoreLabel = NodePath("ScoreLabel")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_8t2a5")
-
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -31,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,38 +29,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -11.5
+offset_top = -37.5
 offset_right = 20.0
-offset_bottom = 11.5
+offset_bottom = 37.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-text = "Screen Test"
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 301.0
-offset_top = 415.0
-offset_right = 399.0
-offset_bottom = 446.0
-theme_override_colors/font_color = Color(0, 0.862745, 0.721569, 1)
-text = "Test button"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 737.0
-offset_top = 190.0
-offset_right = 1003.0
-offset_bottom = 467.0
-text = "Test text for a real men!!!
-
-I don't know how to make a good post effects for this viewport, but I will test some features now."
-
-[node name="ScoreLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 291.0
-offset_top = 197.0
-offset_right = 331.0
-offset_bottom = 220.0
-theme_override_font_sizes/font_size = 52
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 250
 text = "0"

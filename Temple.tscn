@@ -88,10 +88,8 @@ lightmap_size_hint = Vector2i(7, 5)
 material = SubResource("StandardMaterial3D_avsxf")
 size = Vector2(1, 0.7)
 
-[node name="Temple" type="Node3D" node_paths=PackedStringArray("_bowlingGameRef", "_endLineCameraRef")]
+[node name="Temple" type="Node3D"]
 script = ExtResource("1_hpo4a")
-_bowlingGameRef = NodePath("BowlingGame")
-_endLineCameraRef = NodePath("BowlingGame/EndLineViewport/EndLineCamera")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f4q88")
@@ -229,7 +227,7 @@ script = ExtResource("6_ql2ml")
 DudeCamera = NodePath("../Dude/DudeFaceCamera")
 BowlingCamera = NodePath("../BowlingGame/BowlingCamera")
 
-[node name="BowlingGame" type="Node3D" parent="." node_paths=PackedStringArray("SpawnBallLocation", "SpawnPinsLocation", "PowerMeterUI", "EndLineView", "_scoreCountdownTimer", "_scoreDataHolderRef")]
+[node name="BowlingGame" type="Node3D" parent="." node_paths=PackedStringArray("SpawnBallLocation", "SpawnPinsLocation", "PowerMeterUI", "EndLineView", "_scoreCountdownTimer", "_endLineCameraRef")]
 script = ExtResource("7_rl7pp")
 BowlingBallScene = ExtResource("8_ncw30")
 SpawnBallLocation = NodePath("BallSpawnLocation")
@@ -238,7 +236,7 @@ SpawnPinsLocation = NodePath("PinsSpawnLocation")
 PowerMeterUI = NodePath("PowerMeter")
 EndLineView = NodePath("EndLineView")
 _scoreCountdownTimer = NodePath("ScoreCountdownTimer")
-_scoreDataHolderRef = NodePath("../ScoreDataHolder")
+_endLineCameraRef = NodePath("EndLineViewport/EndLineCamera")
 _moveBallSensitivity = 0.2
 _baseThrowPower = 8.0
 
@@ -550,6 +548,7 @@ size = Vector2i(1024, 512)
 [node name="ScoreDataHolder" type="Node" parent="."]
 script = ExtResource("11_3ld55")
 
+[connection signal="ActiveBowlingLineChanged" from="." to="BowlingGame" method="OnActiveBowlingLineChanged"]
 [connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]
 [connection signal="GameModeChanged" from="." to="PlayerViewManager" method="ChangeCameraForGameMode"]
 [connection signal="GameModeChanged" from="." to="BowlingGame" method="OnGameModeChanged"]
@@ -561,4 +560,6 @@ script = ExtResource("11_3ld55")
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea6" to="." method="StartBowling"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea7" to="." method="StartBowling"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea8" to="." method="StartBowling"]
+[connection signal="ScoreCounted" from="BowlingGame" to="." method="OnScoreCounted"]
+[connection signal="ScoreCounted" from="BowlingGame" to="ScoreDataHolder" method="AddScore"]
 [connection signal="ScoreChanged" from="ScoreDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTest" method="UpdateScoreLabel"]
