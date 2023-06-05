@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://c12o8eiub24ir"]
+
+[node name="BowlingGameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="PowerMeterScale" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -128.5
+offset_right = 253.0
+offset_bottom = 128.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.85098, 0, 0.294118, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(1, 0.192157, 0.360784, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(1, 0.396078, 0.423529, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(1, 0.576471, 0.596078, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(1, 0.686275, 0.658824, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(1, 0.784314, 0.756863, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(1, 0.85098, 0.835294, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(1, 0.905882, 0.894118, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="PowerMeterScale"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="PowerLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -159.0
+offset_right = 253.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Throw power:"
+horizontal_alignment = 1
+
+[node name="ButtonsTutor" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -127.0
+offset_right = 136.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Click to launch the ball
+Press Q to quit the launching mode"

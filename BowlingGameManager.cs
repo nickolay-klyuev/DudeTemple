@@ -19,7 +19,7 @@ public partial class BowlingGameManager : Node3D
 
 	[ExportSubgroup("UI")]
 	[Export]
-	VBoxContainer PowerMeterUI;
+	Control BowlingGameUI;
 
 	[Export]
 	TextureRect EndLineView;
@@ -27,6 +27,9 @@ public partial class BowlingGameManager : Node3D
 	[ExportSubgroup("Utils")]
 	[Export]
 	private Timer _scoreCountdownTimer;
+
+	[Export]
+	private Timer _failCountdownTimer;
 
 	[Export]
 	private Camera3D _endLineCameraRef;
@@ -61,13 +64,14 @@ public partial class BowlingGameManager : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		SubscribeToFail();
 		SubscribeToEndLaneTriggers();
 
 		SetBowlingUIVisibility(false);
 
 		const string powerMeterScaleName = "PowerMeterScale";
 
-		VBoxContainer powerMeterScale = PowerMeterUI.GetNode<VBoxContainer>(powerMeterScaleName);
+		VBoxContainer powerMeterScale = BowlingGameUI.GetNode<VBoxContainer>(powerMeterScaleName);
 		if (powerMeterScale != null)
 		{
 			foreach (ColorRect scalePart in powerMeterScale.GetChildren())
@@ -126,7 +130,10 @@ public partial class BowlingGameManager : Node3D
 				_bowlingBall.ApplyImpulse(new Vector3(_baseThrowPower * _currentThrowPower, 0.0f, 0.0f));
 				//_bowlingBall.ApplyTorqueImpulse(new Vector3(500.0f, 0.0f, 0.0f));
 				_bIsBallLanched = true;
-				PowerMeterUI.Visible = false;
+				BowlingGameUI.Visible = false;
+
+				// Start countdown for end game if ball doesn't reach pins after timer time.
+				_failCountdownTimer.Start();
 			}
 		}
     }
@@ -230,8 +237,14 @@ public partial class BowlingGameManager : Node3D
 
 	private void SetBowlingUIVisibility(bool bIsVisible)
 	{
-		PowerMeterUI.Visible = bIsVisible;
+		BowlingGameUI.Visible = bIsVisible;
 		EndLineView.Visible = bIsVisible;
+	}
+
+	private void SubscribeToFail()
+	{
+		_failCountdownTimer.Timeout += CountScore;
+		_failCountdownTimer.Timeout += CleanBowlingLane;
 	}
 
 	private void SubscribeToEndLaneTriggers()
@@ -250,6 +263,9 @@ public partial class BowlingGameManager : Node3D
 	private void TriggerScoreCountdown(Node3D body)
 	{
 		_scoreCountdownTimer.Start();
+
+		// Stop fail timer because player reached pins and it is not fail for sure.
+		_failCountdownTimer.Stop();
 	}
 
 	private void CountScore()

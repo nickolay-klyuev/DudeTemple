@@ -8,10 +8,17 @@ public partial class ScoreDataHolder : Node
 
     public int GlobalScore { private set; get; } = 0;
 
+    public override void _Ready()
+    {
+        GlobalScore = StaticSaveSystem.LoadScore();
+        EmitSignal(SignalName.ScoreChanged, GlobalScore);
+    }
+
     public void AddScore(int amount)
     {
         GlobalScore += amount;
 
+        StaticSaveSystem.SaveScoreAsync(GlobalScore);
         EmitSignal(SignalName.ScoreChanged, GlobalScore);
     }
 }

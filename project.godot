@@ -15,6 +15,10 @@ run/main_scene="res://Temple.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/mode=3
+
 [dotnet]
 
 project/assembly_name="DudeTemple"
