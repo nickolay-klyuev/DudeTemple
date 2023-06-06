@@ -10,7 +10,7 @@ public partial class ScoreDataHolder : Node
 
     public override void _Ready()
     {
-        GlobalScore = StaticSaveSystem.LoadScore();
+        GlobalScore = SaveDataHelperStatic.LoadScore();
         EmitSignal(SignalName.ScoreChanged, GlobalScore);
     }
 
@@ -18,7 +18,7 @@ public partial class ScoreDataHolder : Node
     {
         GlobalScore += amount;
 
-        StaticSaveSystem.SaveScoreAsync(GlobalScore);
+        SaveDataHelperStatic.SaveScoreAsync(GlobalScore);
         EmitSignal(SignalName.ScoreChanged, GlobalScore);
     }
 }
