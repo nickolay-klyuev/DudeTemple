@@ -3,6 +3,9 @@ using System;
 
 public partial class DudeController : CharacterBody3D
 {
+	[Signal]
+	public delegate void OnInteractProcessChangedEventHandler(bool bIsInteracting);
+
 	[Export]
 	private float _lookAroundSensitivity = 1.0f;
 
@@ -11,9 +14,6 @@ public partial class DudeController : CharacterBody3D
 
 	[Export]
 	RayCast3D DudeHand;
-
-	[Export]
-	Label InteractUI;
 
 	[Export]
 	private float _speed = 5.0f;
@@ -32,8 +32,6 @@ public partial class DudeController : CharacterBody3D
 
 	public override void _Ready()
 	{
-		InteractUI.Visible = false;
-
 		_dudeCollision = GetChild<CollisionShape3D>(0);
 	}
 
@@ -105,11 +103,11 @@ public partial class DudeController : CharacterBody3D
 		}
 	}
 
-	private void InteractProcess()
+	private void InteractProcess() // TODO: Try to get rid of this process. 
 	{
 		if (DudeHand.IsColliding())
 		{
-			InteractUI.Visible = true;
+			EmitSignal(SignalName.OnInteractProcessChanged, true);
 
 			IInteractable interactableObject = DudeHand.GetCollider() as IInteractable;
 			if (interactableObject != null && Input.IsActionJustPressed("Interact"))
@@ -119,7 +117,7 @@ public partial class DudeController : CharacterBody3D
 		}
 		else
 		{
-			InteractUI.Visible = false;
+			EmitSignal(SignalName.OnInteractProcessChanged, false);
 		}
 	}
 
@@ -132,7 +130,7 @@ public partial class DudeController : CharacterBody3D
 		}
 		else if (gameMode == TempleState.GameMode.RollingBalls)
 		{
-			InteractUI.Visible = false;
+			EmitSignal(SignalName.OnInteractProcessChanged, false); // TODO: need to refactor this one
 			SetDisabled(true);
 		}
 	}

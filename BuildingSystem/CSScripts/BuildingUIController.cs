@@ -1,14 +1,19 @@
 using Godot;
+using Godot.Collections;
 using System;
 
-public partial class PauseMenuHandler : Control, IMenuInteract
+public partial class BuildingUIController : Control, IMenuInteract
 {
-	[Signal]
-	public delegate void CloseMenuRequestEventHandler();
+	[Export]
+	Label BuildingLabel;
+
+	[Export]
+	Label CostLabel;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		CheckHelperStatic.CheckNodes(new Array<Node>(){BuildingLabel, CostLabel}, this);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,13 +31,9 @@ public partial class PauseMenuHandler : Control, IMenuInteract
 		Visible = false;
 	}
 
-	public void OnResumeButtonPressed()
+	public void SetData(string buildingLabel, int cost)
 	{
-		EmitSignal(SignalName.CloseMenuRequest);
-	}
-
-	public void OnExitButtonPressed()
-	{
-		GetTree().Quit();
+		BuildingLabel.Text = buildingLabel;
+		CostLabel.Text = cost.ToString();
 	}
 }

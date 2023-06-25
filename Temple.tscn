@@ -1,7 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://b8l5mnur7ugi1"]
+[gd_scene load_steps=38 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://DudeController.cs" id="1_ap5d1"]
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
+[ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
+[ext_resource type="PackedScene" uid="uid://3r6tqgb0rdfb" path="res://BuildingSystem/Scenes/BuildingMenu.tscn" id="3_kkkw8"]
 [ext_resource type="Script" path="res://StartBowlingHandler.cs" id="5_68h4b"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
 [ext_resource type="Script" path="res://PlayerViewManager.cs" id="6_ql2ml"]
@@ -13,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://UI/ScreenTest/ScreenTest.tscn" id="10_hv4nn"]
 [ext_resource type="Script" path="res://Score/CSScripts/ScoreDataHolder.cs" id="11_3ld55"]
 [ext_resource type="Texture2D" uid="uid://eqwlkmikfudt" path="res://Dudeism.svg.png" id="13_qh0bv"]
+[ext_resource type="Script" path="res://BuildingSystem/CSScripts/BuildingPlaceTrigger.cs" id="14_gh51t"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_mode = 1
@@ -90,19 +93,59 @@ lightmap_size_hint = Vector2i(7, 5)
 material = SubResource("StandardMaterial3D_avsxf")
 size = Vector2(1, 0.7)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6koht"]
+size = Vector3(2, 2, 2)
+
 [node name="Temple" type="Node3D"]
 script = ExtResource("1_hpo4a")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f4q88")
 
-[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("DudeFace", "DudeHand", "InteractUI")]
+[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("_pauseMenu", "_buildingMenu", "_interactLabel")]
+process_mode = 3
+editor_description = "This manager is controlling pausing the game and showing UI that is needed."
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("2_2cwu4")
+_pauseMenu = NodePath("PauseMenu")
+_buildingMenu = NodePath("BuildingMenu")
+_interactLabel = NodePath("InteractLabel")
+
+[node name="PauseMenu" parent="UIManager" instance=ExtResource("9_gpxng")]
+layout_mode = 1
+
+[node name="BuildingMenu" parent="UIManager" instance=ExtResource("3_kkkw8")]
+layout_mode = 1
+
+[node name="InteractLabel" type="Label" parent="UIManager"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.677469
+anchor_right = 0.5
+anchor_bottom = 0.677469
+offset_left = -70.0
+offset_top = -13.0
+offset_right = 70.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Press E to interact"
+metadata/_edit_use_anchors_ = true
+
+[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("DudeFace", "DudeHand")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
 script = ExtResource("1_ap5d1")
 _lookAroundSensitivity = 0.3
 DudeFace = NodePath("DudeFaceCamera")
 DudeHand = NodePath("DudeFaceCamera/InteractRaycast")
-InteractUI = NodePath("InteractLabel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dude"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22154, 0)
@@ -117,22 +160,6 @@ target_position = Vector3(0, -2, 0)
 collision_mask = 2048
 collide_with_areas = true
 collide_with_bodies = false
-
-[node name="InteractLabel" type="Label" parent="Dude"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-text = "Press E to interact"
-metadata/_edit_use_anchors_ = true
 
 [node name="StartBowlingTriggers" type="Node3D" parent="."]
 
@@ -271,8 +298,6 @@ one_shot = true
 [node name="FailCountdownTimer" type="Timer" parent="BowlingGame"]
 wait_time = 10.0
 one_shot = true
-
-[node name="PauseMenu" parent="." instance=ExtResource("9_gpxng")]
 
 [node name="BowlingLanes" type="Node3D" parent="."]
 
@@ -496,10 +521,22 @@ size = Vector3(3.5, 1, 3.5)
 texture_albedo = ExtResource("13_qh0bv")
 texture_emission = ExtResource("13_qh0bv")
 
+[node name="BuildingPlace" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.0611, 0, 14.1872)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("14_gh51t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_6koht")
+
 [connection signal="ActiveBowlingLineChanged" from="." to="BowlingGame" method="OnActiveBowlingLineChanged"]
 [connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]
 [connection signal="GameModeChanged" from="." to="PlayerViewManager" method="ChangeCameraForGameMode"]
 [connection signal="GameModeChanged" from="." to="BowlingGame" method="OnGameModeChanged"]
+[connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="CloseCurrent"]
+[connection signal="OnInteractProcessChanged" from="Dude" to="UIManager" method="SetInteractLabelVisibility"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea" to="." method="StartBowling"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea2" to="." method="StartBowling"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea3" to="." method="StartBowling"]
@@ -511,3 +548,4 @@ texture_emission = ExtResource("13_qh0bv")
 [connection signal="ScoreCounted" from="BowlingGame" to="." method="OnScoreCounted"]
 [connection signal="ScoreCounted" from="BowlingGame" to="ScoreDataHolder" method="AddScore"]
 [connection signal="ScoreChanged" from="ScoreDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTestUI" method="UpdateScoreLabel"]
+[connection signal="BuildingPlaceTriggered" from="BuildingPlace" to="UIManager" method="OpenBuildingMenu"]
