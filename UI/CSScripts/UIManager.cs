@@ -16,7 +16,7 @@ public partial class UIManager : Control
 	private PauseMenuHandler _pauseMenu;
 
 	[Export]
-	private BuildingUIController _buildingMenu;
+	private BuildingMenuHandler _buildingMenu;
 
 	[ExportSubgroup("Gameplay UI")]
 	[Export]
@@ -87,9 +87,9 @@ public partial class UIManager : Control
 		SetInteractLabelVisibility(false);
 	}
 
-	public void OpenBuildingMenu(string buildingLabel, int cost)
+	public void OpenBuildingMenu(int buildingPlaceIndex)
 	{
-		_buildingMenu.SetData(buildingLabel, cost);
+		_buildingMenu.BuildingPlaceIndex = buildingPlaceIndex;
 		OpenMenu(EFullScreenMenuType.BuildingMenu);
 	}
 

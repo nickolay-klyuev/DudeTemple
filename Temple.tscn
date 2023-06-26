@@ -1,9 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=39 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://DudeController.cs" id="1_ap5d1"]
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
-[ext_resource type="PackedScene" uid="uid://3r6tqgb0rdfb" path="res://BuildingSystem/Scenes/BuildingMenu.tscn" id="3_kkkw8"]
+[ext_resource type="PackedScene" uid="uid://do6y1bhu16x8w" path="res://BuildingSystem/Scenes/BuildingMenu.tscn" id="3_kkkw8"]
 [ext_resource type="Script" path="res://StartBowlingHandler.cs" id="5_68h4b"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
 [ext_resource type="Script" path="res://PlayerViewManager.cs" id="6_ql2ml"]
@@ -15,7 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://UI/ScreenTest/ScreenTest.tscn" id="10_hv4nn"]
 [ext_resource type="Script" path="res://Score/CSScripts/ScoreDataHolder.cs" id="11_3ld55"]
 [ext_resource type="Texture2D" uid="uid://eqwlkmikfudt" path="res://Dudeism.svg.png" id="13_qh0bv"]
-[ext_resource type="Script" path="res://BuildingSystem/CSScripts/BuildingPlaceTrigger.cs" id="14_gh51t"]
+[ext_resource type="Script" path="res://BuildingSystem/CS/BuildingPlaceTrigger.cs" id="16_b08le"]
+[ext_resource type="Script" path="res://BuildingSystem/CS/Builder.cs" id="16_jxwbk"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_mode = 1
@@ -521,11 +522,14 @@ size = Vector3(3.5, 1, 3.5)
 texture_albedo = ExtResource("13_qh0bv")
 texture_emission = ExtResource("13_qh0bv")
 
+[node name="Builder" type="Node" parent="."]
+script = ExtResource("16_jxwbk")
+
 [node name="BuildingPlace" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.0611, 0, 14.1872)
 collision_layer = 2048
 collision_mask = 2048
-script = ExtResource("14_gh51t")
+script = ExtResource("16_b08le")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlace"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -536,6 +540,7 @@ shape = SubResource("BoxShape3D_6koht")
 [connection signal="GameModeChanged" from="." to="PlayerViewManager" method="ChangeCameraForGameMode"]
 [connection signal="GameModeChanged" from="." to="BowlingGame" method="OnGameModeChanged"]
 [connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="CloseCurrent"]
+[connection signal="BuildPressed" from="UIManager/BuildingMenu" to="Builder" method="Build"]
 [connection signal="OnInteractProcessChanged" from="Dude" to="UIManager" method="SetInteractLabelVisibility"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea" to="." method="StartBowling"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea2" to="." method="StartBowling"]

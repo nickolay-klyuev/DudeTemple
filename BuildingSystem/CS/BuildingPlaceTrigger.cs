@@ -1,10 +1,14 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class BuildingPlaceTrigger : Area3D, IInteractable
 {
 	[Signal]
-	public delegate void BuildingPlaceTriggeredEventHandler(string buildingLabel, int cost);
+	public delegate void BuildingPlaceTriggeredEventHandler(int index);
+
+	[Export]
+	private int _index = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -18,6 +22,6 @@ public partial class BuildingPlaceTrigger : Area3D, IInteractable
 
 	public void Interact()
 	{
-		EmitSignal(SignalName.BuildingPlaceTriggered, "Testbuilding Name", 550);
+		EmitSignal(SignalName.BuildingPlaceTriggered, _index);
 	}
 }
