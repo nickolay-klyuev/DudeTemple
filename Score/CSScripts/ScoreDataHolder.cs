@@ -21,4 +21,19 @@ public partial class ScoreDataHolder : Node
         SaveDataHelperStatic.SaveScoreAsync(GlobalScore);
         EmitSignal(SignalName.ScoreChanged, GlobalScore);
     }
+
+    public bool RemoveScore(int amount)
+    {
+        if (GlobalScore - amount < 0)
+        {
+            return false;
+        }
+        
+        GlobalScore -= amount;
+
+        SaveDataHelperStatic.SaveScoreAsync(GlobalScore);
+        EmitSignal(SignalName.ScoreChanged, GlobalScore);
+        
+        return true;
+    }
 }

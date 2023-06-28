@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public partial class BuildingMenuHandler : Control, IMenuInteract
 {
 	[Signal]
-	public delegate void BuildPressedEventHandler(int placeIndex, string scenePath);
+	public delegate void BuildPressedEventHandler(int placeIndex, int cost, string scenePath);
 
 	[Export]
 	Label BuildingLabel;
@@ -93,6 +93,6 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 
 	public void OnBuildButtonPressed()
 	{
-		EmitSignal(SignalName.BuildPressed, _placeIndex, _datas[_activePage].ScenePath);
+		EmitSignal(SignalName.BuildPressed, _placeIndex, _datas[_activePage].Cost, _datas[_activePage].ScenePath);
 	}
 }
