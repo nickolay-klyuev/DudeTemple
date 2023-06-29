@@ -27,9 +27,10 @@ public partial class Builder : Node
         }
 	}
 
-    public void Build(int placeIndex, int cost, string scenePath)
+    public void Build(int placeIndex, string scenePath)
     {
-        if (_freeBuildingPlaces[placeIndex] && _scoreHolder.RemoveScore(cost))
+        GD.Print("BUILD");
+        if (_freeBuildingPlaces[placeIndex]) // TODO: building must replace building if it's busy
         {
             PackedScene buildingPacked = GD.Load<PackedScene>(scenePath);
             Node3D building = buildingPacked.Instantiate<Node3D>();
@@ -37,6 +38,22 @@ public partial class Builder : Node
             GetNode(_buildingPlacePathes[placeIndex]).AddChild(building);
 
             _freeBuildingPlaces[placeIndex] = false;
+        }
+    }
+
+    public void Unlock(EBuilding building, int cost)
+    {
+        #if DEBUG
+        if (BuildingDataMapStatic.IsBuildingUnlocked(building))
+        {
+            GD.PrintErr($"{Name}: Building is already unlocked!!!!!!");
+            return;
+        }
+        #endif
+
+        if (_scoreHolder.RemoveScore(cost))
+        {
+            BuildingDataMapStatic.UnlockBuilding(building);
         }
     }
 }

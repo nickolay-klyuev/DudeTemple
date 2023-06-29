@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://BuildingSystem/CS/BuildingMenuHandler.cs" id="1_4y3cc"]
 
-[node name="BuildingMenu" type="Control" node_paths=PackedStringArray("BuildingLabel", "CostLabel")]
+[node name="BuildingMenu" type="Control" node_paths=PackedStringArray("_buildingLabel", "_costLabel", "_buildButton", "_unlockButton")]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -11,8 +11,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4y3cc")
-BuildingLabel = NodePath("BuildingLabel")
-CostLabel = NodePath("CostLabel")
+_buildingLabel = NodePath("BuildingLabel")
+_costLabel = NodePath("CostLabel")
+_buildButton = NodePath("CenterContainer/Build")
+_unlockButton = NodePath("CenterContainer/Unlock")
 
 [node name="MainLabel" type="Label" parent="."]
 layout_mode = 1
@@ -89,7 +91,7 @@ text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Build" type="Button" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -98,12 +100,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -140.0
 offset_top = -100.0
-offset_right = -45.0
-offset_bottom = -66.0
+offset_right = -44.0
+offset_bottom = -60.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Build" type="Button" parent="CenterContainer"]
+layout_mode = 2
 text = "Build"
+
+[node name="Unlock" type="Button" parent="CenterContainer"]
+layout_mode = 2
+text = "Unlock"
 
 [connection signal="pressed" from="Previous" to="." method="PreviousPage"]
 [connection signal="pressed" from="Next" to="." method="NextPage"]
-[connection signal="pressed" from="Build" to="." method="OnBuildButtonPressed"]
+[connection signal="pressed" from="CenterContainer/Build" to="." method="OnBuildButtonPressed"]
+[connection signal="pressed" from="CenterContainer/Unlock" to="." method="OnUnlockButtonPressed"]

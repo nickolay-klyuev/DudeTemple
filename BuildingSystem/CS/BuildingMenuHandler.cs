@@ -6,13 +6,22 @@ using System.Collections.Generic;
 public partial class BuildingMenuHandler : Control, IMenuInteract
 {
 	[Signal]
-	public delegate void BuildPressedEventHandler(int placeIndex, int cost, string scenePath);
+	public delegate void BuildPressedEventHandler(int placeIndex, string scenePath);
+
+	[Signal]
+	public delegate void UnlockPressedEventHandler(EBuilding building, int cost);
 
 	[Export]
-	Label BuildingLabel;
+	private Label _buildingLabel;
 
 	[Export]
-	Label CostLabel;
+	private Label _costLabel;
+
+	[Export]
+	private Button _buildButton;
+
+	[Export]
+	private Button _unlockButton;
 
 	private int _placeIndex;
 	public int BuildingPlaceIndex
@@ -43,7 +52,10 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		CheckHelperStatic.CheckNodes(new Array<Node>(){BuildingLabel, CostLabel}, this);
+		if (OS.IsDebugBuild())
+		{
+			CheckHelperStatic.CheckNodes(new Array<Node>(){_buildingLabel, _costLabel, _buildButton, _unlockButton}, this);
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -87,12 +99,33 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 
 	private void UpdatePage()
 	{
-		BuildingLabel.Text = _datas[_activePage].Label;
-		CostLabel.Text = _datas[_activePage].Cost.ToString();
+		if (BuildingDataMapStatic.IsBuildingUnlocked(_datas[_activePage].Building))
+		{
+			_buildButton.Visible = true;
+			_unlockButton.Visible = false;
+			_costLabel.Visible = false;
+
+			_buildingLabel.Text = _datas[_activePage].Label;
+		}
+		else
+		{
+			_buildButton.Visible = false;
+			_unlockButton.Visible = true;
+			_costLabel.Visible = true;
+
+			_buildingLabel.Text = _datas[_activePage].Label;
+			_costLabel.Text = _datas[_activePage].Cost.ToString();
+		}
 	}
 
 	public void OnBuildButtonPressed()
 	{
-		EmitSignal(SignalName.BuildPressed, _placeIndex, _datas[_activePage].Cost, _datas[_activePage].ScenePath);
+		EmitSignal(SignalName.BuildPressed, _placeIndex, _datas[_activePage].ScenePath);
+	}
+
+	public void OnUnlockButtonPressed()
+	{
+		EmitSignal(SignalName.UnlockPressed, (int)_datas[_activePage].Building, _datas[_activePage].Cost);
+		UpdatePage();
 	}
 }
