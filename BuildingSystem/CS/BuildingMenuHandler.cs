@@ -12,6 +12,10 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 	public delegate void UnlockPressedEventHandler(EBuilding building, int cost);
 
 	[Export]
+	private UserDataHolder _userDataHolder;
+
+	[ExportGroup("SubUI")]
+	[Export]
 	private Label _buildingLabel;
 
 	[Export]
@@ -29,7 +33,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 		set
 		{
 			_placeIndex = value;
-			BuildingDatas = BuildingDataMapStatic.GetBuildingData(_placeIndex);
+			BuildingDatas = BuildingDataHelper.GetBuildingData(_placeIndex);
 		}
 	}
 
@@ -52,10 +56,9 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if (OS.IsDebugBuild())
-		{
-			CheckHelperStatic.CheckNodes(new Array<Node>(){_buildingLabel, _costLabel, _buildButton, _unlockButton}, this);
-		}
+		#if DEBUG
+		CheckHelperStatic.CheckNodes(new Array<Node>(){_buildingLabel, _costLabel, _buildButton, _unlockButton, _userDataHolder}, this);
+		#endif
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -99,7 +102,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 
 	private void UpdatePage()
 	{
-		if (BuildingDataMapStatic.IsBuildingUnlocked(_datas[_activePage].Building))
+		if (_userDataHolder.IsBuildingUnlocked(_datas[_activePage].Building))
 		{
 			_buildButton.Visible = true;
 			_unlockButton.Visible = false;

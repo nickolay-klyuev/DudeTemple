@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://UI/ScreenTest/ScreenTest.tscn" id="10_hv4nn"]
-[ext_resource type="Script" path="res://Score/CSScripts/ScoreDataHolder.cs" id="11_3ld55"]
+[ext_resource type="Script" path="res://UserData/CSScripts/UserDataHolder.cs" id="14_mclx4"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/BuildingPlaceTrigger.cs" id="16_b08le"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/Builder.cs" id="16_jxwbk"]
 
@@ -120,8 +120,9 @@ _interactLabel = NodePath("InteractLabel")
 [node name="PauseMenu" parent="UIManager" instance=ExtResource("9_gpxng")]
 layout_mode = 1
 
-[node name="BuildingMenu" parent="UIManager" instance=ExtResource("3_kkkw8")]
+[node name="BuildingMenu" parent="UIManager" node_paths=PackedStringArray("_userDataHolder") instance=ExtResource("3_kkkw8")]
 layout_mode = 1
+_userDataHolder = NodePath("../../UserDataHolder")
 
 [node name="InteractLabel" type="Label" parent="UIManager"]
 layout_mode = 1
@@ -512,12 +513,19 @@ render_target_update_mode = 4
 
 [node name="ScreenTestUI" parent="ScreenTest/ScreenTestViewport" instance=ExtResource("10_hv4nn")]
 
-[node name="ScoreDataHolder" type="Node" parent="."]
-script = ExtResource("11_3ld55")
+[node name="UserDataHolder" type="Node" parent="." node_paths=PackedStringArray("_dirtyTimer")]
+process_mode = 3
+editor_description = "This node holds user data that can be saved (like score or unlocked content) and notifies about it changing. Also it triggers save data to a file if it was changed. "
+script = ExtResource("14_mclx4")
+_dirtyTimer = NodePath("SaveDirtyDataTimer")
 
-[node name="Builder" type="Node" parent="." node_paths=PackedStringArray("_scoreHolder")]
+[node name="SaveDirtyDataTimer" type="Timer" parent="UserDataHolder"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Builder" type="Node" parent="." node_paths=PackedStringArray("_userDataHolder")]
 script = ExtResource("16_jxwbk")
-_scoreHolder = NodePath("../ScoreDataHolder")
+_userDataHolder = NodePath("../UserDataHolder")
 _buildingPlacePathes = Array[NodePath]([NodePath("../BuildingPlace")])
 
 [node name="BuildingPlace" type="Area3D" parent="."]
@@ -552,6 +560,6 @@ omni_range = 1.5
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea7" to="." method="StartBowling"]
 [connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea8" to="." method="StartBowling"]
 [connection signal="ScoreCounted" from="BowlingGame" to="." method="OnScoreCounted"]
-[connection signal="ScoreCounted" from="BowlingGame" to="ScoreDataHolder" method="AddScore"]
-[connection signal="ScoreChanged" from="ScoreDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTestUI" method="UpdateScoreLabel"]
+[connection signal="ScoreCounted" from="BowlingGame" to="UserDataHolder" method="AddScore"]
+[connection signal="ScoreChanged" from="UserDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTestUI" method="UpdateScoreLabel"]
 [connection signal="BuildingPlaceTriggered" from="BuildingPlace" to="UIManager" method="OpenBuildingMenu"]
