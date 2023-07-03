@@ -9,35 +9,41 @@ public partial class Builder : Node
 
     [Export]
     [ExportGroup("Building Places")]
-    private Array<NodePath> _buildingPlacePathes;
-
-    private Array<bool> _freeBuildingPlaces = new Array<bool>();
+    private Array<NodePath> _buildingPlaceSocketPathes;
 
     // Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-        if (OS.IsDebugBuild())
-        {
-            CheckHelperStatic.CheckNode(_userDataHolder, this);
-        }
-
-        for (int index = 0; index < _buildingPlacePathes.Count; index++)
-        {
-            _freeBuildingPlaces.Add(true);
-        }
+        #if DEBUG
+        CheckHelperStatic.CheckNode(_userDataHolder, this);
+        #endif
 	}
 
-    public void Build(int placeIndex, string scenePath)
+    public void OnBuildingDataLoaded(Dictionary<int, EBuilding> builtBuildings)
     {
-        if (_freeBuildingPlaces[placeIndex]) // TODO: building must replace building if it's busy
+        for (int placeIndex = 0; placeIndex < builtBuildings.Count; placeIndex++)
         {
-            PackedScene buildingPacked = GD.Load<PackedScene>(scenePath);
-            Node3D building = buildingPacked.Instantiate<Node3D>();
-
-            GetNode(_buildingPlacePathes[placeIndex]).AddChild(building);
-
-            _freeBuildingPlaces[placeIndex] = false;
+            Build(placeIndex, builtBuildings[placeIndex]);
         }
+    }
+
+    public void BuildAndPushUserData(int placeIndex, EBuilding building)
+    {
+        Build(placeIndex, building);
+
+        _userDataHolder.AddOrUpdateBuiltBuilding(placeIndex, building);
+    }
+
+    private void Build(int placeIndex, EBuilding building)
+    {
+        string scenePath = BuildingDataHelper.GetBuildingData(building).ScenePath;
+
+        PackedScene buildingScenePacked = GD.Load<PackedScene>(scenePath);
+        Node3D buildingScene = buildingScenePacked.Instantiate<Node3D>();
+
+        Node3D buildSocket = GetNode<Node3D>(_buildingPlaceSocketPathes[placeIndex]);
+        ClearBuildingPlaceSocket(buildSocket);
+        buildSocket.AddChild(buildingScene);
     }
 
     public void Unlock(EBuilding building, int cost)
@@ -52,7 +58,20 @@ public partial class Builder : Node
 
         if (_userDataHolder.RemoveScore(cost))
         {
-            _userDataHolder.UnlockBuilding(building);
+            _userDataHolder.AddUnlockBuilding(building);
+        }
+    }
+
+    private void ClearBuildingPlaceSocket(Node3D socket)
+    {
+        if (socket.GetChildren().Count == 0)
+        {
+            return;
+        }
+
+        foreach (Node child in socket.GetChildren())
+        {
+            child.QueueFree();
         }
     }
 }

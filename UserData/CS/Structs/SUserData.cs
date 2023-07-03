@@ -19,4 +19,17 @@ public struct SUserData
         UnlockedBuildings = unlockedBuildings;
         BuiltBuildings = builtBuildings;
     }
+
+    public SUserData(int score, Array<EBuilding> unlockedBuildings, Dictionary<int, int> builtBuildings)
+    {
+        Dictionary<int, EBuilding> builtBuildingsCasted = new Dictionary<int, EBuilding>();
+        for (int placeIndex = 0; placeIndex < builtBuildings.Count; placeIndex++)
+        {
+            builtBuildingsCasted.Add(placeIndex, (EBuilding)builtBuildings[placeIndex]);
+        }
+
+        Score = score;
+        UnlockedBuildings = unlockedBuildings;
+        BuiltBuildings = builtBuildingsCasted;
+    }
 }

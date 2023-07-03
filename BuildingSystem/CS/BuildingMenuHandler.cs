@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public partial class BuildingMenuHandler : Control, IMenuInteract
 {
 	[Signal]
-	public delegate void BuildPressedEventHandler(int placeIndex, string scenePath);
+	public delegate void BuildPressedEventHandler(int placeIndex, EBuilding building);
 
 	[Signal]
 	public delegate void UnlockPressedEventHandler(EBuilding building, int cost);
@@ -33,7 +33,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 		set
 		{
 			_placeIndex = value;
-			BuildingDatas = BuildingDataHelper.GetBuildingData(_placeIndex);
+			BuildingDatas = BuildingDataHelper.GetBuildingDataForPlace(_placeIndex);
 		}
 	}
 
@@ -123,7 +123,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 
 	public void OnBuildButtonPressed()
 	{
-		EmitSignal(SignalName.BuildPressed, _placeIndex, _datas[_activePage].ScenePath);
+		EmitSignal(SignalName.BuildPressed, _placeIndex, (int)_datas[_activePage].Building);
 	}
 
 	public void OnUnlockButtonPressed()

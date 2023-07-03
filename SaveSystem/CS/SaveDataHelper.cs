@@ -23,7 +23,7 @@ public static class SaveDataHelper
 
         saveFile.StoreVar(scoreVar);
         saveFile.StoreVar(unlockedBuildingsVar);
-        //saveFile.StoreVar(builtBuildingsVar);
+        saveFile.StoreVar(builtBuildingsVar);
         saveFile.Close();
     }
 
@@ -33,13 +33,14 @@ public static class SaveDataHelper
         {
             using FileAccess saveFile = FileAccess.OpenEncryptedWithPass(DATA_PATH, FileAccess.ModeFlags.Read, FILE_HELPER);
 
+            // TODO: Test and fix any errors when there is no save data. 
             int loadedScore = (int)saveFile.GetVar();
             Array<EBuilding> unlockedBuildings = (Array<EBuilding>)saveFile.GetVar();
-            //Dictionary<int, EBuilding> builtBuildings = (Dictionary<int, EBuilding>)saveFile.GetVar();
+            Dictionary<int, int> builtBuildings = (Dictionary<int, int>)saveFile.GetVar();
 
             saveFile.Close();
 
-            return new SUserData(loadedScore, unlockedBuildings, new Dictionary<int, EBuilding>());
+            return new SUserData(loadedScore, unlockedBuildings, builtBuildings);
         }
         else
         {

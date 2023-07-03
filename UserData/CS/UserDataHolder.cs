@@ -7,6 +7,9 @@ public partial class UserDataHolder : Node
     [Signal]
     public delegate void ScoreChangedEventHandler(int newScore);
 
+    [Signal]
+    public delegate void BuildingDataLoadedEventHandler(Dictionary<int, EBuilding> builtBuildings);
+
     [Export]
     private Timer _dirtyTimer;
 
@@ -21,11 +24,12 @@ public partial class UserDataHolder : Node
         #endif
 
         _dirtyTimer.Timeout += SaveDirtyData;
-        TreeExiting += ForceSaveDirtyData;
+        TreeExiting += ForceSaveDataOnExit;
 
         _userData = SaveDataHelper.LoadData();
 
         EmitSignal(SignalName.ScoreChanged, _userData.Score);
+        EmitSignal(SignalName.BuildingDataLoaded, _userData.BuiltBuildings);
     }
 
     public void AddScore(int amount)
@@ -53,7 +57,7 @@ public partial class UserDataHolder : Node
         return true;
     }
 
-    public void UnlockBuilding(EBuilding building)
+    public void AddUnlockBuilding(EBuilding building)
     {
         _userData.UnlockedBuildings.Add(building);
 
@@ -63,6 +67,20 @@ public partial class UserDataHolder : Node
     public bool IsBuildingUnlocked(EBuilding building)
     {
         return _userData.UnlockedBuildings.Contains(building);
+    }
+
+    public void AddOrUpdateBuiltBuilding(int placeIndex, EBuilding building)
+    {
+        if (_userData.BuiltBuildings.ContainsKey(placeIndex))
+        {
+            _userData.BuiltBuildings[placeIndex] = building;
+        }
+        else
+        {
+            _userData.BuiltBuildings.Add(placeIndex, building);
+        }
+
+        MarkAsDirty();
     }
 
     private void MarkAsDirty()
@@ -82,7 +100,7 @@ public partial class UserDataHolder : Node
         _bIsDirty = false;
     }
 
-    private void ForceSaveDirtyData()
+    private void ForceSaveDataOnExit()
     {
         if (_bIsDirty)
         {
