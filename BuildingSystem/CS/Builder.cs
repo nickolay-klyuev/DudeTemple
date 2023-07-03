@@ -21,9 +21,9 @@ public partial class Builder : Node
 
     public void OnBuildingDataLoaded(Dictionary<int, EBuilding> builtBuildings)
     {
-        for (int placeIndex = 0; placeIndex < builtBuildings.Count; placeIndex++)
+        foreach (var builtBuilding in builtBuildings)
         {
-            Build(placeIndex, builtBuildings[placeIndex]);
+            Build(builtBuilding.Key, builtBuilding.Value);
         }
     }
 

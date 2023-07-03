@@ -36,7 +36,7 @@ public static class SaveDataHelper
             // TODO: Test and fix any errors when there is no save data. 
             int loadedScore = (int)saveFile.GetVar();
             Array<EBuilding> unlockedBuildings = (Array<EBuilding>)saveFile.GetVar();
-            Dictionary<int, int> builtBuildings = (Dictionary<int, int>)saveFile.GetVar();
+            Dictionary<int, EBuilding> builtBuildings = (Dictionary<int, EBuilding>)saveFile.GetVar();
 
             saveFile.Close();
 

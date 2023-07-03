@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=39 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://DudeController.cs" id="1_ap5d1"]
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/BuildingPlaceTrigger.cs" id="16_b08le"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/Builder.cs" id="16_jxwbk"]
+[ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_mode = 1
@@ -526,24 +527,96 @@ one_shot = true
 [node name="Builder" type="Node" parent="." node_paths=PackedStringArray("_userDataHolder")]
 script = ExtResource("16_jxwbk")
 _userDataHolder = NodePath("../UserDataHolder")
-_buildingPlaceSocketPathes = Array[NodePath]([NodePath("../BuildingPlace/BuildSocket")])
+_buildingPlaceSocketPathes = Array[NodePath]([NodePath("../BuildingPlaces/BuildingPlace_1/BuildSocket"), NodePath("../BuildingPlaces/BuildingPlace_2/BuildSocket"), NodePath("../BuildingPlaces/BuildingPlace_3/BuildSocket"), NodePath("../BuildingPlaces/BuildingPlace_4/BuildSocket")])
 
-[node name="BuildingPlace" type="Area3D" parent="."]
+[node name="BuildingPlaces" type="Node3D" parent="."]
+
+[node name="BuildingPlace_1" type="Area3D" parent="BuildingPlaces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.0611, 0, 14.1872)
 collision_layer = 2048
 collision_mask = 2048
 script = ExtResource("16_b08le")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlace"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6koht")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlace"]
+[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
 light_color = Color(0.247059, 0.745098, 1, 1)
 omni_range = 1.5
 
-[node name="BuildSocket" type="Node3D" parent="BuildingPlace"]
+[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_1"]
+
+[node name="BuildingPlace_2" type="Area3D" parent="BuildingPlaces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5308, -2.38419e-07, 0.500443)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("16_b08le")
+_index = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_6koht")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
+light_color = Color(0.247059, 0.745098, 1, 1)
+omni_range = 1.5
+
+[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_2"]
+
+[node name="BuildingPlace_3" type="Area3D" parent="BuildingPlaces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0611, 0, -0.222703)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("16_b08le")
+_index = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_6koht")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
+light_color = Color(0.247059, 0.745098, 1, 1)
+omni_range = 1.5
+
+[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_3"]
+
+[node name="BuildingPlace_4" type="Area3D" parent="BuildingPlaces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9647, 0, -0.181874)
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("16_b08le")
+_index = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_6koht")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
+light_color = Color(0.247059, 0.745098, 1, 1)
+omni_range = 1.5
+
+[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_4"]
+
+[node name="Posters" type="Node3D" parent="."]
+
+[node name="CustomPosterTest" parent="Posters" instance=ExtResource("17_1s2qa")]
+
+[node name="CustomPosterTest2" parent="Posters" instance=ExtResource("17_1s2qa")]
+transform = Transform3D(0.966273, 1.12566e-08, 0.257521, 0.257521, -4.22371e-08, -0.966273, 1.03747e-15, 1, -4.37114e-08, -8.61794, 2.28306, 15.3195)
+
+[node name="CustomPosterTest3" parent="Posters" instance=ExtResource("17_1s2qa")]
+transform = Transform3D(0.979032, -8.90445e-09, -0.20371, -0.20371, -4.27948e-08, -0.979032, 1.79248e-16, 1, -4.37114e-08, -8.61794, 2.28306, -1.3569)
+
+[node name="CustomPosterTest4" parent="Posters" instance=ExtResource("17_1s2qa")]
+transform = Transform3D(0.995221, 4.26852e-09, 0.0976527, 0.0976527, -4.35024e-08, -0.995221, 1.79248e-16, 1, -4.37114e-08, -1.55569, 2.28306, -1.3569)
+
+[node name="CustomPosterTest5" parent="Posters" instance=ExtResource("17_1s2qa")]
+transform = Transform3D(0.9991, 1.85407e-09, 0.0424166, 0.0424166, -4.3672e-08, -0.9991, -1.67685e-16, 1, -4.37114e-08, -21.7551, 2.28306, -1.3569)
 
 [connection signal="ActiveBowlingLineChanged" from="." to="BowlingGame" method="OnActiveBowlingLineChanged"]
 [connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]
@@ -565,4 +638,7 @@ omni_range = 1.5
 [connection signal="ScoreCounted" from="BowlingGame" to="UserDataHolder" method="AddScore"]
 [connection signal="BuildingDataLoaded" from="UserDataHolder" to="Builder" method="OnBuildingDataLoaded"]
 [connection signal="ScoreChanged" from="UserDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTestUI" method="UpdateScoreLabel"]
-[connection signal="BuildingPlaceTriggered" from="BuildingPlace" to="UIManager" method="OpenBuildingMenu"]
+[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_1" to="UIManager" method="OpenBuildingMenu"]
+[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_2" to="UIManager" method="OpenBuildingMenu"]
+[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_3" to="UIManager" method="OpenBuildingMenu"]
+[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_4" to="UIManager" method="OpenBuildingMenu"]

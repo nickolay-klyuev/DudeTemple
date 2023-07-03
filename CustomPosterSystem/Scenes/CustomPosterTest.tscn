@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjsfkv5kqmenn"]
+
+[ext_resource type="Texture2D" uid="uid://kq3xd0gngqkr" path="res://icon.svg" id="1_1yv8p"]
+[ext_resource type="Script" path="res://CustomPosterSystem/CS/PosterHandler.cs" id="2_2pe1g"]
+[ext_resource type="Script" path="res://CustomPosterSystem/CS/PosterInteractTrigger.cs" id="3_2bnnn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ojh2"]
+size = Vector3(2, 2, 2)
+
+[node name="CustomPosterTest" type="Decal" node_paths=PackedStringArray("_posterFileDialog")]
+transform = Transform3D(0.985648, -7.37919e-09, -0.168816, -0.168816, -4.3084e-08, -0.985648, 0, 1, -4.37114e-08, -18.1639, 2.28306, 15.3195)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("1_1yv8p")
+script = ExtResource("2_2pe1g")
+_posterFileDialog = NodePath("PosterImageDialog")
+
+[node name="PosterImageDialog" type="FileDialog" parent="."]
+title = "Open a File"
+position = Vector2i(200, 50)
+size = Vector2i(865, 600)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+root_subfolder = "/home"
+
+[node name="PosterInteractTrigger" type="Area3D" parent="."]
+collision_layer = 2048
+collision_mask = 2048
+script = ExtResource("3_2bnnn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PosterInteractTrigger"]
+shape = SubResource("BoxShape3D_8ojh2")
+
+[connection signal="PosterInteractTriggered" from="PosterInteractTrigger" to="." method="OpenFileDialog"]
