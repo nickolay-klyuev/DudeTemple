@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class PosterHandler : Decal
@@ -6,11 +7,27 @@ public partial class PosterHandler : Decal
 	[Export]
 	private FileDialog _posterFileDialog;
 
+	[Export]
+	[ExportGroup("SaveMeta")]
+	private string _posterId;
+
+	[Export]
+	private UserDataHolder _dataHolder;
+
+	private Vector3 _initDecalSize = Vector3.Zero;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		#if DEBUG
 		CheckHelperStatic.CheckNode(_posterFileDialog, this);
+
+		if (String.IsNullOrEmpty(_posterId))
+		{
+			GD.PrintErr($"{Name}: Poster id is missing!!! You need to add poster id to save poster in user file!!!");
+		}
+
+		CheckHelperStatic.CheckNode(_dataHolder, this);
 		#endif
 
 		_posterFileDialog.FileSelected += OnPosterImageSelected;
@@ -39,17 +56,10 @@ public partial class PosterHandler : Decal
 			return;
 		}
 		#endif
-		
-		Image poster = new Image();
-		poster.Load(path);
 
-		ImageTexture posterTexture = ImageTexture.CreateFromImage(poster);
-		Vector2 posterSize = posterTexture.GetSize();
+		SetNewPosterImage(path);
 
-		// Resize decal to look good with custom image.
-		Size = new Vector3(Size.X, Size.Y, Size.X * posterSize.Y / posterSize.X);
-
-		TextureAlbedo = posterTexture;
+		_dataHolder.AddOrUpdatePosterImage(_posterId, path);
 
 		// TODO: It's a bit bulky. Maybe find out better way to change MouseMode when FileDialog is closed.
 		OnPosterFileDialogClosed();
@@ -58,5 +68,37 @@ public partial class PosterHandler : Decal
 	private void OnPosterFileDialogClosed()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+	}
+
+	private void OnPosterImagesLoaded(Dictionary<string, string> posterImages)
+	{
+		SetNewPosterImage(posterImages[_posterId]);
+	}
+
+	private void SetNewPosterImage(string imagePath)
+	{
+		Image poster = new Image();
+		poster.Load(imagePath);
+
+		ImageTexture posterTexture = ImageTexture.CreateFromImage(poster);
+		Vector2 posterSize = posterTexture.GetSize();
+
+		// TODO: A bit of weird hack. Try to change it in the future.
+		if (_initDecalSize == Vector3.Zero)
+		{
+			_initDecalSize = Size;
+		}
+
+		// Resize decal to look good with custom image.
+		if (posterSize.Y > posterSize.X)
+		{
+			Size = new Vector3(_initDecalSize.X, _initDecalSize.Y, _initDecalSize.Z * posterSize.Y / posterSize.X);
+		}
+		else
+		{
+			Size = new Vector3(_initDecalSize.X * posterSize.X / posterSize.Y, _initDecalSize.Y, _initDecalSize.Z);
+		}
+
+		TextureAlbedo = posterTexture;
 	}
 }

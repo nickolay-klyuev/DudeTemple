@@ -10,6 +10,9 @@ public partial class UserDataHolder : Node
     [Signal]
     public delegate void BuildingDataLoadedEventHandler(Dictionary<int, EBuilding> builtBuildings);
 
+    [Signal]
+    public delegate void PosterImagesLoadedEventHandler(Dictionary<string, string> posterImages);
+
     [Export]
     private Timer _dirtyTimer;
 
@@ -28,8 +31,13 @@ public partial class UserDataHolder : Node
 
         _userData = SaveDataHelper.LoadData();
 
+        #if DEBUG
+        SaveDataHelper.LogUserData(_userData);
+        #endif
+
         EmitSignal(SignalName.ScoreChanged, _userData.Score);
         EmitSignal(SignalName.BuildingDataLoaded, _userData.BuiltBuildings);
+        EmitSignal(SignalName.PosterImagesLoaded, _userData.PosterImages);
     }
 
     public void AddScore(int amount)
@@ -78,6 +86,20 @@ public partial class UserDataHolder : Node
         else
         {
             _userData.BuiltBuildings.Add(placeIndex, building);
+        }
+
+        MarkAsDirty();
+    }
+
+    public void AddOrUpdatePosterImage(string posterId, string imagePath)
+    {
+        if (_userData.PosterImages.ContainsKey(posterId))
+        {
+            _userData.PosterImages[posterId] = imagePath;
+        }
+        else
+        {
+            _userData.PosterImages.Add(posterId, imagePath);
         }
 
         MarkAsDirty();
