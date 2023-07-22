@@ -1,10 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=41 format=3 uid="uid://66y0bs2gjy50"]
 
-[ext_resource type="Script" path="res://DudeController.cs" id="1_ap5d1"]
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
 [ext_resource type="PackedScene" uid="uid://do6y1bhu16x8w" path="res://BuildingSystem/Scenes/BuildingMenu.tscn" id="3_kkkw8"]
 [ext_resource type="Script" path="res://StartBowlingHandler.cs" id="5_68h4b"]
+[ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
 [ext_resource type="Script" path="res://PlayerViewManager.cs" id="6_ql2ml"]
 [ext_resource type="Script" path="res://BowlingGameManager.cs" id="7_rl7pp"]
@@ -13,10 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://UI/ScreenTest/ScreenTest.tscn" id="10_hv4nn"]
+[ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
 [ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/BuildingPlaceTrigger.cs" id="16_b08le"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/Builder.cs" id="16_jxwbk"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
+[ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/GrabbableBowlingBall.tscn" id="19_l0jl4"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_mode = 1
@@ -24,9 +26,8 @@ ambient_light_source = 2
 ambient_light_color = Color(0.258824, 0, 0.101961, 1)
 ambient_light_energy = 0.2
 glow_enabled = true
-glow_normalized = true
-glow_intensity = 1.5
-glow_bloom = 0.5
+glow_bloom = 0.1
+glow_blend_mode = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
 height = 1.8
@@ -142,12 +143,15 @@ size_flags_horizontal = 4
 text = "Press E to interact"
 metadata/_edit_use_anchors_ = true
 
-[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("DudeFace", "DudeHand")]
+[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
-script = ExtResource("1_ap5d1")
+collision_layer = 0
+script = ExtResource("5_idorm")
 _lookAroundSensitivity = 0.3
-DudeFace = NodePath("DudeFaceCamera")
-DudeHand = NodePath("DudeFaceCamera/InteractRaycast")
+_dudeFace = NodePath("DudeFaceCamera")
+_dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
+_aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
+_grabSocket = NodePath("DudeFaceCamera/GrabSocket")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dude"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22154, 0)
@@ -156,12 +160,20 @@ shape = SubResource("CapsuleShape3D_0vrco")
 [node name="DudeFaceCamera" type="Camera3D" parent="Dude"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9119, 0)
 
+[node name="GrabSocket" type="Node3D" parent="Dude/DudeFaceCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175149, -0.237393, -0.649593)
+
 [node name="InteractRaycast" type="RayCast3D" parent="Dude/DudeFaceCamera"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -2, 0)
 collision_mask = 2048
 collide_with_areas = true
-collide_with_bodies = false
+
+[node name="AimRaycast" type="RayCast3D" parent="Dude/DudeFaceCamera"]
+transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 0, 0, -0.747919)
+target_position = Vector3(0, -50, 0)
+debug_shape_custom_color = Color(1, 0.239216, 0.513726, 1)
+debug_shape_thickness = 1
 
 [node name="StartBowlingTriggers" type="Node3D" parent="."]
 
@@ -432,6 +444,9 @@ shape = SubResource("ConvexPolygonShape3D_ga3vx")
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 7.45856)
 mesh = SubResource("PlaneMesh_1arfw")
 
+[node name="neon-sign" parent="RoomMain" instance=ExtResource("13_t2s33")]
+transform = Transform3D(-9.61651e-08, 0, -2.2, 0, 2.2, 0, 2.2, 0, -9.61651e-08, 10.6132, 2.88402, 4.64701)
+
 [node name="Lighting" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lighting"]
@@ -532,7 +547,7 @@ _buildingPlaceSocketPathes = Array[NodePath]([NodePath("../BuildingPlaces/Buildi
 [node name="BuildingPlaces" type="Node3D" parent="."]
 
 [node name="BuildingPlace_1" type="Area3D" parent="BuildingPlaces"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.0611, 0, 14.1872)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.5816, 0, 13.459)
 collision_layer = 2048
 collision_mask = 2048
 script = ExtResource("16_b08le")
@@ -627,6 +642,9 @@ _dataHolder = NodePath("../../UserDataHolder")
 transform = Transform3D(0.9991, 1.85407e-09, 0.0424166, 0.0424166, -4.3672e-08, -0.9991, -1.67685e-16, 1, -4.37114e-08, -21.7551, 2.28306, -1.3569)
 _posterId = "poster-5"
 _dataHolder = NodePath("../../UserDataHolder")
+
+[node name="GrabbableBowlingBall" parent="." instance=ExtResource("19_l0jl4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 10)
 
 [connection signal="ActiveBowlingLineChanged" from="." to="BowlingGame" method="OnActiveBowlingLineChanged"]
 [connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]

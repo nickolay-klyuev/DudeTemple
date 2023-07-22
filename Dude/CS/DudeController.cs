@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class DudeController : CharacterBody3D
@@ -10,10 +11,16 @@ public partial class DudeController : CharacterBody3D
 	private float _lookAroundSensitivity = 1.0f;
 
 	[Export]
-	Camera3D DudeFace;
+	private Camera3D _dudeFace;
 
 	[Export]
-	RayCast3D DudeHand;
+	private RayCast3D _dudeHand;
+
+	[Export]
+	private RayCast3D _aimRaycast;
+
+	[Export]
+	private Node3D _grabSocket;
 
 	[Export]
 	private float _speed = 5.0f;
@@ -30,8 +37,15 @@ public partial class DudeController : CharacterBody3D
 
 	private CollisionShape3D _dudeCollision;
 
+	private bool _bIsHoldingThing = false;
+	private Node3D _holdingThing;
+
 	public override void _Ready()
 	{
+		#if DEBUG
+		CheckHelperStatic.CheckNodes(new Array<Node>{ _dudeFace, _dudeHand, _aimRaycast, _grabSocket}, this);
+		#endif
+
 		_dudeCollision = GetChild<CollisionShape3D>(0);
 	}
 
@@ -84,6 +98,7 @@ public partial class DudeController : CharacterBody3D
 		MoveAndSlide();
 
 		InteractProcess();
+		HoldingThingProcess();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -99,26 +114,81 @@ public partial class DudeController : CharacterBody3D
 			var TurnModifier = 0.01f * _lookAroundSensitivity;
 
 			RotateY(-mouseMotion.Relative.X * TurnModifier);
-			DudeFace.RotateX(-mouseMotion.Relative.Y * TurnModifier);
+			_dudeFace.RotateX(-mouseMotion.Relative.Y * TurnModifier);
 		}
 	}
 
 	private void InteractProcess() // TODO: Try to get rid of this process. 
 	{
-		if (DudeHand.IsColliding())
+		if (_dudeHand.IsColliding())
 		{
 			EmitSignal(SignalName.OnInteractProcessChanged, true);
 
-			IInteractable interactableObject = DudeHand.GetCollider() as IInteractable;
+			IInteractable interactableObject = _dudeHand.GetCollider() as IInteractable;
 			if (interactableObject != null && Input.IsActionJustPressed("Interact"))
 			{
 				interactableObject.Interact();
+			}
+
+			IGrabbable grabbableThing = _dudeHand.GetCollider() as IGrabbable;
+			if (grabbableThing != null && Input.IsActionJustPressed("Interact"))
+			{
+				grabbableThing.Grab();
+				HoldThing(grabbableThing as Node3D);
 			}
 		}
 		else
 		{
 			EmitSignal(SignalName.OnInteractProcessChanged, false);
 		}
+	}
+
+	private void HoldThing(Node3D thing)
+	{
+		if (thing == null)
+		{
+			#if DEBUG
+			GD.PrintErr($"{Name}: you are trying to hold a thing that doesn't exist!!!");
+			#endif
+
+			return;
+		}
+
+		thing.GlobalPosition = _grabSocket.GlobalPosition;
+		_holdingThing = thing;
+		_bIsHoldingThing = true;
+	}
+
+	private void HoldingThingProcess() // TODO: maybe it's possible to rid off this process?
+	{
+		if (_bIsHoldingThing && _holdingThing != null)
+		{
+			_holdingThing.GlobalPosition = _grabSocket.GlobalPosition;
+
+			if (Input.IsActionJustPressed("MainAction"))
+			{
+				ReleaseThing();
+			}
+		}
+	}
+
+	private void ReleaseThing()
+	{
+		_bIsHoldingThing = false;
+		
+		Vector3 throwDirection;
+		if (_aimRaycast.IsColliding())
+		{
+
+			throwDirection = _aimRaycast.GetCollisionPoint() - _grabSocket.GlobalPosition;
+		}
+		else
+		{
+			throwDirection = _aimRaycast.ToGlobal(_aimRaycast.TargetPosition) - _grabSocket.GlobalPosition;
+		}
+
+		((IGrabbable)_holdingThing).ThrowToDirection(throwDirection, 90.0f);// TODO: Make force dynamic.
+		_holdingThing = null;
 	}
 
 	// Change Dude's behave for different game modes

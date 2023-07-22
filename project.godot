@@ -78,5 +78,6 @@ BuildBarTest={
 
 [layer_names]
 
+3d_physics/layer_1="StaticObjects"
 3d_physics/layer_11="LaneEndTrigger"
 3d_physics/layer_12="InteractLayer"

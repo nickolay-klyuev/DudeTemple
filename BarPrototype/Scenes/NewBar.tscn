@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci65620v01rei"]
+
+[ext_resource type="PackedScene" uid="uid://p756sd2r4ukf" path="res://Blender/bar-first-try.glb" id="1_gwwsi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_785fb"]
+size = Vector3(1.35, 1.65, 4)
+
+[node name="bar-first-try" instance=ExtResource("1_gwwsi")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.658818, 0.825797, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_785fb")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.07615, 1.52236, 0)
+light_color = Color(0.815686, 0.819608, 0.0156863, 1)
+light_energy = 0.5
+spot_range = 1.5
+spot_angle = 75.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.07615, 1.52236, -1.22443)
+light_color = Color(0.815686, 0.819608, 0.0156863, 1)
+light_energy = 0.5
+spot_range = 1.5
+spot_angle = 75.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.07615, 1.52236, 1.16264)
+light_color = Color(0.815686, 0.819608, 0.0156863, 1)
+light_energy = 0.5
+spot_range = 1.5
+spot_angle = 75.0
