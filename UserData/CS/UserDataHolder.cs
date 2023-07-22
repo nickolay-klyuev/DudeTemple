@@ -42,6 +42,11 @@ public partial class UserDataHolder : Node
 
     public void AddScore(int amount)
     {
+        if (amount == 0)
+        {
+            return;
+        }
+
         _userData.Score += amount;
 
         EmitSignal(SignalName.ScoreChanged, _userData.Score);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=42 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://BuildingSystem/CS/Builder.cs" id="16_jxwbk"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
 [ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/GrabbableBowlingBall.tscn" id="19_l0jl4"]
+[ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_mode = 1
@@ -161,7 +162,7 @@ shape = SubResource("CapsuleShape3D_0vrco")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9119, 0)
 
 [node name="GrabSocket" type="Node3D" parent="Dude/DudeFaceCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175149, -0.237393, -0.649593)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0290618, -0.237393, -0.259171)
 
 [node name="InteractRaycast" type="RayCast3D" parent="Dude/DudeFaceCamera"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -176,6 +177,7 @@ debug_shape_custom_color = Color(1, 0.239216, 0.513726, 1)
 debug_shape_thickness = 1
 
 [node name="StartBowlingTriggers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4199, 0, 0)
 
 [node name="StartGameArea" type="Area3D" parent="StartBowlingTriggers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
@@ -644,7 +646,36 @@ _posterId = "poster-5"
 _dataHolder = NodePath("../../UserDataHolder")
 
 [node name="GrabbableBowlingBall" parent="." instance=ExtResource("19_l0jl4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2.03864, 10)
+
+[node name="PinsManager" type="Node3D" parent="." node_paths=PackedStringArray("_userData")]
+script = ExtResource("20_sm84q")
+_pinsScene = ExtResource("6_buwsq")
+_userData = NodePath("../UserDataHolder")
+
+[node name="PinsSpawnLocation_1" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 0)
+
+[node name="PinsSpawnLocation_2" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 2)
+
+[node name="PinsSpawnLocation_3" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 4)
+
+[node name="PinsSpawnLocation_4" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 6)
+
+[node name="PinsSpawnLocation_5" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 8)
+
+[node name="PinsSpawnLocation_6" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 10)
+
+[node name="PinsSpawnLocation_7" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 12)
+
+[node name="PinsSpawnLocation_8" type="Node3D" parent="PinsManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 
 [connection signal="ActiveBowlingLineChanged" from="." to="BowlingGame" method="OnActiveBowlingLineChanged"]
 [connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]

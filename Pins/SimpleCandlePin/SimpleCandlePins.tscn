@@ -1,36 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://6qw3gie53svf"]
+[gd_scene load_steps=4 format=3 uid="uid://6qw3gie53svf"]
 
+[ext_resource type="Script" path="res://Pins/CS/PinsGroupHandler.cs" id="1_37v5e"]
 [ext_resource type="PackedScene" uid="uid://b1ec7pxs575sm" path="res://Pins/SimpleCandlePin/SimpleCandlePin.tscn" id="1_xr1ca"]
 
-[node name="SimpleCandlePins" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 0)
+[sub_resource type="BoxShape3D" id="BoxShape3D_gd2c1"]
+size = Vector3(3, 1, 1.5)
 
-[node name="SimpleCandlePin" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePins" type="Node3D" node_paths=PackedStringArray("_pinsHolder", "_scoreCountdownTimer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 0)
+script = ExtResource("1_37v5e")
+_pinsHolder = NodePath("PinsHolder")
+_scoreCountdownTimer = NodePath("ScoreCountdownTimer")
+
+[node name="PinsHolder" type="Node3D" parent="."]
+
+[node name="SimpleCandlePin" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.388646, 0.206394, 0.14165)
 
-[node name="SimpleCandlePin2" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin2" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.386831, 0.206394, 0.483468)
 
-[node name="SimpleCandlePin3" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin3" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.383448, 0.206394, -0.165047)
 
-[node name="SimpleCandlePin4" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin4" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389422, 0.206394, -0.485596)
 
-[node name="SimpleCandlePin5" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin5" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243439, 0.206394, 0.32437)
 
-[node name="SimpleCandlePin6" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin6" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225, 0.206, 0)
 
-[node name="SimpleCandlePin7" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin7" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225235, 0.206394, -0.355465)
 
-[node name="SimpleCandlePin8" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin8" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111032, 0.206394, -0.189017)
 
-[node name="SimpleCandlePin9" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin9" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112633, 0.206394, 0.19559)
 
-[node name="SimpleCandlePin10" parent="." instance=ExtResource("1_xr1ca")]
+[node name="SimpleCandlePin10" parent="PinsHolder" instance=ExtResource("1_xr1ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.206, 0)
+
+[node name="BallTriggerArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0778856, 0.291554, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BallTriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.879868, 0, 0)
+shape = SubResource("BoxShape3D_gd2c1")
+
+[node name="ScoreCountdownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="BallTriggerArea" to="." method="OnBallTriggerAreaBodyEntered"]
