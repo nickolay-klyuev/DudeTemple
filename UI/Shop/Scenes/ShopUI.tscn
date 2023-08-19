@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyxw06ofkcujw"]
+
+[ext_resource type="Theme" uid="uid://bg8digrsku7x6" path="res://UI/Shop/Themes/MainShopTheme.tres" id="1_51tg0"]
+[ext_resource type="Script" path="res://UI/Shop/CS/Tools/ShopUITool.cs" id="2_6cgx3"]
+[ext_resource type="PackedScene" uid="uid://e00ov8d1p54s" path="res://UI/Scenes/SelfOpeningBlock.tscn" id="3_08vot"]
+[ext_resource type="Script" path="res://UI/Shop/CS/ShopEnvironmentCategoryHandler.cs" id="4_wma7w"]
+
+[node name="ShopUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_51tg0")
+script = ExtResource("2_6cgx3")
+Environments = ["Test_1", "Test_2", "Test_3"]
+
+[node name="TabContainer" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.05
+anchor_right = 0.7
+anchor_bottom = 0.3
+offset_bottom = 1089.0
+grow_horizontal = 2
+tab_alignment = 1
+
+[node name="Environment" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+
+[node name="SelfOpeningBlock" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("4_wma7w")
+
+[node name="@VBoxContainer@49997" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("4_wma7w")
+
+[node name="@VBoxContainer@49998" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("4_wma7w")
+
+[node name="Ball" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Pins" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2

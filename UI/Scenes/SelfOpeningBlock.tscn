@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://e00ov8d1p54s"]
+
+[ext_resource type="Script" path="res://UI/Shop/CS/ShopEnvironmentCategoryHandler.cs" id="1_rien5"]
+[ext_resource type="Texture2D" uid="uid://kq3xd0gngqkr" path="res://icon.svg" id="2_kijc7"]
+
+[node name="SelfOpeningBlock" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("1_rien5")
+
+[node name="Title" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="Title"]
+layout_mode = 2
+text = "Lights"
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("2_kijc7")
+
+[node name="Description" type="Label" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "assghldjrhlihil"
+
+[node name="BuyButton" type="Button" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "Buy"

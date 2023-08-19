@@ -1,3 +1,4 @@
+#if DEBUG
 using Godot;
 using Godot.Collections;
 using System;
@@ -40,4 +41,16 @@ public static class CheckHelperStatic
 
         return bValid;
     }
+
+    public static bool CheckUI(Control ui, Node caller)
+    {
+        if (ui == null)
+        {
+            GD.PrintErr($"{caller.Name}: ui control is missing!!!");
+            return false;
+        }
+        
+        return true;
+    }
 }
+#endif
