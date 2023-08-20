@@ -7,7 +7,7 @@ public partial class ShopUITool : Control
 {
 	[ExportCategory("UI Constructer")]
 	[Export]
-	public Array<string> Environments
+	public Array<EBuilding> Environments
 	{
 		get => _environments;
 		set
@@ -17,7 +17,7 @@ public partial class ShopUITool : Control
 		}
 	}
 
-	private Array<string> _environments;
+	private Array<EBuilding> _environments;
 
 	private const string SELF_OPENING_BLOCK_PATH = "res://UI/Scenes/SelfOpeningBlock.tscn";
 
@@ -40,10 +40,17 @@ public partial class ShopUITool : Control
 			return;
 		}
 
+		Control environment = GetNode<Control>("TabContainer/Environment");
+		#if DEBUG
+		CheckHelperStatic.CheckUI(environment, this);
+		#endif
+
 		int index = 0;
-		foreach(ShopEnvironmentCategoryHandler child in GetNode("TabContainer/Environment").GetChildren())
+		foreach(ShopEnvironmentCategoryHandler child in environment.GetChildren())
 		{
-			child.SetTitle(_environments[index]);
+			SBuildingData data = BuildingDataHelper.GetBuildingData(_environments[index]);
+			child.SetTitle(data.Label);
+			child.SetDescription(data.Description);
 			index++;
 		}
 	}
@@ -64,7 +71,7 @@ public partial class ShopUITool : Control
 
 		ClearShopUI(environmentsHolder);
 
-		foreach (string environmentName in _environments)
+		for (int index = 0; index < _environments.Count; index++)
 		{
 			Node blockInstance = selfOpeningBlock.Instantiate();
 

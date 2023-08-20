@@ -52,5 +52,21 @@ public static class CheckHelperStatic
         
         return true;
     }
+
+    public static bool CheckUIs(Node caller, params Control[] uis)
+    {
+        bool bValid = true;
+
+        foreach (Control ui in uis)
+        {
+            if (ui == null)
+            {
+                GD.PrintErr($"{caller.Name}: ui control is missing!!!");
+                bValid = false;
+            }
+        }
+
+        return bValid;
+    }
 }
 #endif

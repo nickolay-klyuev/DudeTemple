@@ -5,9 +5,9 @@ public static class BuildingDataHelper
 {
     private static List<SBuildingData> _buildingData = new List<SBuildingData>()
     {
-        new SBuildingData(EBuilding.Bar, "Bar", 1, "res://BarPrototype/Scenes/NewBar.tscn"),
-        new SBuildingData(EBuilding.Toilet, "Toilet", 100, "res://BarPrototype/Scenes/BarPrototype.tscn"),
-        new SBuildingData(EBuilding.Lights, "Lights", 150, "res://BarPrototype/Scenes/BarPrototype.tscn"),
+        new SBuildingData(EBuilding.Bar, "Bar", 1, "res://BarPrototype/Scenes/NewBar.tscn", "This you can buy drinks or something else."),
+        new SBuildingData(EBuilding.Toilet, "Toilet", 100, "res://BarPrototype/Scenes/BarPrototype.tscn", "You can use it when you need it."),
+        new SBuildingData(EBuilding.Lights, "Lights", 150, "res://BarPrototype/Scenes/BarPrototype.tscn", "Add fancy and cozy light."),
         new SBuildingData(EBuilding.Test_1, "Test_1", 5, "res://BarPrototype/Scenes/BarPrototype.tscn"),
         new SBuildingData(EBuilding.Test_2, "Test_2", 10, "res://BarPrototype/Scenes/BarPrototype.tscn"),
         new SBuildingData(EBuilding.Test_3, "Test_3", 15, "res://BarPrototype/Scenes/BarPrototype.tscn"),

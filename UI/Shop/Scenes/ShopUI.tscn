@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_51tg0")
 script = ExtResource("2_6cgx3")
-Environments = ["Test_1", "Test_2", "Test_3"]
+Environments = [0, 1, 2]
 
 [node name="TabContainer" type="TabContainer" parent="."]
 custom_minimum_size = Vector2(800, 500)
@@ -31,19 +31,19 @@ tab_alignment = 1
 [node name="Environment" type="VBoxContainer" parent="TabContainer"]
 layout_mode = 2
 
-[node name="SelfOpeningBlock" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
+[node name="@VBoxContainer@30395" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
 layout_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 script = ExtResource("4_wma7w")
 
-[node name="@VBoxContainer@49997" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
+[node name="@VBoxContainer@30396" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
 layout_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 script = ExtResource("4_wma7w")
 
-[node name="@VBoxContainer@49998" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
+[node name="@VBoxContainer@30397" type="VBoxContainer" parent="TabContainer/Environment" instance=ExtResource("3_08vot")]
 layout_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2

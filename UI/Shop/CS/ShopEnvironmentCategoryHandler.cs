@@ -5,16 +5,17 @@ public partial class ShopEnvironmentCategoryHandler : VBoxContainer
 {
 	private Control _categoryContentBlock;
 	private Label _title;
+	private Label _description;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_categoryContentBlock = GetNode<Control>("Content");
 		_title = GetNode<Label>("Title/Label");
-
+		_description = GetNode<Label>("Content/Description");
+		
 		#if DEBUG
-		CheckHelperStatic.CheckUI(_categoryContentBlock, this);
-		CheckHelperStatic.CheckUI(_title, this);
+		CheckHelperStatic.CheckUIs(this, _categoryContentBlock, _title, _description);
 		#endif
 
 		ToggleContent(false);
@@ -33,6 +34,11 @@ public partial class ShopEnvironmentCategoryHandler : VBoxContainer
 	public void SetTitle(string title)
 	{
 		_title.Text = title;
+	}
+
+	public void SetDescription(string desc)
+	{
+		_description.Text = desc;
 	}
 
 	private void HoverModulate()
