@@ -43,7 +43,7 @@ public partial class DudeController : CharacterBody3D
 	public override void _Ready()
 	{
 		#if DEBUG
-		CheckHelperStatic.CheckNodes(new Array<Node>{ _dudeFace, _dudeHand, _aimRaycast, _grabSocket}, this);
+		CheckHelper.CheckNodes(new Array<Node>{ _dudeFace, _dudeHand, _aimRaycast, _grabSocket}, this);
 		#endif
 
 		_dudeCollision = GetChild<CollisionShape3D>(0);
@@ -189,25 +189,5 @@ public partial class DudeController : CharacterBody3D
 
 		((IGrabbable)_holdingThing).ThrowToDirection(throwDirection, 90.0f);// TODO: Make force dynamic.
 		_holdingThing = null;
-	}
-
-	// Change Dude's behave for different game modes
-	public void OnGameModeChanged(TempleState.GameMode gameMode)
-	{
-		if (gameMode == TempleState.GameMode.Walking)
-		{
-			SetDisabled(false);
-		}
-		else if (gameMode == TempleState.GameMode.RollingBalls)
-		{
-			EmitSignal(SignalName.OnInteractProcessChanged, false); // TODO: need to refactor this one
-			SetDisabled(true);
-		}
-	}
-
-	private void SetDisabled(bool bIsDisabled)
-	{
-		_bIsDisabled = bIsDisabled;
-		_dudeCollision.Disabled = _bIsDisabled;
 	}
 }

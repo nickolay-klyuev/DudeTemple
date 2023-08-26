@@ -57,7 +57,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 	public override void _Ready()
 	{
 		#if DEBUG
-		CheckHelperStatic.CheckNodes(new Array<Node>(){_buildingLabel, _costLabel, _buildButton, _unlockButton, _userDataHolder}, this);
+		CheckHelper.CheckNodes(new Array<Node>(){_buildingLabel, _costLabel, _buildButton, _unlockButton, _userDataHolder}, this);
 		#endif
 	}
 

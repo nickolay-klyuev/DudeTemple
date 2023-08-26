@@ -42,7 +42,7 @@ public partial class ShopUITool : Control
 
 		Control environment = GetNode<Control>("TabContainer/Environment");
 		#if DEBUG
-		CheckHelperStatic.CheckUI(environment, this);
+		CheckHelper.CheckUI(environment, this);
 		#endif
 
 		int index = 0;
@@ -64,10 +64,10 @@ public partial class ShopUITool : Control
 		}
 
 		PackedScene selfOpeningBlock = GD.Load<PackedScene>(SELF_OPENING_BLOCK_PATH);
-		CheckHelperStatic.CheckScene(selfOpeningBlock, this);
+		CheckHelper.CheckScene(selfOpeningBlock, this);
 
 		Node environmentsHolder = GetNode("TabContainer/Environment");
-		CheckHelperStatic.CheckNode(environmentsHolder, this);
+		CheckHelper.CheckNode(environmentsHolder, this);
 
 		ClearShopUI(environmentsHolder);
 

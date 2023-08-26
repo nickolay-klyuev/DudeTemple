@@ -15,7 +15,7 @@ public partial class ShopEnvironmentCategoryHandler : VBoxContainer
 		_description = GetNode<Label>("Content/Description");
 		
 		#if DEBUG
-		CheckHelperStatic.CheckUIs(this, _categoryContentBlock, _title, _description);
+		CheckHelper.CheckUIs(this, _categoryContentBlock, _title, _description);
 		#endif
 
 		ToggleContent(false);

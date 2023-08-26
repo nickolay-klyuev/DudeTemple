@@ -3,8 +3,42 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public static class CheckHelperStatic
+public static class CheckHelper
 {
+    public static bool Check(Node caller, params Node[] nodesToCheck )
+    {
+        bool bValid = true;
+
+        foreach (Node node in nodesToCheck)
+        {
+            if (node == null)
+            {
+                GD.PrintErr($"{caller.Name}: {node.Name} node is null!!!");
+                GD.PrintErr($"{{caller.GetScript().AsStringName()}}: Please check [Export] fields manually to resolve this error!!!");
+                bValid = false;
+            }
+        }
+
+        return bValid;
+    }
+
+    public static bool Check(Node caller, params PackedScene[] packedScenesToCheck)
+    {
+        bool bValid = true;
+
+        foreach (PackedScene scene in packedScenesToCheck)
+        {
+            if (scene == null)
+            {
+                GD.PrintErr($"{caller.Name}: packed scene is null!!!");
+                GD.PrintErr($"{{caller.GetScript().AsStringName()}}: Please check all resources and packed scenes manually to resolve this error!!!");
+                bValid = false;
+            }
+        }
+
+        return bValid;
+    }
+
     public static bool CheckScene(PackedScene scene, Node caller)
     {
         if (scene == null)

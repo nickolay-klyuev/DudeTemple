@@ -23,7 +23,7 @@ public partial class UserDataHolder : Node
     public override void _Ready()
     {
         #if DEBUG
-        CheckHelperStatic.CheckNode(_dirtyTimer, this);
+        CheckHelper.CheckNode(_dirtyTimer, this);
         #endif
 
         _dirtyTimer.Timeout += SaveDirtyData;

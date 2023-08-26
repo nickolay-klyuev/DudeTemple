@@ -20,14 +20,14 @@ public partial class PosterHandler : Decal
 	public override void _Ready()
 	{
 		#if DEBUG
-		CheckHelperStatic.CheckNode(_posterFileDialog, this);
+		CheckHelper.CheckNode(_posterFileDialog, this);
 
 		if (String.IsNullOrEmpty(_posterId))
 		{
 			GD.PrintErr($"{Name}: Poster id is missing!!! You need to add poster id to save poster in user file!!!");
 		}
 
-		CheckHelperStatic.CheckNode(_dataHolder, this);
+		CheckHelper.CheckNode(_dataHolder, this);
 		#endif
 
 		_posterFileDialog.FileSelected += OnPosterImageSelected;

@@ -1,21 +1,15 @@
-[gd_scene load_steps=42 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=33 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
 [ext_resource type="PackedScene" uid="uid://do6y1bhu16x8w" path="res://BuildingSystem/Scenes/BuildingMenu.tscn" id="3_kkkw8"]
-[ext_resource type="Script" path="res://StartBowlingHandler.cs" id="5_68h4b"]
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
-[ext_resource type="Script" path="res://PlayerViewManager.cs" id="6_ql2ml"]
-[ext_resource type="Script" path="res://BowlingGameManager.cs" id="7_rl7pp"]
-[ext_resource type="PackedScene" uid="uid://c12o8eiub24ir" path="res://UI/BowlingGame/BowlingGameUI.tscn" id="8_34frt"]
-[ext_resource type="PackedScene" uid="uid://be5qpiblt04st" path="res://BowlingBall.tscn" id="8_ncw30"]
 [ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://UI/ScreenTest/ScreenTest.tscn" id="10_hv4nn"]
 [ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
 [ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
-[ext_resource type="Script" path="res://BuildingSystem/CS/BuildingPlaceTrigger.cs" id="16_b08le"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/Builder.cs" id="16_jxwbk"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
 [ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/GrabbableBowlingBall.tscn" id="19_l0jl4"]
@@ -32,12 +26,6 @@ glow_blend_mode = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
 height = 1.8
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0dj8r"]
-size = Vector3(2, 2, 2)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_80ma2"]
-viewport_path = NodePath("BowlingGame/EndLineViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl01h"]
 albedo_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
@@ -95,9 +83,6 @@ resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 5)
 material = SubResource("StandardMaterial3D_avsxf")
 size = Vector2(1, 0.7)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6koht"]
-size = Vector3(2, 2, 2)
 
 [node name="Temple" type="Node3D"]
 script = ExtResource("1_hpo4a")
@@ -176,145 +161,6 @@ target_position = Vector3(0, -50, 0)
 debug_shape_custom_color = Color(1, 0.239216, 0.513726, 1)
 debug_shape_thickness = 1
 
-[node name="StartBowlingTriggers" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4199, 0, 0)
-
-[node name="StartGameArea" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="StartGameArea2" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 2)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-_lineIndex = 1
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="StartGameArea3" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 4)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-_lineIndex = 2
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="StartGameArea4" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 6)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-_lineIndex = 3
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="StartGameArea5" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 8)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-_lineIndex = 4
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="StartGameArea6" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 10)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-_lineIndex = 5
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="StartGameArea7" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 12)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-_lineIndex = 6
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="StartGameArea8" type="Area3D" parent="StartBowlingTriggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 14)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("5_68h4b")
-_lineIndex = 7
-
-[node name="StartGameTrigger" type="CollisionShape3D" parent="StartBowlingTriggers/StartGameArea8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("BoxShape3D_0dj8r")
-
-[node name="PlayerViewManager" type="Node" parent="." node_paths=PackedStringArray("DudeCamera", "BowlingCamera")]
-editor_description = "Used to change player view by managing several cameras."
-script = ExtResource("6_ql2ml")
-DudeCamera = NodePath("../Dude/DudeFaceCamera")
-BowlingCamera = NodePath("../BowlingGame/BowlingCamera")
-
-[node name="BowlingGame" type="Node3D" parent="." node_paths=PackedStringArray("SpawnBallLocation", "SpawnPinsLocation", "BowlingGameUI", "EndLineView", "_scoreCountdownTimer", "_failCountdownTimer", "_endLineCameraRef")]
-script = ExtResource("7_rl7pp")
-BowlingBallScene = ExtResource("8_ncw30")
-SpawnBallLocation = NodePath("BallSpawnLocation")
-BowlingPinsScene = ExtResource("6_buwsq")
-SpawnPinsLocation = NodePath("PinsSpawnLocation")
-BowlingGameUI = NodePath("BowlingGameUI")
-EndLineView = NodePath("EndLineView")
-_scoreCountdownTimer = NodePath("ScoreCountdownTimer")
-_failCountdownTimer = NodePath("FailCountdownTimer")
-_endLineCameraRef = NodePath("EndLineViewport/EndLineCamera")
-_moveBallSensitivity = 0.2
-_baseThrowPower = 8.0
-
-[node name="BallSpawnLocation" type="Node3D" parent="BowlingGame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.94376, 0.663973, 0)
-
-[node name="PinsSpawnLocation" type="Node3D" parent="BowlingGame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 0)
-
-[node name="BowlingCamera" type="Camera3D" parent="BowlingGame"]
-transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 4.61853e-14, -4.37114e-08, -11.5495, 2, 0)
-
-[node name="BowlingGameUI" parent="BowlingGame" instance=ExtResource("8_34frt")]
-
-[node name="EndLineView" type="TextureRect" parent="BowlingGame"]
-offset_right = 512.0
-offset_bottom = 512.0
-texture = SubResource("ViewportTexture_80ma2")
-
-[node name="EndLineViewport" type="SubViewport" parent="BowlingGame"]
-
-[node name="EndLineCamera" type="Camera3D" parent="BowlingGame/EndLineViewport"]
-transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, 7.54898, 0.821305, 0)
-
-[node name="ScoreCountdownTimer" type="Timer" parent="BowlingGame"]
-wait_time = 3.0
-one_shot = true
-
-[node name="FailCountdownTimer" type="Timer" parent="BowlingGame"]
-wait_time = 10.0
-one_shot = true
-
 [node name="BowlingLanes" type="Node3D" parent="."]
 
 [node name="LaneSeparator" type="MeshInstance3D" parent="BowlingLanes"]
@@ -385,138 +231,138 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 15.0092)
 mesh = SubResource("PlaneMesh_2uf1j")
 skeleton = NodePath("../..")
 
-[node name="RoomMain" type="Node3D" parent="."]
+[node name="DumbTempleObjects" type="Node3D" parent="."]
 
-[node name="Floor" type="StaticBody3D" parent="RoomMain"]
+[node name="Floor" type="StaticBody3D" parent="DumbTempleObjects"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomMain/Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.83, 0, 7)
 mesh = SubResource("PlaneMesh_8kvq3")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMain/Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.83, 0, 7)
 shape = SubResource("ConvexPolygonShape3D_0y456")
 
-[node name="Wall_1" type="StaticBody3D" parent="RoomMain"]
+[node name="Wall_1" type="StaticBody3D" parent="DumbTempleObjects"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomMain/Wall_1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/Wall_1"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -26.08, 2.5, 7)
 mesh = SubResource("PlaneMesh_1ixc5")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMain/Wall_1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_1"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -26.08, 2.5, 7)
 shape = SubResource("ConvexPolygonShape3D_jmsaj")
 
-[node name="Wall_2" type="StaticBody3D" parent="RoomMain"]
+[node name="Wall_2" type="StaticBody3D" parent="DumbTempleObjects"]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RoomMain/Wall_2"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DumbTempleObjects/Wall_2"]
 transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, 10.8457, 2.5, 7)
 mesh = SubResource("PlaneMesh_1ixc5")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMain/Wall_2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_2"]
 transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, 10.8457, 2.5, 7)
 shape = SubResource("ConvexPolygonShape3D_bhqjj")
 
-[node name="Wall_3" type="StaticBody3D" parent="RoomMain"]
+[node name="Wall_3" type="StaticBody3D" parent="DumbTempleObjects"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomMain/Wall_3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/Wall_3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.9252, 2.5, -1.25)
 mesh = SubResource("PlaneMesh_0ix34")
 skeleton = NodePath("../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMain/Wall_3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.9252, 2.5, -1.25)
 shape = SubResource("ConvexPolygonShape3D_n1tse")
 
-[node name="Wall_4" type="StaticBody3D" parent="RoomMain"]
+[node name="Wall_4" type="StaticBody3D" parent="DumbTempleObjects"]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RoomMain/Wall_4"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DumbTempleObjects/Wall_4"]
 transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -6.925, 2.5, 15.2)
 mesh = SubResource("PlaneMesh_0ix34")
 skeleton = NodePath("../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMain/Wall_4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_4"]
 transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -6.925, 2.5, 15.2)
 shape = SubResource("ConvexPolygonShape3D_ga3vx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomMain"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 7.45856)
 mesh = SubResource("PlaneMesh_1arfw")
 
-[node name="neon-sign" parent="RoomMain" instance=ExtResource("13_t2s33")]
+[node name="neon-sign" parent="DumbTempleObjects" instance=ExtResource("13_t2s33")]
 transform = Transform3D(-9.61651e-08, 0, -2.2, 0, 2.2, 0, 2.2, 0, -9.61651e-08, 10.6132, 2.88402, 4.64701)
 
-[node name="Lighting" type="Node3D" parent="."]
+[node name="Lighting" type="Node3D" parent="DumbTempleObjects"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7588, 4.92916, 3.14996)
 light_color = Color(1, 0.270588, 0.407843, 1)
 omni_range = 10.0
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7588, 4.92916, 10.0206)
 light_color = Color(1, 0.270588, 0.407843, 1)
 omni_range = 10.0
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41918, 4.92916, 3.14996)
 light_color = Color(1, 0.270588, 0.407843, 1)
 omni_range = 10.0
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41918, 4.92916, 10.0206)
 light_color = Color(1, 0.270588, 0.407843, 1)
 omni_range = 10.0
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D5" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8117, 4.92916, 3.14996)
 light_color = Color(1, 0.270588, 0.407843, 1)
 omni_range = 10.0
 
-[node name="OmniLight3D6" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D6" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8117, 4.92916, 10.0206)
 light_color = Color(1, 0.270588, 0.407843, 1)
 omni_range = 10.0
 
-[node name="OmniLight3D7" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D7" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 0)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="OmniLight3D8" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D8" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 2.05016)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="OmniLight3D9" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D9" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 3.99413)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="OmniLight3D10" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D10" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 6.06253)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="OmniLight3D11" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D11" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 8.0715)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="OmniLight3D12" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D12" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 9.99766)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="OmniLight3D13" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D13" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 12.0308)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="OmniLight3D14" type="OmniLight3D" parent="Lighting"]
+[node name="OmniLight3D14" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 14.0459)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
@@ -544,80 +390,7 @@ one_shot = true
 [node name="Builder" type="Node" parent="." node_paths=PackedStringArray("_userDataHolder")]
 script = ExtResource("16_jxwbk")
 _userDataHolder = NodePath("../UserDataHolder")
-_buildingPlaceSocketPathes = Array[NodePath]([NodePath("../BuildingPlaces/BuildingPlace_1/BuildSocket"), NodePath("../BuildingPlaces/BuildingPlace_2/BuildSocket"), NodePath("../BuildingPlaces/BuildingPlace_3/BuildSocket"), NodePath("../BuildingPlaces/BuildingPlace_4/BuildSocket")])
-
-[node name="BuildingPlaces" type="Node3D" parent="."]
-
-[node name="BuildingPlace_1" type="Area3D" parent="BuildingPlaces"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.5816, 0, 13.459)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("16_b08le")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_6koht")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
-light_color = Color(0.247059, 0.745098, 1, 1)
-omni_range = 1.5
-
-[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_1"]
-
-[node name="BuildingPlace_2" type="Area3D" parent="BuildingPlaces"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5308, -2.38419e-07, 0.500443)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("16_b08le")
-_index = 1
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_6koht")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
-light_color = Color(0.247059, 0.745098, 1, 1)
-omni_range = 1.5
-
-[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_2"]
-
-[node name="BuildingPlace_3" type="Area3D" parent="BuildingPlaces"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0611, 0, -0.222703)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("16_b08le")
-_index = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_6koht")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
-light_color = Color(0.247059, 0.745098, 1, 1)
-omni_range = 1.5
-
-[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_3"]
-
-[node name="BuildingPlace_4" type="Area3D" parent="BuildingPlaces"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9647, 0, -0.181874)
-collision_layer = 2048
-collision_mask = 2048
-script = ExtResource("16_b08le")
-_index = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingPlaces/BuildingPlace_4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_6koht")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="BuildingPlaces/BuildingPlace_4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743461, 0)
-light_color = Color(0.247059, 0.745098, 1, 1)
-omni_range = 1.5
-
-[node name="BuildSocket" type="Node3D" parent="BuildingPlaces/BuildingPlace_4"]
+_buildingPlaceSocketPathes = Array[NodePath]([NodePath(""), NodePath(""), NodePath(""), NodePath("")])
 
 [node name="Posters" type="Node3D" parent="."]
 
@@ -677,24 +450,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 12)
 [node name="PinsSpawnLocation_8" type="Node3D" parent="PinsManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 
-[connection signal="ActiveBowlingLineChanged" from="." to="BowlingGame" method="OnActiveBowlingLineChanged"]
-[connection signal="GameModeChanged" from="." to="Dude" method="OnGameModeChanged"]
-[connection signal="GameModeChanged" from="." to="PlayerViewManager" method="ChangeCameraForGameMode"]
-[connection signal="GameModeChanged" from="." to="BowlingGame" method="OnGameModeChanged"]
 [connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="CloseCurrent"]
 [connection signal="BuildPressed" from="UIManager/BuildingMenu" to="Builder" method="BuildAndPushUserData"]
 [connection signal="UnlockPressed" from="UIManager/BuildingMenu" to="Builder" method="Unlock"]
 [connection signal="OnInteractProcessChanged" from="Dude" to="UIManager" method="SetInteractLabelVisibility"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea" to="." method="StartBowling"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea2" to="." method="StartBowling"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea3" to="." method="StartBowling"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea4" to="." method="StartBowling"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea5" to="." method="StartBowling"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea6" to="." method="StartBowling"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea7" to="." method="StartBowling"]
-[connection signal="StartBowlingTriggered" from="StartBowlingTriggers/StartGameArea8" to="." method="StartBowling"]
-[connection signal="ScoreCounted" from="BowlingGame" to="." method="OnScoreCounted"]
-[connection signal="ScoreCounted" from="BowlingGame" to="UserDataHolder" method="AddScore"]
 [connection signal="BuildingDataLoaded" from="UserDataHolder" to="Builder" method="OnBuildingDataLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest2" method="OnPosterImagesLoaded"]
@@ -702,7 +461,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest4" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest5" method="OnPosterImagesLoaded"]
 [connection signal="ScoreChanged" from="UserDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTestUI" method="UpdateScoreLabel"]
-[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_1" to="UIManager" method="OpenBuildingMenu"]
-[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_2" to="UIManager" method="OpenBuildingMenu"]
-[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_3" to="UIManager" method="OpenBuildingMenu"]
-[connection signal="BuildingPlaceTriggered" from="BuildingPlaces/BuildingPlace_4" to="UIManager" method="OpenBuildingMenu"]

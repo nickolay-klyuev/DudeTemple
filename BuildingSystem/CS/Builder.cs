@@ -15,7 +15,7 @@ public partial class Builder : Node
 	public override void _Ready()
 	{
         #if DEBUG
-        CheckHelperStatic.CheckNode(_userDataHolder, this);
+        CheckHelper.CheckNode(_userDataHolder, this);
         #endif
 	}
 

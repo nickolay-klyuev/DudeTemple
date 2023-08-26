@@ -208,25 +208,25 @@ public partial class BowlingGameManager : Node3D
 		}
 	}
 
-	public void OnGameModeChanged(TempleState.GameMode gameMode)
-	{
-		if (gameMode == TempleState.GameMode.RollingBalls)
-		{
-			SetBowlingUIVisibility(true);
+	// public void OnGameModeChanged(TempleState.GameMode gameMode)
+	// {
+	// 	if (gameMode == TempleState.GameMode.RollingBalls)
+	// 	{
+	// 		SetBowlingUIVisibility(true);
 
-			if (_bIsBowlingLaneClean)
-			{
-				_bIsBowlingLaneClean = false;
+	// 		if (_bIsBowlingLaneClean)
+	// 		{
+	// 			_bIsBowlingLaneClean = false;
 
-				SpawnBall();
-				SpawnPins();
-			}
-		}
-		else
-		{
-			SetBowlingUIVisibility(false);
-		}
-	}
+	// 			SpawnBall();
+	// 			SpawnPins();
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		SetBowlingUIVisibility(false);
+	// 	}
+	// }
 
 	private void CleanBowlingLane()
 	{

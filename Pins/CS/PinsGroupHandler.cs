@@ -19,7 +19,7 @@ public partial class PinsGroupHandler : Node3D
 	public override void _Ready()
 	{
 		#if DEBUG
-		CheckHelperStatic.CheckNodes(new Array<Node>(){ _pinsHolder, _scoreCountdownTimer }, this);
+		CheckHelper.CheckNodes(new Array<Node>(){ _pinsHolder, _scoreCountdownTimer }, this);
 		#endif
 
 		foreach (Node3D pin in _pinsHolder.GetChildren())

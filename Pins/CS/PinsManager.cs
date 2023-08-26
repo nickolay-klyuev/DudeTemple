@@ -17,8 +17,8 @@ public partial class PinsManager : Node3D
 	public override void _Ready()
 	{
 		#if DEBUG
-		CheckHelperStatic.CheckScene(_pinsScene, this);
-		CheckHelperStatic.CheckNode(_userData, this);
+		CheckHelper.CheckScene(_pinsScene, this);
+		CheckHelper.CheckNode(_userData, this);
 		#endif
 
 		foreach (Node3D point in GetChildren())
