@@ -4,11 +4,11 @@ using System;
 
 public partial class UIManager : Control
 {
-	public enum EFullScreenMenuType
+	public enum EMenuType
 	{
 		None,
 		PauseMenu,
-		BuildingMenu
+		ShopMenu
 	}
 
 	[ExportSubgroup("Full Screen UI")]
@@ -16,19 +16,23 @@ public partial class UIManager : Control
 	private PauseMenuHandler _pauseMenu;
 
 	[Export]
-	private BuildingMenuHandler _buildingMenu;
+	private ShopUITool _shopMenu;
 
 	[ExportSubgroup("Gameplay UI")]
 	[Export]
 	private Label _interactLabel;
 
-	private EFullScreenMenuType _activeMenu = EFullScreenMenuType.None;
+	private EMenuType _activeMenu = EMenuType.None;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		#if DEBUG
+		CheckHelper.Check(this, _pauseMenu, _shopMenu, _interactLabel);
+		#endif
+
 		_pauseMenu.Close();
-		_buildingMenu.Close();
+		_shopMenu.Close();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,60 +45,56 @@ public partial class UIManager : Control
 		// Open/Close pause menu by action
         if (@event is InputEventKey && Input.IsActionJustPressed("Return"))
 		{
-			if (_activeMenu == EFullScreenMenuType.None)
+			if (_activeMenu == EMenuType.None)
 			{
-				OpenMenu(EFullScreenMenuType.PauseMenu);
+				OpenPauseMenu();
+			}
+			else if (_activeMenu == EMenuType.ShopMenu)
+			{
+				CloseShopMenu();
 			}
 			else
 			{
-				CloseCurrent();
+				ClosePauseMenu();
 			}
 		}
     }
 
-	public void CloseCurrent()
+	public void SetInteractLabelVisibility(bool bIsVisible)
 	{
-		switch(_activeMenu)
-		{
-			case EFullScreenMenuType.PauseMenu:
-				_pauseMenu.Close();
-				break;
-			case EFullScreenMenuType.BuildingMenu:
-				_buildingMenu.Close();
-				break;
-		}
+		_interactLabel.Visible = bIsVisible;
+	}
 
-		_activeMenu = EFullScreenMenuType.None;
+	public void OpenShopMenu()
+	{
+		_shopMenu.Open();
+
+		_activeMenu = EMenuType.ShopMenu;
+	}
+
+	private void CloseShopMenu()
+	{
+		_shopMenu.Close();
+
+		_activeMenu = EMenuType.PauseMenu;
+	}
+
+	public void ClosePauseMenu()
+	{
+		_pauseMenu.Close();
+
+		_activeMenu = EMenuType.None;
 		GetTree().Paused = false;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
-	public void OpenMenu(EFullScreenMenuType menu)
+	private void OpenPauseMenu()
 	{
-		switch(menu)
-		{
-			case EFullScreenMenuType.PauseMenu:
-				_pauseMenu.Open();
-				break;
-			case EFullScreenMenuType.BuildingMenu:
-				_buildingMenu.Open();
-				break;
-		}
+		_pauseMenu.Open();
 
-		_activeMenu = menu;
+		_activeMenu = EMenuType.PauseMenu;
 		GetTree().Paused = true;
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		SetInteractLabelVisibility(false);
-	}
-
-	public void OpenBuildingMenu(int buildingPlaceIndex)
-	{
-		_buildingMenu.BuildingPlaceIndex = buildingPlaceIndex;
-		OpenMenu(EFullScreenMenuType.BuildingMenu);
-	}
-
-	public void SetInteractLabelVisibility(bool bIsVisible)
-	{
-		_interactLabel.Visible = bIsVisible;
 	}
 }

@@ -1,4 +1,4 @@
-public enum EBuilding
+public enum EFurniture
 {
     Bar,
     Toilet,

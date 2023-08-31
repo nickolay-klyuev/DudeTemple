@@ -3,11 +3,11 @@ using Godot.Collections;
 using System;
 
 [Tool]
-public partial class ShopUITool : Control
+public partial class ShopUITool : Control, IMenuInteract
 {
 	[ExportCategory("UI Constructer")]
 	[Export]
-	public Array<EBuilding> Environments
+	public Array<EFurniture> Environments
 	{
 		get => _environments;
 		set
@@ -17,7 +17,7 @@ public partial class ShopUITool : Control
 		}
 	}
 
-	private Array<EBuilding> _environments;
+	private Array<EFurniture> _environments;
 
 	private const string SELF_OPENING_BLOCK_PATH = "res://UI/Scenes/SelfOpeningBlock.tscn";
 
@@ -30,6 +30,16 @@ public partial class ShopUITool : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+	public void Open()
+	{
+		Visible = true;
+	}
+
+	public void Close()
+	{
+		Visible = false;
 	}
 
 	private void SetupShopUIInfoGameplayOnly()

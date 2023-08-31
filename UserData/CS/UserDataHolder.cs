@@ -8,7 +8,7 @@ public partial class UserDataHolder : Node
     public delegate void ScoreChangedEventHandler(int newScore);
 
     [Signal]
-    public delegate void BuildingDataLoadedEventHandler(Dictionary<int, EBuilding> builtBuildings);
+    public delegate void UnlockedFurnituresLoadedEventHandler(Array<EFurniture> unlockedFurnitures);
 
     [Signal]
     public delegate void PosterImagesLoadedEventHandler(Dictionary<string, string> posterImages);
@@ -36,7 +36,7 @@ public partial class UserDataHolder : Node
         #endif
 
         EmitSignal(SignalName.ScoreChanged, _userData.Score);
-        EmitSignal(SignalName.BuildingDataLoaded, _userData.BuiltBuildings);
+        EmitSignal(SignalName.UnlockedFurnituresLoaded, _userData.UnlockedFurnitures);
         EmitSignal(SignalName.PosterImagesLoaded, _userData.PosterImages);
     }
 
@@ -70,30 +70,16 @@ public partial class UserDataHolder : Node
         return true;
     }
 
-    public void AddUnlockBuilding(EBuilding building)
+    public void AddUnlockedFurniture(EFurniture furniture)
     {
-        _userData.UnlockedBuildings.Add(building);
+        _userData.UnlockedFurnitures.Add(furniture);
 
         MarkAsDirty();
     }
 
-    public bool IsBuildingUnlocked(EBuilding building)
+    public bool IsFurnitureUnlocked(EFurniture furniture)
     {
-        return _userData.UnlockedBuildings.Contains(building);
-    }
-
-    public void AddOrUpdateBuiltBuilding(int placeIndex, EBuilding building)
-    {
-        if (_userData.BuiltBuildings.ContainsKey(placeIndex))
-        {
-            _userData.BuiltBuildings[placeIndex] = building;
-        }
-        else
-        {
-            _userData.BuiltBuildings.Add(placeIndex, building);
-        }
-
-        MarkAsDirty();
+        return _userData.UnlockedFurnitures.Contains(furniture);
     }
 
     public void AddOrUpdatePosterImage(string posterId, string imagePath)

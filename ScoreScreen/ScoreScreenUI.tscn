@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwx8hymuqd3jp"]
 
-[ext_resource type="Script" path="res://UI/ScreenTest/CSScripts/ScreenTest.cs" id="1_ir5xf"]
+[ext_resource type="Script" path="res://ScoreScreen/CSScripts/ScoreScreen.cs" id="1_ir5xf"]
 
 [node name="ScreenTestUI" type="Control" node_paths=PackedStringArray("_scoreLabel")]
 layout_mode = 3

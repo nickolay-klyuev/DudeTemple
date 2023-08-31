@@ -1,16 +1,15 @@
-[gd_scene load_steps=33 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=32 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
-[ext_resource type="PackedScene" uid="uid://do6y1bhu16x8w" path="res://BuildingSystem/Scenes/BuildingMenu.tscn" id="3_kkkw8"]
+[ext_resource type="PackedScene" uid="uid://cyxw06ofkcujw" path="res://UI/Shop/Scenes/ShopUI.tscn" id="4_vkkum"]
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
 [ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
-[ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://UI/ScreenTest/ScreenTest.tscn" id="10_hv4nn"]
+[ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
 [ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
 [ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
-[ext_resource type="Script" path="res://BuildingSystem/CS/Builder.cs" id="16_jxwbk"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
 [ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/GrabbableBowlingBall.tscn" id="19_l0jl4"]
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
@@ -67,10 +66,10 @@ points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
 size = Vector2(40, 20)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o4v64"]
-viewport_path = NodePath("ScreenTest/ScreenTestViewport")
+viewport_path = NodePath("ScoreScreen/ScoreScreenViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8xssg"]
-viewport_path = NodePath("ScreenTest/ScreenTestViewport")
+viewport_path = NodePath("ScoreScreen/ScoreScreenViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avsxf"]
 resource_local_to_scene = true
@@ -90,7 +89,7 @@ script = ExtResource("1_hpo4a")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f4q88")
 
-[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("_pauseMenu", "_buildingMenu", "_interactLabel")]
+[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("_pauseMenu", "_shopMenu", "_interactLabel")]
 process_mode = 3
 editor_description = "This manager is controlling pausing the game and showing UI that is needed."
 layout_mode = 3
@@ -102,15 +101,14 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("2_2cwu4")
 _pauseMenu = NodePath("PauseMenu")
-_buildingMenu = NodePath("BuildingMenu")
+_shopMenu = NodePath("ShopUI")
 _interactLabel = NodePath("InteractLabel")
 
 [node name="PauseMenu" parent="UIManager" instance=ExtResource("9_gpxng")]
 layout_mode = 1
 
-[node name="BuildingMenu" parent="UIManager" node_paths=PackedStringArray("_userDataHolder") instance=ExtResource("3_kkkw8")]
+[node name="ShopUI" parent="UIManager" instance=ExtResource("4_vkkum")]
 layout_mode = 1
-_userDataHolder = NodePath("../../UserDataHolder")
 
 [node name="InteractLabel" type="Label" parent="UIManager"]
 layout_mode = 1
@@ -367,15 +365,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 14.0459)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
 
-[node name="ScreenTest" type="MeshInstance3D" parent="."]
+[node name="ScoreScreen" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -13.7417, 1.55752, 15.1995)
 mesh = SubResource("PlaneMesh_ixssc")
 
-[node name="ScreenTestViewport" type="SubViewport" parent="ScreenTest"]
+[node name="ScoreScreenViewport" type="SubViewport" parent="ScoreScreen"]
 size = Vector2i(1024, 512)
 render_target_update_mode = 4
 
-[node name="ScreenTestUI" parent="ScreenTest/ScreenTestViewport" instance=ExtResource("10_hv4nn")]
+[node name="ScoreScreenUI" parent="ScoreScreen/ScoreScreenViewport" instance=ExtResource("10_hv4nn")]
 
 [node name="UserDataHolder" type="Node" parent="." node_paths=PackedStringArray("_dirtyTimer")]
 process_mode = 3
@@ -384,13 +382,8 @@ script = ExtResource("14_pai1m")
 _dirtyTimer = NodePath("SaveDirtyDataTimer")
 
 [node name="SaveDirtyDataTimer" type="Timer" parent="UserDataHolder"]
-wait_time = 5.0
+wait_time = 30.0
 one_shot = true
-
-[node name="Builder" type="Node" parent="." node_paths=PackedStringArray("_userDataHolder")]
-script = ExtResource("16_jxwbk")
-_userDataHolder = NodePath("../UserDataHolder")
-_buildingPlaceSocketPathes = Array[NodePath]([NodePath(""), NodePath(""), NodePath(""), NodePath("")])
 
 [node name="Posters" type="Node3D" parent="."]
 
@@ -450,14 +443,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 12)
 [node name="PinsSpawnLocation_8" type="Node3D" parent="PinsManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 
-[connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="CloseCurrent"]
-[connection signal="BuildPressed" from="UIManager/BuildingMenu" to="Builder" method="BuildAndPushUserData"]
-[connection signal="UnlockPressed" from="UIManager/BuildingMenu" to="Builder" method="Unlock"]
+[node name="UnlockableFurniture" type="Node3D" parent="."]
+
+[connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="ClosePauseMenu"]
+[connection signal="OpenShopRequest" from="UIManager/PauseMenu" to="UIManager" method="OpenShopMenu"]
 [connection signal="OnInteractProcessChanged" from="Dude" to="UIManager" method="SetInteractLabelVisibility"]
-[connection signal="BuildingDataLoaded" from="UserDataHolder" to="Builder" method="OnBuildingDataLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest2" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest3" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest4" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest5" method="OnPosterImagesLoaded"]
-[connection signal="ScoreChanged" from="UserDataHolder" to="ScreenTest/ScreenTestViewport/ScreenTestUI" method="UpdateScoreLabel"]
+[connection signal="ScoreChanged" from="UserDataHolder" to="ScoreScreen/ScoreScreenViewport/ScoreScreenUI" method="UpdateScoreLabel"]

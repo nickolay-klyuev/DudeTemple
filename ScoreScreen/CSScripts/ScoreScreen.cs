@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ScreenTest : Control
+public partial class ScoreScreen : Control
 {
 	[Export]
 	Label _scoreLabel;

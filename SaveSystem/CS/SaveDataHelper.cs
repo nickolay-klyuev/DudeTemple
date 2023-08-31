@@ -18,13 +18,11 @@ public static class SaveDataHelper
         using FileAccess saveFile = FileAccess.OpenEncryptedWithPass(DATA_FILE_PATH, FileAccess.ModeFlags.Write, FILE_HELPER);
 
         Variant scoreVar = userData.Score;
-        Variant unlockedBuildingsVar = userData.UnlockedBuildings;
-        Variant builtBuildingsVar = userData.BuiltBuildings;
+        Variant unlockedFurnituresVar = userData.UnlockedFurnitures;
         Variant posterImages = userData.PosterImages;
 
         saveFile.StoreVar(scoreVar);
-        saveFile.StoreVar(unlockedBuildingsVar);
-        saveFile.StoreVar(builtBuildingsVar);
+        saveFile.StoreVar(unlockedFurnituresVar);
         saveFile.StoreVar(posterImages);
         saveFile.Close();
     }
@@ -37,13 +35,12 @@ public static class SaveDataHelper
 
             // TODO: Test and fix any errors when there is no save data. 
             int loadedScore = (int)saveFile.GetVar();
-            Array<EBuilding> unlockedBuildings = (Array<EBuilding>)saveFile.GetVar();
-            Dictionary<int, EBuilding> builtBuildings = (Dictionary<int, EBuilding>)saveFile.GetVar();
+            Array<EFurniture> unlockedFurnitures = (Array<EFurniture>)saveFile.GetVar();
             Dictionary<string, string> posterImages = (Dictionary<string, string>)saveFile.GetVar();
 
             saveFile.Close();
 
-            return new SUserData(loadedScore, unlockedBuildings, builtBuildings, posterImages);
+            return new SUserData(loadedScore, unlockedFurnitures, posterImages);
         }
         else
         {
@@ -56,8 +53,7 @@ public static class SaveDataHelper
     {
         GD.Print("### User Data ###");
         GD.Print($"Score: {userData.Score};");
-        GD.Print($"UnlockedBuildings: {userData.UnlockedBuildings};");
-        GD.Print($"BuiltBuildings: {userData.BuiltBuildings};");
+        GD.Print($"UnlockedFurnitures: {userData.UnlockedFurnitures};");
         GD.Print($"PosterImages: {userData.PosterImages};");
     } 
     #endif

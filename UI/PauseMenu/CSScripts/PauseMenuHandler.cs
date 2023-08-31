@@ -6,6 +6,9 @@ public partial class PauseMenuHandler : Control, IMenuInteract
 	[Signal]
 	public delegate void CloseMenuRequestEventHandler();
 
+	[Signal]
+	public delegate void OpenShopRequestEventHandler();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -29,6 +32,11 @@ public partial class PauseMenuHandler : Control, IMenuInteract
 	public void OnResumeButtonPressed()
 	{
 		EmitSignal(SignalName.CloseMenuRequest);
+	}
+
+	public void OnShopButtonPressed()
+	{
+		EmitSignal(SignalName.OpenShopRequest);
 	}
 
 	public void OnExitButtonPressed()

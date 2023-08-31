@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://do6y1bhu16x8w"]
 
-[ext_resource type="Script" path="res://BuildingSystem/CS/BuildingMenuHandler.cs" id="1_4y3cc"]
+[ext_resource type="Script" path="res://OBSOLETE/BuildingMenuHandler.cs" id="1_4y3cc"]
 
 [node name="BuildingMenu" type="Control" node_paths=PackedStringArray("_buildingLabel", "_costLabel", "_buildButton", "_unlockButton")]
 process_mode = 2

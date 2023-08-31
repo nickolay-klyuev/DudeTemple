@@ -34,9 +34,14 @@ text = "Pause Menu"
 layout_mode = 2
 text = "Resume"
 
+[node name="ShopButton" type="Button" parent="MenuVBox"]
+layout_mode = 2
+text = "Shop"
+
 [node name="ExitButton" type="Button" parent="MenuVBox"]
 layout_mode = 2
 text = "Exit"
 
 [connection signal="pressed" from="MenuVBox/ResumeButton" to="." method="OnResumeButtonPressed"]
+[connection signal="pressed" from="MenuVBox/ShopButton" to="." method="OnShopButtonPressed"]
 [connection signal="pressed" from="MenuVBox/ExitButton" to="." method="OnExitButtonPressed"]

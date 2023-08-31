@@ -6,10 +6,10 @@ using System.Collections.Generic;
 public partial class BuildingMenuHandler : Control, IMenuInteract
 {
 	[Signal]
-	public delegate void BuildPressedEventHandler(int placeIndex, EBuilding building);
+	public delegate void BuildPressedEventHandler(int placeIndex, EFurniture building);
 
 	[Signal]
-	public delegate void UnlockPressedEventHandler(EBuilding building, int cost);
+	public delegate void UnlockPressedEventHandler(EFurniture building, int cost);
 
 	[Export]
 	private UserDataHolder _userDataHolder;
@@ -102,7 +102,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 
 	private void UpdatePage()
 	{
-		if (_userDataHolder.IsBuildingUnlocked(_datas[_activePage].Building))
+		if (_userDataHolder.IsFurnitureUnlocked(_datas[_activePage].Building))
 		{
 			_buildButton.Visible = true;
 			_unlockButton.Visible = false;
