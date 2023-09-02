@@ -1,30 +1,22 @@
 using Godot;
-using Godot.Collections;
 using System;
 
-[Tool]
-public partial class ShopUITool : Control, IMenuInteract
+public partial class ShopUIConstructor : Control, IMenuInteract
 {
-	[ExportCategory("UI Constructer")]
-	[Export]
-	public Array<EFurniture> Environments
-	{
-		get => _environments;
-		set
-		{
-			_environments = value;
-			ConstructShopUIEditorOnly();
-		}
-	}
+	[Signal]
+	public delegate void BuyFurnitureRequestEventHandler(EFurniture furniture);
 
-	private Array<EFurniture> _environments;
+	private EFurniture[] _furnitures;
 
 	private const string SELF_OPENING_BLOCK_PATH = "res://UI/Scenes/SelfOpeningBlock.tscn";
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		SetupShopUIInfoGameplayOnly();
+		_furnitures = BuildingDataHelper.GetFurnitureForUnlock();
+
+		ConstructShopUI();
+		SetupShopUIInfo();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,63 +34,49 @@ public partial class ShopUITool : Control, IMenuInteract
 		Visible = false;
 	}
 
-	private void SetupShopUIInfoGameplayOnly()
+	private void SetupShopUIInfo()
 	{
-		// Setup UI only during gameplay
-		if (Engine.IsEditorHint())
-		{
-			return;
-		}
-
 		Control environment = GetNode<Control>("TabContainer/Environment");
+
 		#if DEBUG
-		CheckHelper.CheckUI(environment, this);
+		CheckHelper.Check(this, environment);
 		#endif
 
 		int index = 0;
 		foreach(ShopEnvironmentCategoryHandler child in environment.GetChildren())
 		{
-			SBuildingData data = BuildingDataHelper.GetBuildingData(_environments[index]);
+			SBuildingData data = BuildingDataHelper.GetBuildingData(_furnitures[index]);
+			child.Id = (int)_furnitures[index];
 			child.SetTitle(data.Label);
 			child.SetDescription(data.Description);
+			child.OnBuyButtonPressedId += MakeBuyFurnitureRequest;
 			index++;
 		}
 	}
 
-	private void ConstructShopUIEditorOnly()
+	private void MakeBuyFurnitureRequest(int id)
 	{
-		// Construct UI only in editor
-		if (!Engine.IsEditorHint())
-		{
-			return;
-		}
+		EmitSignal(SignalName.BuyFurnitureRequest, id);
+	}
 
+	private void ConstructShopUI()
+	{
 		PackedScene selfOpeningBlock = GD.Load<PackedScene>(SELF_OPENING_BLOCK_PATH);
-		CheckHelper.CheckScene(selfOpeningBlock, this);
+
+		#if DEBUG
+		CheckHelper.Check(this, selfOpeningBlock);
+		#endif
 
 		Node environmentsHolder = GetNode("TabContainer/Environment");
 		CheckHelper.CheckNode(environmentsHolder, this);
 
-		ClearShopUI(environmentsHolder);
-
-		for (int index = 0; index < _environments.Count; index++)
+		for (int index = 0; index < _furnitures.Length; index++)
 		{
 			Node blockInstance = selfOpeningBlock.Instantiate();
 
 			environmentsHolder.AddChild(blockInstance);
 
 			blockInstance.Owner = GetTree().EditedSceneRoot;
-		}
-	}
-
-	private void ClearShopUI(params Node[] holdersToClean)
-	{
-		foreach (Node holder in holdersToClean)
-		{
-			foreach (Node child in holder.GetChildren())
-			{
-				child.QueueFree();
-			}
 		}
 	}
 }

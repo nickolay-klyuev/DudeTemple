@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=35 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
 [ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
 [ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
+[ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
+[ext_resource type="PackedScene" uid="uid://ci65620v01rei" path="res://BarPrototype/Scenes/NewBar.tscn" id="15_smrk4"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
 [ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/GrabbableBowlingBall.tscn" id="19_l0jl4"]
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
@@ -22,6 +24,13 @@ ambient_light_energy = 0.2
 glow_enabled = true
 glow_bloom = 0.1
 glow_blend_mode = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg8y2"]
+bg_color = Color(0.901961, 0.901961, 0.901961, 0.588235)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
 height = 1.8
@@ -103,6 +112,22 @@ script = ExtResource("2_2cwu4")
 _pauseMenu = NodePath("PauseMenu")
 _shopMenu = NodePath("ShopUI")
 _interactLabel = NodePath("InteractLabel")
+
+[node name="CenterPoint" type="Panel" parent="UIManager"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pg8y2")
 
 [node name="PauseMenu" parent="UIManager" instance=ExtResource("9_gpxng")]
 layout_mode = 1
@@ -443,10 +468,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 12)
 [node name="PinsSpawnLocation_8" type="Node3D" parent="PinsManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 
-[node name="UnlockableFurniture" type="Node3D" parent="."]
+[node name="UnlockableFurniture" type="Node3D" parent="." node_paths=PackedStringArray("_furnitures")]
+script = ExtResource("14_teffm")
+_furnitures = [NodePath("bar-first-try"), NodePath("bar-first-try2"), NodePath("bar-first-try3")]
+
+[node name="bar-first-try" parent="UnlockableFurniture" instance=ExtResource("15_smrk4")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 0)
+
+[node name="bar-first-try2" parent="UnlockableFurniture" instance=ExtResource("15_smrk4")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 4.35462)
+
+[node name="bar-first-try3" parent="UnlockableFurniture" instance=ExtResource("15_smrk4")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 8.31897)
 
 [connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="ClosePauseMenu"]
 [connection signal="OpenShopRequest" from="UIManager/PauseMenu" to="UIManager" method="OpenShopMenu"]
+[connection signal="BuyFurnitureRequest" from="UIManager/ShopUI" to="UnlockableFurniture" method="EnableFurniture"]
 [connection signal="OnInteractProcessChanged" from="Dude" to="UIManager" method="SetInteractLabelVisibility"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest2" method="OnPosterImagesLoaded"]

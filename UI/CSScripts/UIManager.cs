@@ -16,7 +16,7 @@ public partial class UIManager : Control
 	private PauseMenuHandler _pauseMenu;
 
 	[Export]
-	private ShopUITool _shopMenu;
+	private ShopUIConstructor _shopMenu;
 
 	[ExportSubgroup("Gameplay UI")]
 	[Export]
@@ -33,6 +33,9 @@ public partial class UIManager : Control
 
 		_pauseMenu.Close();
 		_shopMenu.Close();
+
+		// Subscribe for shop close button
+		_shopMenu.GetNode<Button>("CloseButton").Pressed += CloseShopMenu;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

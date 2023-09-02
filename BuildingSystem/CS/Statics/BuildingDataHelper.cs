@@ -1,8 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public static class BuildingDataHelper
 {
+    private static EFurniture[] _furnitureForUnlock = { EFurniture.Bar, EFurniture.Toilet, EFurniture.Lights };
+
+    public static EFurniture[] GetFurnitureForUnlock()
+    {
+        return _furnitureForUnlock;
+    }
+
     private static List<SBuildingData> _buildingData = new List<SBuildingData>()
     {
         new SBuildingData(EFurniture.Bar, "Bar", 1, "res://BarPrototype/Scenes/NewBar.tscn", "This you can buy drinks or something else."),

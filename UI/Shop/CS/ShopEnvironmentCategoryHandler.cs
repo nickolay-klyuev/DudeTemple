@@ -3,6 +3,11 @@ using System;
 
 public partial class ShopEnvironmentCategoryHandler : VBoxContainer
 {
+	[Signal]
+	public delegate void OnBuyButtonPressedIdEventHandler(int id);
+
+	public int Id { get; set; }
+
 	private Control _categoryContentBlock;
 	private Label _title;
 	private Label _description;
@@ -29,6 +34,11 @@ public partial class ShopEnvironmentCategoryHandler : VBoxContainer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+	public void OnBuyButtonPressed()
+	{
+		EmitSignal(SignalName.OnBuyButtonPressedId, Id);
 	}
 
 	public void SetTitle(string title)
