@@ -1,0 +1,394 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwdauvj53ci80"]
+
+[ext_resource type="PackedScene" uid="uid://dwew67g4yvaxa" path="res://Blender/bar.glb" id="1_3eu11"]
+[ext_resource type="PackedScene" uid="uid://cyhy3s6pg3p10" path="res://BarPrototype/Scenes/Bottles/MysticsBeerBottle.tscn" id="2_s3mi7"]
+[ext_resource type="PackedScene" uid="uid://bc780cjl1r1oj" path="res://BarPrototype/Scenes/Bottles/WhiskeyBottle.tscn" id="3_kjapl"]
+[ext_resource type="PackedScene" uid="uid://c0pn1hkaxas8w" path="res://BarPrototype/Scenes/Bottles/Glass.tscn" id="4_2mnrv"]
+[ext_resource type="PackedScene" uid="uid://dpx41vnabpa0n" path="res://BarPrototype/Scenes/Bottles/SwordBeerBottle.tscn" id="5_gpfl8"]
+[ext_resource type="PackedScene" uid="uid://c7q76nkbwxthh" path="res://BarPrototype/Scenes/Bottles/Mug.tscn" id="6_vodcb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mh6up"]
+albedo_color = Color(0.345098, 0.184314, 0.00784314, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnphv"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00yjg"]
+albedo_color = Color(0.768627, 0.588235, 0.443137, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcs0q"]
+albedo_color = Color(0.768627, 0.588235, 0.443137, 1)
+roughness = 0.8
+
+[node name="Bar" instance=ExtResource("1_3eu11")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_mh6up")
+surface_material_override/1 = SubResource("StandardMaterial3D_rnphv")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Cube" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.908671, -0.0433582, 0)
+light_energy = 2.0
+spot_range = 2.0
+spot_angle = 70.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Cube" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.908671, -0.0433582, 1.24724)
+light_energy = 2.0
+spot_range = 2.0
+spot_angle = 70.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Cube" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.908671, -0.0433582, -1.29865)
+light_energy = 2.0
+spot_range = 2.0
+spot_angle = 70.0
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_00yjg")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Cube_001" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.67141, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Cube_001" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.93427, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Cube_001" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.20386, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Cube_001" index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.444315, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Cube_001" index="4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.300824, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="Cube_002" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lcs0q")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Cube_002" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.67141, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Cube_002" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.93427, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Cube_002" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.20386, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Cube_002" index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.444315, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Cube_002" index="4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.300824, 0.225803)
+spot_range = 1.0
+spot_angle = 75.0
+
+[node name="BottlesTest" type="Node3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 2.31112, 1.34662)
+
+[node name="MysticsBeerBottle" parent="BottlesTest" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest7" type="Node3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 2.31112, -1.23855)
+
+[node name="MysticsBeerBottle" parent="BottlesTest7" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest7" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest7" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest7" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest7" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest7" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest7" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest7" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest2" type="Node3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 3.04952, 1.34662)
+
+[node name="MysticsBeerBottle" parent="BottlesTest2" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest2" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest2" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest2" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest2" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest2" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest2" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest2" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest3" type="Node3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 1.56583, 1.34662)
+
+[node name="MysticsBeerBottle" parent="BottlesTest3" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest3" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest3" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest3" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest3" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest3" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest3" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest3" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest8" type="Node3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 1.56583, -1.20215)
+
+[node name="MysticsBeerBottle" parent="BottlesTest8" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest8" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest8" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest8" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest8" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest8" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest8" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest8" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest4" type="Node3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 0.829002, 1.34662)
+
+[node name="MysticsBeerBottle" parent="BottlesTest4" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest4" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest4" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest4" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest4" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest4" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest4" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest4" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest9" type="Node3D" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 0.829002, -1.18544)
+
+[node name="MysticsBeerBottle" parent="BottlesTest9" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest9" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest9" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest9" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest9" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest9" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest9" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest9" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest5" type="Node3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 0.0788308, 1.34662)
+
+[node name="MysticsBeerBottle" parent="BottlesTest5" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest5" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest5" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest5" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest5" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest5" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest5" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest5" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest10" type="Node3D" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 0.0788308, -1.21224)
+
+[node name="MysticsBeerBottle" parent="BottlesTest10" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest10" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest10" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest10" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest10" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest10" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest10" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest10" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesTest6" type="Node3D" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61511, 3.04952, -1.2172)
+
+[node name="MysticsBeerBottle" parent="BottlesTest6" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.692848, 0, 0.721083, 0, 1, 0, -0.721083, 0, 0.692848, 0.017285, -0.057745, -0.635539)
+
+[node name="MysticsBeerBottle2" parent="BottlesTest6" index="1" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(-0.105743, 0, 0.994393, 0, 1, 0, -0.994393, 0, -0.105743, 0.0301619, -0.057745, 0.108682)
+
+[node name="WhiskeyBottle" parent="BottlesTest6" index="2" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.57274, 0, 2.89182, 0, 10, 0, -2.89182, 0, 9.57274, 0.0364106, -0.0517423, 0.42499)
+
+[node name="WhiskeyBottle2" parent="BottlesTest6" index="3" instance=ExtResource("3_kjapl")]
+transform = Transform3D(8.53714, 0, -5.20741, 0, 10, 0, 5.20741, 0, 8.53714, -0.0407059, -0.0517423, -0.43776)
+
+[node name="Glass" parent="BottlesTest6" index="4" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113312, -0.0515125, 0.305882)
+
+[node name="Glass2" parent="BottlesTest6" index="5" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586883, -0.0515125, -0.251205)
+
+[node name="SwordBeerBottle" parent="BottlesTest6" index="6" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(0.147809, 0, 0.989016, 0, 1, 0, -0.989016, 0, 0.147809, -0.0624179, -0.0509415, 0.224253)
+
+[node name="SwordBeerBottle2" parent="BottlesTest6" index="7" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.0865299, 0, 0.996249, 0, 1, 0, -0.996249, 0, -0.0865299, 0.00863135, -0.0509415, -0.020592)
+
+[node name="BottlesOnTableTest" type="Node3D" parent="." index="14"]
+
+[node name="MysticsBeerBottle" parent="BottlesOnTableTest" index="0" instance=ExtResource("2_s3mi7")]
+transform = Transform3D(0.400317, 0, 0.916377, 0, 1, 0, -0.916377, 0, 0.400317, 1.05827, 1.62164, 1.79912)
+
+[node name="SwordBeerBottle" parent="BottlesOnTableTest" index="1" instance=ExtResource("5_gpfl8")]
+transform = Transform3D(-0.321439, 0, 0.94693, 0, 1, 0, -0.94693, 0, -0.321439, 0.97275, 1.62185, 0.716748)
+
+[node name="Glass" parent="BottlesOnTableTest" index="2" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13679, 1.62185, 1.26099)
+
+[node name="Glass2" parent="BottlesOnTableTest" index="3" instance=ExtResource("4_2mnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976079, 1.6221, -1.52233)
+
+[node name="Mug" parent="BottlesOnTableTest" index="4" instance=ExtResource("6_vodcb")]
+transform = Transform3D(1.32256, 0, -9.91216, 0, 10, 0, 9.91216, 0, 1.32256, 1.10567, 1.62235, -0.462671)
+
+[node name="WhiskeyBottle" parent="BottlesOnTableTest" index="5" instance=ExtResource("3_kjapl")]
+transform = Transform3D(9.11855, 0, -4.10512, 0, 10, 0, 4.10512, 0, 9.11855, 0.890476, 1.62308, -1.33596)

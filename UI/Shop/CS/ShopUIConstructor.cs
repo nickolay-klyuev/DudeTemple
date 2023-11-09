@@ -68,7 +68,10 @@ public partial class ShopUIConstructor : Control, IMenuInteract
 		#endif
 
 		Node environmentsHolder = GetNode("TabContainer/Environment");
+
+		#if DEBUG
 		CheckHelper.CheckNode(environmentsHolder, this);
+		#endif
 
 		for (int index = 0; index < _furnitures.Length; index++)
 		{

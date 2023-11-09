@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyhy3s6pg3p10"]
+
+[ext_resource type="PackedScene" uid="uid://gapcvsqigqc4" path="res://Blender/beer-bottle.glb" id="1_60hg2"]
+[ext_resource type="Texture2D" uid="uid://dhhklpouroywi" path="res://BarPrototype/Textures/beer-mystics.png" id="2_tcgys"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7k3r"]
+albedo_color = Color(0.321569, 0.462745, 0.592157, 1)
+roughness = 0.0
+
+[node name="MysticsBeerBottle" instance=ExtResource("1_60hg2")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m7k3r")
+
+[node name="Decal" type="Decal" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0496528, 0.0255863)
+size = Vector3(0.055, 0.02, 0.08)
+texture_albedo = ExtResource("2_tcgys")
+texture_emission = ExtResource("2_tcgys")
+emission_energy = 1.5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00141739, 0.0415726, 0.0379816)
+light_color = Color(0.129412, 0.368627, 0, 1)
+omni_range = 0.05

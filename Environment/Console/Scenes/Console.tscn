@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjp7al4c2pcfv"]
+
+[ext_resource type="PackedScene" uid="uid://b8bgjfgu43uwh" path="res://Blender/sega.glb" id="1_yhh7a"]
+[ext_resource type="Material" uid="uid://cwtbdlxunlg05" path="res://Console/Materials/ConsoleMainMaterial.tres" id="2_x5ctl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cljd4"]
+albedo_color = Color(0.87451, 0, 0.87451, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20lys"]
+albedo_color = Color(0.188235, 0.478431, 1, 1)
+
+[node name="Console" instance=ExtResource("1_yhh7a")]
+
+[node name="Cube" parent="." index="0"]
+material_override = ExtResource("2_x5ctl")
+
+[node name="Sphere" parent="." index="1"]
+material_override = ExtResource("2_x5ctl")
+
+[node name="Cube_001" parent="." index="2"]
+material_override = SubResource("StandardMaterial3D_cljd4")
+
+[node name="Cube_002" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_20lys")

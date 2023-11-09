@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=40 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
@@ -12,8 +12,13 @@
 [ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
 [ext_resource type="PackedScene" uid="uid://ci65620v01rei" path="res://BarPrototype/Scenes/NewBar.tscn" id="15_smrk4"]
+[ext_resource type="PackedScene" uid="uid://bjp7al4c2pcfv" path="res://Environment/Console/Scenes/Console.tscn" id="16_mchgi"]
+[ext_resource type="PackedScene" uid="uid://cdur1t76kcw57" path="res://Environment/TV/Scenes/TVTable.tscn" id="16_rmwrf"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
+[ext_resource type="PackedScene" uid="uid://ba1gaacj3ueqy" path="res://Environment/TV/Scenes/TV.tscn" id="17_d5lhe"]
 [ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/GrabbableBowlingBall.tscn" id="19_l0jl4"]
+[ext_resource type="PackedScene" uid="uid://c6qcraf8okeu7" path="res://Environment/Couch/Scenes/Couch.tscn" id="19_r7iic"]
+[ext_resource type="PackedScene" uid="uid://fluugsl4cp6s" path="res://BarPrototype/Scenes/BarNormalSize.tscn" id="20_sm8d2"]
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
@@ -480,6 +485,35 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 4.35462
 
 [node name="bar-first-try3" parent="UnlockableFurniture" instance=ExtResource("15_smrk4")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 8.31897)
+
+[node name="FurnitureTest" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6894, 0, -0.987531)
+
+[node name="TVTable" parent="FurnitureTest" instance=ExtResource("16_rmwrf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.96454e-05, 0, 0.204611)
+
+[node name="TV" parent="FurnitureTest" instance=ExtResource("17_d5lhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0145893, 0.838658, 0.197861)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FurnitureTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143091, 3.45972, 0.987531)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="FurnitureTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5625, 2.88792, 1.12195)
+
+[node name="Console" parent="FurnitureTest" instance=ExtResource("16_mchgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0105934, 0.371, 0.425858)
+
+[node name="Couch" parent="FurnitureTest" instance=ExtResource("19_r7iic")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 3.03141)
+
+[node name="BarNormalSize" parent="FurnitureTest" instance=ExtResource("20_sm8d2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9173, 0, 14.0776)
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2766, 2.5805, 7.46106)
+size = Vector3(40, 6, 18.235)
+box_projection = true
 
 [connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="ClosePauseMenu"]
 [connection signal="OpenShopRequest" from="UIManager/PauseMenu" to="UIManager" method="OpenShopMenu"]

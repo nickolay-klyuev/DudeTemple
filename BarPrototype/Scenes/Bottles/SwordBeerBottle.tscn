@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpx41vnabpa0n"]
+
+[ext_resource type="PackedScene" uid="uid://gapcvsqigqc4" path="res://Blender/beer-bottle.glb" id="1_g8d7u"]
+[ext_resource type="Texture2D" uid="uid://sumjo6l8f2tw" path="res://BarPrototype/Textures/beer-swords.png" id="2_cjsks"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7k3r"]
+albedo_color = Color(0.321569, 0.462745, 0.592157, 1)
+roughness = 0.0
+
+[node name="SwordBeerBottle" instance=ExtResource("1_g8d7u")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m7k3r")
+
+[node name="Decal" type="Decal" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0496528, 0.0274752)
+size = Vector3(0.055, 0.02, 0.08)
+texture_albedo = ExtResource("2_cjsks")
+emission_energy = 0.5

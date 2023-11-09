@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci65620v01rei"]
+[gd_scene load_steps=9 format=3 uid="uid://ci65620v01rei"]
 
 [ext_resource type="PackedScene" uid="uid://p756sd2r4ukf" path="res://Blender/bar-first-try.glb" id="1_gwwsi"]
 [ext_resource type="Script" path="res://BarPrototype/CS/BarController.cs" id="2_imsvk"]
+[ext_resource type="PackedScene" uid="uid://cyhy3s6pg3p10" path="res://BarPrototype/Scenes/Bottles/MysticsBeerBottle.tscn" id="3_k300y"]
+[ext_resource type="PackedScene" uid="uid://dpx41vnabpa0n" path="res://BarPrototype/Scenes/Bottles/SwordBeerBottle.tscn" id="4_5f20u"]
+[ext_resource type="PackedScene" uid="uid://c0pn1hkaxas8w" path="res://BarPrototype/Scenes/Bottles/Glass.tscn" id="5_5txcy"]
+[ext_resource type="PackedScene" uid="uid://c7q76nkbwxthh" path="res://BarPrototype/Scenes/Bottles/Mug.tscn" id="6_s835b"]
+[ext_resource type="PackedScene" uid="uid://bc780cjl1r1oj" path="res://BarPrototype/Scenes/Bottles/WhiskeyBottle.tscn" id="7_0l5f1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_785fb"]
 size = Vector3(1.35, 1.65, 4)
@@ -36,3 +41,23 @@ light_color = Color(0.815686, 0.819608, 0.0156863, 1)
 light_energy = 0.5
 spot_range = 1.5
 spot_angle = 75.0
+
+[node name="BottlesOnTableTest" type="Node3D" parent="." index="6"]
+
+[node name="MysticsBeerBottle" parent="BottlesOnTableTest" index="0" instance=ExtResource("3_k300y")]
+transform = Transform3D(0.400317, 0, 0.916377, 0, 1, 0, -0.916377, 0, 0.400317, 1.05827, 1.62164, 1.79912)
+
+[node name="SwordBeerBottle" parent="BottlesOnTableTest" index="1" instance=ExtResource("4_5f20u")]
+transform = Transform3D(-0.321439, 0, 0.94693, 0, 1, 0, -0.94693, 0, -0.321439, 0.97275, 1.62185, 0.716748)
+
+[node name="Glass" parent="BottlesOnTableTest" index="2" instance=ExtResource("5_5txcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13679, 1.62185, 1.26099)
+
+[node name="Glass2" parent="BottlesOnTableTest" index="3" instance=ExtResource("5_5txcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976079, 1.6221, -1.52233)
+
+[node name="Mug" parent="BottlesOnTableTest" index="4" instance=ExtResource("6_s835b")]
+transform = Transform3D(1.32256, 0, -9.91216, 0, 10, 0, 9.91216, 0, 1.32256, 1.10567, 1.62235, -0.462671)
+
+[node name="WhiskeyBottle" parent="BottlesOnTableTest" index="5" instance=ExtResource("7_0l5f1")]
+transform = Transform3D(9.11855, 0, -4.10512, 0, 10, 0, 4.10512, 0, 9.11855, 0.890476, 1.62308, -1.33596)

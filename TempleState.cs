@@ -18,4 +18,9 @@ public partial class TempleState : Node3D
 	{
 
 	}
+
+	public Node3D GetDude()
+	{
+		return GetNode<Node3D>("Dude");
+	}
 }

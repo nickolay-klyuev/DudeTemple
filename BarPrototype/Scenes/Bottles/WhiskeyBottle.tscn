@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc780cjl1r1oj"]
+
+[ext_resource type="PackedScene" uid="uid://cr057jfss1jnp" path="res://Blender/whiskey-bottle.glb" id="1_a5khl"]
+[ext_resource type="Texture2D" uid="uid://0oof4dwfm2n8" path="res://BarPrototype/Textures/whiskey-old-asshole.png" id="2_qem40"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6hclp"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(0.901961, 0.513726, 0.105882, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ti26"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.54902, 0.54902, 0.54902, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwg4b"]
+albedo_color = Color(0.258824, 0.258824, 0.258824, 1)
+
+[node name="WhiskeyBottle" instance=ExtResource("1_a5khl")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="Fill" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6hclp")
+
+[node name="Glass" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8ti26")
+
+[node name="Cup" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_dwg4b")
+
+[node name="Sticker" type="Decal" parent="." index="3"]
+transform = Transform3D(-4.37114e-08, 1, 0, 0.00467744, 2.0446e-10, -0.999989, -0.999989, -4.37109e-08, -0.00467744, 0.00236232, 0.00654212, 0)
+size = Vector3(0.01, 0.005, 0.01)
+texture_albedo = ExtResource("2_qem40")
