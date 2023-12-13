@@ -1,17 +1,18 @@
-[gd_scene load_steps=40 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=42 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
 [ext_resource type="PackedScene" uid="uid://cyxw06ofkcujw" path="res://UI/Shop/Scenes/ShopUI.tscn" id="4_vkkum"]
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
+[ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
+[ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
 [ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
 [ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
 [ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
-[ext_resource type="PackedScene" uid="uid://ci65620v01rei" path="res://BarPrototype/Scenes/NewBar.tscn" id="15_smrk4"]
 [ext_resource type="PackedScene" uid="uid://bjp7al4c2pcfv" path="res://Environment/Console/Scenes/Console.tscn" id="16_mchgi"]
 [ext_resource type="PackedScene" uid="uid://cdur1t76kcw57" path="res://Environment/TV/Scenes/TVTable.tscn" id="16_rmwrf"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
@@ -22,10 +23,7 @@
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
-background_mode = 1
-ambient_light_source = 2
-ambient_light_color = Color(0.258824, 0, 0.101961, 1)
-ambient_light_energy = 0.2
+background_energy_multiplier = 0.3
 glow_enabled = true
 glow_bloom = 0.1
 glow_blend_mode = 0
@@ -59,6 +57,7 @@ size = Vector2(16.5, 16.5)
 points = PackedVector3Array(-8.25, 0, -8.25, -8.25, 0, 8.25, 8.25, 0, -8.25, 8.25, 0, 8.25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ixc5"]
+material = ExtResource("7_bk3b3")
 size = Vector2(5, 16.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jmsaj"]
@@ -68,6 +67,7 @@ points = PackedVector3Array(2.5, 0, 8.25, -2.5, 0, 8.25, 2.5, 0, -8.25, -2.5, 0,
 points = PackedVector3Array(2.5, 0, 8.25, -2.5, 0, 8.25, 2.5, 0, -8.25, -2.5, 0, -8.25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0ix34"]
+material = ExtResource("7_bk3b3")
 size = Vector2(40, 5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1tse"]
@@ -76,7 +76,13 @@ points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ga3vx"]
 points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx6bd"]
+albedo_color = Color(0.211765, 0.211765, 0.211765, 1)
+metallic = 0.2
+roughness = 0.35
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_1arfw"]
+material = SubResource("StandardMaterial3D_hx6bd")
 size = Vector2(40, 20)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o4v64"]
@@ -97,8 +103,9 @@ lightmap_size_hint = Vector2i(7, 5)
 material = SubResource("StandardMaterial3D_avsxf")
 size = Vector2(1, 0.7)
 
-[node name="Temple" type="Node3D"]
+[node name="Temple" type="Node3D" node_paths=PackedStringArray("_userDataHolder")]
 script = ExtResource("1_hpo4a")
+_userDataHolder = NodePath("UserDataHolder")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f4q88")
@@ -137,8 +144,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_pg8y2")
 [node name="PauseMenu" parent="UIManager" instance=ExtResource("9_gpxng")]
 layout_mode = 1
 
-[node name="ShopUI" parent="UIManager" instance=ExtResource("4_vkkum")]
+[node name="ShopUI" parent="UIManager" node_paths=PackedStringArray("_userData") instance=ExtResource("4_vkkum")]
 layout_mode = 1
+_userData = NodePath("../../UserDataHolder")
 
 [node name="InteractLabel" type="Label" parent="UIManager"]
 layout_mode = 1
@@ -325,36 +333,6 @@ transform = Transform3D(-9.61651e-08, 0, -2.2, 0, 2.2, 0, 2.2, 0, -9.61651e-08, 
 
 [node name="Lighting" type="Node3D" parent="DumbTempleObjects"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7588, 4.92916, 3.14996)
-light_color = Color(1, 0.270588, 0.407843, 1)
-omni_range = 10.0
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7588, 4.92916, 10.0206)
-light_color = Color(1, 0.270588, 0.407843, 1)
-omni_range = 10.0
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41918, 4.92916, 3.14996)
-light_color = Color(1, 0.270588, 0.407843, 1)
-omni_range = 10.0
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41918, 4.92916, 10.0206)
-light_color = Color(1, 0.270588, 0.407843, 1)
-omni_range = 10.0
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8117, 4.92916, 3.14996)
-light_color = Color(1, 0.270588, 0.407843, 1)
-omni_range = 10.0
-
-[node name="OmniLight3D6" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8117, 4.92916, 10.0206)
-light_color = Color(1, 0.270588, 0.407843, 1)
-omni_range = 10.0
-
 [node name="OmniLight3D7" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 0)
 light_color = Color(0.141176, 0.721569, 1, 1)
@@ -394,6 +372,51 @@ omni_range = 1.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 14.0459)
 light_color = Color(0.141176, 0.721569, 1, 1)
 omni_range = 1.2
+
+[node name="TopLamp" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63909, 4.5684, 1.04973)
+
+[node name="TopLamp2" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63909, 4.5684, 6.88223)
+
+[node name="TopLamp3" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63909, 4.5684, 12.7688)
+
+[node name="TopLamp4" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.864437, 4.5684, 1.04973)
+
+[node name="TopLamp5" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.864437, 4.5684, 6.88223)
+
+[node name="TopLamp6" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.864437, 4.5684, 12.7688)
+
+[node name="TopLamp7" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05199, 4.5684, 1.04973)
+
+[node name="TopLamp8" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05199, 4.5684, 6.88223)
+
+[node name="TopLamp9" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05199, 4.5684, 12.7688)
+
+[node name="TopLamp10" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5362, 4.5684, 1.04973)
+
+[node name="TopLamp11" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5362, 4.5684, 6.88223)
+
+[node name="TopLamp12" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5362, 4.5684, 12.7688)
+
+[node name="TopLamp13" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 1.04973)
+
+[node name="TopLamp14" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 6.88223)
+
+[node name="TopLamp15" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 12.7688)
 
 [node name="ScoreScreen" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -13.7417, 1.55752, 15.1995)
@@ -473,42 +496,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 12)
 [node name="PinsSpawnLocation_8" type="Node3D" parent="PinsManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 
-[node name="UnlockableFurniture" type="Node3D" parent="." node_paths=PackedStringArray("_furnitures")]
+[node name="UnlockableFurniture" type="Node3D" parent="." node_paths=PackedStringArray("_userData", "_furnitures")]
 script = ExtResource("14_teffm")
-_furnitures = [NodePath("bar-first-try"), NodePath("bar-first-try2"), NodePath("bar-first-try3")]
+_userData = NodePath("../UserDataHolder")
+_furnitures = [NodePath("BarNormalSize"), NodePath("Couch"), NodePath("TVTable"), NodePath("TV"), NodePath("Console")]
 
-[node name="bar-first-try" parent="UnlockableFurniture" instance=ExtResource("15_smrk4")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 0)
+[node name="TVTable" parent="UnlockableFurniture" instance=ExtResource("16_rmwrf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6893, 0, -0.78292)
 
-[node name="bar-first-try2" parent="UnlockableFurniture" instance=ExtResource("15_smrk4")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 4.35462)
+[node name="TV" parent="UnlockableFurniture" instance=ExtResource("17_d5lhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6748, 0.838658, -0.78967)
 
-[node name="bar-first-try3" parent="UnlockableFurniture" instance=ExtResource("15_smrk4")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24.7933, 0, 8.31897)
+[node name="Console" parent="UnlockableFurniture" instance=ExtResource("16_mchgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7, 0.371, -0.561673)
 
-[node name="FurnitureTest" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6894, 0, -0.987531)
+[node name="Couch" parent="UnlockableFurniture" instance=ExtResource("19_r7iic")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.6894, 0, 2.04388)
 
-[node name="TVTable" parent="FurnitureTest" instance=ExtResource("16_rmwrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.96454e-05, 0, 0.204611)
-
-[node name="TV" parent="FurnitureTest" instance=ExtResource("17_d5lhe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0145893, 0.838658, 0.197861)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="FurnitureTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143091, 3.45972, 0.987531)
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="FurnitureTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5625, 2.88792, 1.12195)
-
-[node name="Console" parent="FurnitureTest" instance=ExtResource("16_mchgi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0105934, 0.371, 0.425858)
-
-[node name="Couch" parent="FurnitureTest" instance=ExtResource("19_r7iic")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 3.03141)
-
-[node name="BarNormalSize" parent="FurnitureTest" instance=ExtResource("20_sm8d2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9173, 0, 14.0776)
+[node name="BarNormalSize" parent="UnlockableFurniture" instance=ExtResource("20_sm8d2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6067, 0, 13.0901)
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2766, 2.5805, 7.46106)
@@ -517,7 +523,7 @@ box_projection = true
 
 [connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="ClosePauseMenu"]
 [connection signal="OpenShopRequest" from="UIManager/PauseMenu" to="UIManager" method="OpenShopMenu"]
-[connection signal="BuyFurnitureRequest" from="UIManager/ShopUI" to="UnlockableFurniture" method="EnableFurniture"]
+[connection signal="BuyFurnitureRequest" from="UIManager/ShopUI" to="UnlockableFurniture" method="BuyFurniture"]
 [connection signal="OnInteractProcessChanged" from="Dude" to="UIManager" method="SetInteractLabelVisibility"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest2" method="OnPosterImagesLoaded"]
@@ -525,3 +531,4 @@ box_projection = true
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest4" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest5" method="OnPosterImagesLoaded"]
 [connection signal="ScoreChanged" from="UserDataHolder" to="ScoreScreen/ScoreScreenViewport/ScoreScreenUI" method="UpdateScoreLabel"]
+[connection signal="UnlockedFurnituresLoaded" from="UserDataHolder" to="UnlockableFurniture" method="OnUnlockedFurnituresLoaded"]

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class ShopUIConstructor : Control, IMenuInteract
@@ -6,13 +7,25 @@ public partial class ShopUIConstructor : Control, IMenuInteract
 	[Signal]
 	public delegate void BuyFurnitureRequestEventHandler(EFurniture furniture);
 
+	[Export]
+	private UserDataHolder _userData;
+
 	private EFurniture[] _furnitures;
+
+	private Control _environment;
 
 	private const string SELF_OPENING_BLOCK_PATH = "res://UI/Scenes/SelfOpeningBlock.tscn";
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		#if DEBUG
+		CheckHelper.Check(this, _userData);
+		#endif
+
+		_userData.UnlockedFurnituresLoaded += OnUnlockedFurnituresLoaded;
+		_userData.NewFurnitureUnlocked += OnNewFurnitureUnlocked;
+
 		_furnitures = BuildingDataHelper.GetFurnitureForUnlock();
 
 		ConstructShopUI();
@@ -36,20 +49,24 @@ public partial class ShopUIConstructor : Control, IMenuInteract
 
 	private void SetupShopUIInfo()
 	{
-		Control environment = GetNode<Control>("TabContainer/Environment");
+		_environment = GetNode<Control>("TabContainer/Environment");
 
 		#if DEBUG
-		CheckHelper.Check(this, environment);
+		CheckHelper.Check(this, _environment);
 		#endif
 
 		int index = 0;
-		foreach(ShopEnvironmentCategoryHandler child in environment.GetChildren())
+		foreach(ShopEnvironmentCategoryHandler child in _environment.GetChildren())
 		{
 			SBuildingData data = BuildingDataHelper.GetBuildingData(_furnitures[index]);
 			child.Id = (int)_furnitures[index];
 			child.SetTitle(data.Label);
 			child.SetDescription(data.Description);
+			child.SetCost(data.Cost);
 			child.OnBuyButtonPressedId += MakeBuyFurnitureRequest;
+
+			_userData.NewFurnitureUnlocked += DisableBuyButtonForFurniture;
+
 			index++;
 		}
 	}
@@ -80,6 +97,45 @@ public partial class ShopUIConstructor : Control, IMenuInteract
 			environmentsHolder.AddChild(blockInstance);
 
 			blockInstance.Owner = GetTree().EditedSceneRoot;
+		}
+	}
+
+	private void OnNewFurnitureUnlocked(int furniture)
+	{
+		DisableBuyButtonForFurniture(furniture);
+
+		foreach(ShopEnvironmentCategoryHandler category in _environment.GetChildren())
+		{
+			if (_userData.IsFurnitureCanBeUnlocked((EFurniture)category.Id))
+			{
+				category.EnableContent();
+			}
+		}
+	}
+
+	private void OnUnlockedFurnituresLoaded(Array<EFurniture> furnitures)
+	{
+		foreach (int furniture in furnitures)
+		{
+			DisableBuyButtonForFurniture(furniture);
+		}
+
+		DisableContentThatCantBeUnlocked();
+	}
+
+	private void DisableBuyButtonForFurniture(int furniture)
+	{
+		_environment.GetChild<ShopEnvironmentCategoryHandler>(furniture).DisableContent();
+	}
+
+	private void DisableContentThatCantBeUnlocked()
+	{
+		foreach(ShopEnvironmentCategoryHandler category in _environment.GetChildren())
+		{
+			if (!_userData.IsFurnitureCanBeUnlocked((EFurniture)category.Id))
+			{
+				category.DisableContent();
+			}
 		}
 	}
 }

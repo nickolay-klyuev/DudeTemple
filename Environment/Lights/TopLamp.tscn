@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cigfrwe7s6om5"]
+
+[ext_resource type="PackedScene" uid="uid://hdumch08e1wi" path="res://Blender/top-lamp.glb" id="1_3ncxn"]
+[ext_resource type="Material" uid="uid://b0qli2vwhhf3t" path="res://Environment/Lights/Materials/TopLampBaseMaterial.tres" id="2_nyj8o"]
+[ext_resource type="Material" uid="uid://bi8w6bsiwp3e6" path="res://Environment/Lights/Materials/TopLampCableMaterial.tres" id="3_05rw3"]
+[ext_resource type="Material" uid="uid://dqntw1wfi0vk4" path="res://Environment/Lights/Materials/TopLampLightEmitMaterial.tres" id="4_2h286"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bb6en"]
+material = ExtResource("4_2h286")
+top_radius = 0.18
+bottom_radius = 0.18
+height = 0.01
+
+[node name="TopLamp" instance=ExtResource("1_3ncxn")]
+
+[node name="Lamp" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_nyj8o")
+
+[node name="Cable" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_05rw3")
+
+[node name="LightEmitMesh" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00170954, 0)
+mesh = SubResource("CylinderMesh_bb6en")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+spot_range = 6.0
+spot_angle = 60.0

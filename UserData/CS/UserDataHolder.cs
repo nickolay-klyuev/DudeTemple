@@ -11,6 +11,9 @@ public partial class UserDataHolder : Node
     public delegate void UnlockedFurnituresLoadedEventHandler(Array<EFurniture> unlockedFurnitures);
 
     [Signal]
+    public delegate void NewFurnitureUnlockedEventHandler(int NewUnlockedFurniture);
+
+    [Signal]
     public delegate void PosterImagesLoadedEventHandler(Dictionary<string, string> posterImages);
 
     [Export]
@@ -74,12 +77,24 @@ public partial class UserDataHolder : Node
     {
         _userData.UnlockedFurnitures.Add(furniture);
 
+        EmitSignal(SignalName.NewFurnitureUnlocked, (int)furniture);
+
         MarkAsDirty();
     }
 
     public bool IsFurnitureUnlocked(EFurniture furniture)
     {
         return _userData.UnlockedFurnitures.Contains(furniture);
+    }
+
+    public bool IsFurnitureCanBeUnlocked(EFurniture furniture)
+    {
+        return !IsFurnitureUnlocked(furniture) && (IsFurnitureUnlocked(BuildingDataHelper.GetFurnitureParent(furniture)) || BuildingDataHelper.GetFurnitureParent(furniture) == furniture);
+    }
+
+    public bool IsFurnitureUnlocked(int furniture)
+    {
+        return IsFurnitureUnlocked((EFurniture)furniture);
     }
 
     public void AddOrUpdatePosterImage(string posterId, string imagePath)

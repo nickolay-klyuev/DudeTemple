@@ -36,7 +36,6 @@ text = "Resume"
 
 [node name="ShopButton" type="Button" parent="MenuVBox"]
 layout_mode = 2
-disabled = true
 text = "Shop"
 
 [node name="ExitButton" type="Button" parent="MenuVBox"]

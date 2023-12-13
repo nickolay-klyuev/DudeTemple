@@ -1,17 +1,17 @@
 public struct SBuildingData
 {
-    public EFurniture Building { get; private set; }
+    public EFurniture Parent { get; private set;}
+    public EFurniture Furniture { get; private set; }
     public string Label { get; private set; }
     public int Cost { get; private set; }
-    public string ScenePath { get; private set; }
     public string Description { get; private set; }
 
-    public SBuildingData(EFurniture building, string label, int cost, string scenePath, string description = "")
+    public SBuildingData(EFurniture parent, EFurniture furniture, string label, int cost, string description = "")
     {
-        Building = building;
+        Parent = parent;
+        Furniture = furniture;
         Label = label;
         Cost = cost;
-        ScenePath = scenePath;
         Description = description;
     }
 }

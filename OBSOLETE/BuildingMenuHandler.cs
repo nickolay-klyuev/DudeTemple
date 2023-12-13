@@ -33,7 +33,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 		set
 		{
 			_placeIndex = value;
-			BuildingDatas = BuildingDataHelper.GetBuildingDataForPlace(_placeIndex);
+			//BuildingDatas = BuildingDataHelper.GetBuildingDataForPlace(_placeIndex);
 		}
 	}
 
@@ -102,7 +102,7 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 
 	private void UpdatePage()
 	{
-		if (_userDataHolder.IsFurnitureUnlocked(_datas[_activePage].Building))
+		if (_userDataHolder.IsFurnitureUnlocked(_datas[_activePage].Furniture))
 		{
 			_buildButton.Visible = true;
 			_unlockButton.Visible = false;
@@ -123,12 +123,12 @@ public partial class BuildingMenuHandler : Control, IMenuInteract
 
 	public void OnBuildButtonPressed()
 	{
-		EmitSignal(SignalName.BuildPressed, _placeIndex, (int)_datas[_activePage].Building);
+		EmitSignal(SignalName.BuildPressed, _placeIndex, (int)_datas[_activePage].Furniture);
 	}
 
 	public void OnUnlockButtonPressed()
 	{
-		EmitSignal(SignalName.UnlockPressed, (int)_datas[_activePage].Building, _datas[_activePage].Cost);
+		EmitSignal(SignalName.UnlockPressed, (int)_datas[_activePage].Furniture, _datas[_activePage].Cost);
 		UpdatePage();
 	}
 }

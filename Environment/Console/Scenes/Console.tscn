@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjp7al4c2pcfv"]
+[gd_scene load_steps=6 format=3 uid="uid://bjp7al4c2pcfv"]
 
 [ext_resource type="PackedScene" uid="uid://b8bgjfgu43uwh" path="res://Blender/sega.glb" id="1_yhh7a"]
-[ext_resource type="Material" uid="uid://cwtbdlxunlg05" path="res://Console/Materials/ConsoleMainMaterial.tres" id="2_x5ctl"]
+[ext_resource type="Script" path="res://BarPrototype/CS/FurnitureController.cs" id="2_f2p5l"]
+[ext_resource type="Material" uid="uid://cwtbdlxunlg05" path="res://Environment/Console/Materials/ConsoleMainMaterial.tres" id="2_x5ctl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cljd4"]
 albedo_color = Color(0.87451, 0, 0.87451, 1)
@@ -11,6 +12,7 @@ roughness = 0.8
 albedo_color = Color(0.188235, 0.478431, 1, 1)
 
 [node name="Console" instance=ExtResource("1_yhh7a")]
+script = ExtResource("2_f2p5l")
 
 [node name="Cube" parent="." index="0"]
 material_override = ExtResource("2_x5ctl")

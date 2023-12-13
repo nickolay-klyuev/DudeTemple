@@ -13,8 +13,8 @@ public static class CheckHelper
         {
             if (node == null)
             {
-                GD.PrintErr($"{caller.Name}: {node.Name} node is null!!!");
-                GD.PrintErr($"{{caller.GetScript().AsStringName()}}: Please check [Export] fields manually to resolve this error!!!");
+                GD.PrintErr($"{caller.Name}: checked node is null!!!");
+                GD.PrintErr($"{caller.Name}: Please check [Export] fields or GetNode() method!!!");
                 bValid = false;
             }
         }

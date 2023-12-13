@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdur1t76kcw57"]
+[gd_scene load_steps=7 format=3 uid="uid://cdur1t76kcw57"]
 
 [ext_resource type="PackedScene" uid="uid://bqi0kw5dupi7q" path="res://Blender/tv-table.glb" id="1_5mfof"]
+[ext_resource type="Script" path="res://BarPrototype/CS/FurnitureController.cs" id="2_1xvc2"]
 [ext_resource type="Material" uid="uid://cgxpwfli76kyr" path="res://Environment/TV/Materials/TVTable-glass-material.tres" id="2_5q3td"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8jkiy"]
+size = Vector3(2.5274, 2.25262, 0.714111)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gitsc"]
 albedo_color = Color(0.423529, 0.32549, 0.298039, 1)
@@ -14,21 +18,28 @@ metallic = 0.5
 roughness = 0.6
 
 [node name="TVTable" instance=ExtResource("1_5mfof")]
+script = ExtResource("2_1xvc2")
 
-[node name="Cube_004" parent="." index="0"]
+[node name="TVTableCollision" type="StaticBody3D" parent="." index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TVTableCollision" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00595093, 1.08573, 0.00012207)
+shape = SubResource("BoxShape3D_8jkiy")
+
+[node name="Cube_004" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_gitsc")
 
-[node name="Cube_003" parent="." index="1"]
+[node name="Cube_003" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_wkxl4")
 
-[node name="Cube_005" parent="." index="2"]
+[node name="Cube_005" parent="." index="3"]
 surface_material_override/0 = ExtResource("2_5q3td")
 
-[node name="Cube_006" parent="." index="3"]
+[node name="Cube_006" parent="." index="4"]
 surface_material_override/0 = ExtResource("2_5q3td")
 
-[node name="Cube_007" parent="." index="4"]
+[node name="Cube_007" parent="." index="5"]
 surface_material_override/0 = ExtResource("2_5q3td")
 
-[node name="Cube_008" parent="." index="5"]
+[node name="Cube_008" parent="." index="6"]
 surface_material_override/0 = ExtResource("2_5q3td")
