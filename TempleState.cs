@@ -23,11 +23,13 @@ public partial class TempleState : Node3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		#if DEBUG
 		// For testing
 		if (Input.IsActionJustPressed("AddScore"))
 		{
 			_userDataHolder.AddScore(100);
 		}
+		#endif
 	}
 
 	public Node3D GetDude()

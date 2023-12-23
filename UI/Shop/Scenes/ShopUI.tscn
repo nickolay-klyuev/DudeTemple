@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyxw06ofkcujw"]
+[gd_scene load_steps=4 format=3 uid="uid://cyxw06ofkcujw"]
 
 [ext_resource type="Theme" uid="uid://bg8digrsku7x6" path="res://UI/Shop/Themes/MainShopTheme.tres" id="1_51tg0"]
 [ext_resource type="Script" path="res://UI/Shop/CS/ShopUIConstructor.cs" id="2_vpmso"]
+[ext_resource type="Script" path="res://UI/Shop/CS/BallSetupUI.cs" id="3_mviy3"]
 
 [node name="ShopUI" type="Control"]
 layout_mode = 3
@@ -25,15 +26,65 @@ grow_vertical = 2
 tab_alignment = 1
 
 [node name="Environment" type="VBoxContainer" parent="TabContainer"]
-layout_mode = 2
-
-[node name="Ball" type="VBoxContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
 
 [node name="Pins" type="VBoxContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="Ball Setup" type="Control" parent="TabContainer"]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+script = ExtResource("3_mviy3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Ball Setup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.0
+offset_top = -205.5
+offset_right = 159.0
+offset_bottom = 233.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Ball Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Ball Setup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Color: "
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="TabContainer/Ball Setup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Press to pick new ball color"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Ball Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Ball Setup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Enable Glowing: "
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Ball Setup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Ball Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Ball Setup/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Glowing Strength: "
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Ball Setup/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 25.0
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 1
@@ -46,3 +97,7 @@ offset_right = 341.0
 offset_bottom = 95.0
 grow_horizontal = 2
 text = "Close"
+
+[connection signal="color_changed" from="TabContainer/Ball Setup/VBoxContainer/HBoxContainer/ColorPickerButton" to="TabContainer/Ball Setup" method="OnBallColorChanged"]
+[connection signal="toggled" from="TabContainer/Ball Setup/VBoxContainer/HBoxContainer2/CheckBox" to="TabContainer/Ball Setup" method="OnGlowingStatusChanged"]
+[connection signal="value_changed" from="TabContainer/Ball Setup/VBoxContainer/HBoxContainer3/HSlider" to="TabContainer/Ball Setup" method="OnGlowingStrengthChanged"]
