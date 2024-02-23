@@ -15,13 +15,14 @@ script = ExtResource("2_2pe1g")
 _posterFileDialog = NodePath("PosterImageDialog")
 
 [node name="PosterImageDialog" type="FileDialog" parent="."]
-title = "Open a File"
-position = Vector2i(200, 50)
+title = "Choose an image"
+initial_position = 4
 size = Vector2i(865, 600)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
 root_subfolder = "/home"
+filters = PackedStringArray("*.png, *.jpg, *.jpeg ; Supported Images")
 
 [node name="PosterInteractTrigger" type="Area3D" parent="."]
 collision_layer = 2048

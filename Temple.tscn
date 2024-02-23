@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=44 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
@@ -22,12 +22,13 @@
 [ext_resource type="PackedScene" uid="uid://c6qcraf8okeu7" path="res://Environment/Couch/Scenes/Couch.tscn" id="19_r7iic"]
 [ext_resource type="PackedScene" uid="uid://fluugsl4cp6s" path="res://BarPrototype/Scenes/BarNormalSize.tscn" id="20_sm8d2"]
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
+[ext_resource type="LightmapGIData" uid="uid://lm57nf0p443f" path="res://Temple.lmbake" id="23_ts3yy"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
-background_energy_multiplier = 0.3
+background_energy_multiplier = 0.4
 glow_enabled = true
-glow_bloom = 0.1
-glow_blend_mode = 0
+glow_normalized = true
+glow_blend_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg8y2"]
 bg_color = Color(0.901961, 0.901961, 0.901961, 0.588235)
@@ -44,21 +45,27 @@ albedo_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
 metallic = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2uf1j"]
+lightmap_size_hint = Vector2i(97, 4)
 material = SubResource("StandardMaterial3D_pl01h")
+add_uv2 = true
 size = Vector2(19.16, 0.48)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipaq"]
 albedo_color = Color(0.301961, 0.301961, 0.219608, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8kvq3"]
+lightmap_size_hint = Vector2i(84, 84)
 material = SubResource("StandardMaterial3D_tipaq")
+add_uv2 = true
 size = Vector2(16.5, 16.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0y456"]
 points = PackedVector3Array(-8.25, 0, -8.25, -8.25, 0, 8.25, 8.25, 0, -8.25, 8.25, 0, 8.25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ixc5"]
+lightmap_size_hint = Vector2i(27, 84)
 material = ExtResource("7_bk3b3")
+add_uv2 = true
 size = Vector2(5, 16.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jmsaj"]
@@ -68,7 +75,9 @@ points = PackedVector3Array(2.5, 0, 8.25, -2.5, 0, 8.25, 2.5, 0, -8.25, -2.5, 0,
 points = PackedVector3Array(2.5, 0, 8.25, -2.5, 0, 8.25, 2.5, 0, -8.25, -2.5, 0, -8.25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0ix34"]
+lightmap_size_hint = Vector2i(202, 27)
 material = ExtResource("7_bk3b3")
+add_uv2 = true
 size = Vector2(40, 5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1tse"]
@@ -83,7 +92,9 @@ metallic = 0.2
 roughness = 0.35
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1arfw"]
+lightmap_size_hint = Vector2i(202, 102)
 material = SubResource("StandardMaterial3D_hx6bd")
+add_uv2 = true
 size = Vector2(40, 20)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o4v64"]
@@ -524,6 +535,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6067, 0, 13.0901)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2766, 2.5805, 7.46106)
 size = Vector3(40, 6, 18.235)
 box_projection = true
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2678, 1.68684, 7.52171)
+quality = 3
+bounces = 10
+light_data = ExtResource("23_ts3yy")
 
 [connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="ClosePauseMenu"]
 [connection signal="OpenShopRequest" from="UIManager/PauseMenu" to="UIManager" method="OpenShopMenu"]
