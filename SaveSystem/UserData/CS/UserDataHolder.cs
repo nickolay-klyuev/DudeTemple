@@ -5,6 +5,9 @@ using System;
 public partial class UserDataHolder : Node
 {
     [Signal]
+    public delegate void UserDataLoadedEventHandler();
+
+    [Signal]
     public delegate void ScoreChangedEventHandler(int newScore);
 
     [Signal]
@@ -38,6 +41,7 @@ public partial class UserDataHolder : Node
         SaveDataHelper.LogUserData(_userData);
         #endif
 
+        EmitSignal(SignalName.UserDataLoaded);
         EmitSignal(SignalName.ScoreChanged, _userData.Score);
         EmitSignal(SignalName.UnlockedFurnituresLoaded, _userData.UnlockedFurnitures);
         EmitSignal(SignalName.PosterImagesLoaded, _userData.PosterImages);

@@ -6,20 +6,21 @@ public partial class BowlingBallHandler : RigidBody3D, IGrabbable
 	[Export]
 	private MeshInstance3D _ballMesh;
 
-	private BowlingBallSetup _bowlingBallSetup;
+	//private BowlingBallSetup _bowlingBallSetup;
 	private Transform3D _initialTransform;
 	private StandardMaterial3D _ballMaterial;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_bowlingBallSetup = FindHelper.FindBowlingBallSetup(this);
+		//_bowlingBallSetup = FindHelper.FindBowlingBallSetup(this);
 
 		#if DEBUG
-		CheckHelper.Check(this, _ballMesh, _bowlingBallSetup);
+		//CheckHelper.Check(this, _ballMesh, _bowlingBallSetup);
+		CheckHelper.Check(this, _ballMesh);
 		#endif
 
-		_bowlingBallSetup.BallSetupIsDirty += OnBallSetupIsDirty;
+		//_bowlingBallSetup.BallSetupIsDirty += OnBallSetupIsDirty;
 
 		_initialTransform = Transform;
 
@@ -74,13 +75,13 @@ public partial class BowlingBallHandler : RigidBody3D, IGrabbable
 		switch (property)
 		{
 			case 0:
-				UpdateColor(_bowlingBallSetup.BallColor);
+				//UpdateColor(_bowlingBallSetup.BallColor);
 				return;
 			case 1:
-				_ballMaterial.EmissionEnabled = _bowlingBallSetup.IsGlowing;
+				//_ballMaterial.EmissionEnabled = _bowlingBallSetup.IsGlowing;
 				return;
 			case 2:
-				UpdateEmittionStrength(_bowlingBallSetup.GlowingStrength);
+				//UpdateEmittionStrength(_bowlingBallSetup.GlowingStrength);
 				return;
 		}
 	}

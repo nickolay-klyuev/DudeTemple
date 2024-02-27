@@ -53,6 +53,11 @@ public static class BuildingDataHelper
     //     return _buildingDataPlaceMap[placeIndex];
     // }
 
+    public static string GetFurnitureName(EFurniture furniture)
+    {
+        return _buildingData[(int)furniture].Label;
+    }
+
     public static SBuildingData GetBuildingData(EFurniture furniture)
     {
         return _buildingData[(int)furniture];

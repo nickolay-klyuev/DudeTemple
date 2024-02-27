@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbtcp1ld8crwc"]
+[gd_scene load_steps=5 format=3 uid="uid://df4xxa4gwm83c"]
 
-[ext_resource type="Script" path="res://UI/PauseMenu/CSScripts/PauseMenuHandler.cs" id="1_a3evy"]
+[ext_resource type="Theme" uid="uid://k5wcmjh1ndtk" path="res://UI/PauseMenu/PauseMenu.tres" id="1_rt2um"]
+[ext_resource type="PackedScene" uid="uid://b4emh6se6gse7" path="res://UI/PauseMenu/MenuButton.tscn" id="1_ut0qb"]
+[ext_resource type="Script" path="res://UI/PauseMenu/CS/PauseMenu.cs" id="2_e6vme"]
+[ext_resource type="PackedScene" uid="uid://j0ww1x3u0jgb" path="res://UI/PauseMenu/Shop.tscn" id="4_ihx7k"]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_content", "_shop", "_settings")]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -10,38 +13,89 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_a3evy")
+theme = ExtResource("1_rt2um")
+script = ExtResource("2_e6vme")
+_content = NodePath("Content")
+_shop = NodePath("Content/NewShop")
+_settings = NodePath("Content/SettingsTest")
 
-[node name="MenuVBox" type="VBoxContainer" parent="."]
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.202
+anchor_bottom = 1.0
+offset_right = 0.29599
+grow_vertical = 2
+alignment = 1
+
+[node name="MenuLabel" type="Label" parent="MenuContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+text = "Pause Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MenuContainer"]
+layout_mode = 2
+
+[node name="ResumeMenuButton" parent="MenuContainer" instance=ExtResource("1_ut0qb")]
+layout_mode = 2
+text = "Resume"
+
+[node name="ShopMenuButton" parent="MenuContainer" instance=ExtResource("1_ut0qb")]
+layout_mode = 2
+text = "Shop
+"
+
+[node name="SettingsMenuButton" parent="MenuContainer" instance=ExtResource("1_ut0qb")]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="ExitMenuButton" parent="MenuContainer" instance=ExtResource("1_ut0qb")]
+layout_mode = 2
+text = "Exit to desktop
+"
+
+[node name="Content" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.221
+anchor_top = 0.045
+anchor_right = 0.971
+anchor_bottom = 0.955
+offset_left = 0.40799
+offset_top = -12.16
+offset_right = 9.40796
+offset_bottom = 9.15997
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="NewShop" parent="Content" instance=ExtResource("4_ihx7k")]
+layout_mode = 1
+
+[node name="SettingsTest" type="Panel" parent="Content"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Content/SettingsTest"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.5
-offset_top = -13.0
-offset_right = 47.5
-offset_bottom = 13.0
+offset_left = -20.0
+offset_top = -19.5
+offset_right = 20.0
+offset_bottom = 19.5
 grow_horizontal = 2
 grow_vertical = 2
+text = "Settings"
 
-[node name="Label" type="Label" parent="MenuVBox"]
-layout_mode = 2
-text = "Pause Menu"
-
-[node name="ResumeButton" type="Button" parent="MenuVBox"]
-layout_mode = 2
-text = "Resume"
-
-[node name="ShopButton" type="Button" parent="MenuVBox"]
-layout_mode = 2
-text = "Shop"
-
-[node name="ExitButton" type="Button" parent="MenuVBox"]
-layout_mode = 2
-text = "Exit"
-
-[connection signal="pressed" from="MenuVBox/ResumeButton" to="." method="OnResumeButtonPressed"]
-[connection signal="pressed" from="MenuVBox/ShopButton" to="." method="OnShopButtonPressed"]
-[connection signal="pressed" from="MenuVBox/ExitButton" to="." method="OnExitButtonPressed"]
+[connection signal="pressed" from="MenuContainer/ShopMenuButton" to="." method="ShowShop"]
+[connection signal="pressed" from="MenuContainer/SettingsMenuButton" to="." method="ShowSettings"]

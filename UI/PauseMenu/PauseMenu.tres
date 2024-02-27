@@ -1,0 +1,36 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://k5wcmjh1ndtk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7cft"]
+bg_color = Color(0.196, 0.196, 0.196, 0.5)
+border_width_bottom = 1
+border_color = Color(0.603922, 0.635294, 0.619608, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghblc"]
+bg_color = Color(0.153, 0.153, 0.153, 0.5)
+border_width_bottom = 1
+border_color = Color(0.603922, 0.635294, 0.619608, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygadd"]
+bg_color = Color(0.082, 0.082, 0.082, 0.5)
+border_width_bottom = 1
+border_color = Color(0.603922, 0.635294, 0.619608, 0.8)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_w6nin"]
+color = Color(0.937, 0.796, 0.408, 0.5)
+grow_begin = 0.0
+grow_end = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbvkp"]
+bg_color = Color(0.682, 0.718, 0.702, 0.5)
+
+[resource]
+Button/colors/font_color = Color(0.882353, 0.937255, 0.901961, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_s7cft")
+Button/styles/normal = SubResource("StyleBoxFlat_ghblc")
+Button/styles/pressed = SubResource("StyleBoxFlat_ygadd")
+HSeparator/constants/separation = 1
+HSeparator/styles/separator = SubResource("StyleBoxLine_w6nin")
+Label/colors/font_color = Color(0.882353, 0.937255, 0.901961, 1)
+Label/font_sizes/font_size = 28
+Label/styles/normal = SubResource("StyleBoxFlat_kbvkp")
+VBoxContainer/constants/separation = 0

@@ -4,9 +4,6 @@ using System;
 
 public partial class DudeController : CharacterBody3D
 {
-	[Signal]
-	public delegate void OnInteractProcessChangedEventHandler(bool bIsInteracting);
-
 	[Export]
 	private float _lookAroundSensitivity = 1.0f;
 
@@ -28,6 +25,9 @@ public partial class DudeController : CharacterBody3D
 	[Export]
 	private float _sprintSpeed = 7.0f;
 
+	[Export]
+	private Label _interactLabel;
+
 	public const float JumpVelocity = 4.5f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -43,7 +43,7 @@ public partial class DudeController : CharacterBody3D
 	public override void _Ready()
 	{
 		#if DEBUG
-		CheckHelper.CheckNodes(new Array<Node>{ _dudeFace, _dudeHand, _aimRaycast, _grabSocket}, this);
+		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel);
 		#endif
 
 		_dudeCollision = GetChild<CollisionShape3D>(0);
@@ -122,7 +122,10 @@ public partial class DudeController : CharacterBody3D
 	{
 		if (_dudeHand.IsColliding())
 		{
-			EmitSignal(SignalName.OnInteractProcessChanged, true);
+			if (!_interactLabel.Visible)
+			{
+				_interactLabel.Visible = true;
+			}
 
 			IInteractable interactableObject = _dudeHand.GetCollider() as IInteractable;
 			if (interactableObject != null && Input.IsActionJustPressed("Interact"))
@@ -139,7 +142,10 @@ public partial class DudeController : CharacterBody3D
 		}
 		else
 		{
-			EmitSignal(SignalName.OnInteractProcessChanged, false);
+			if (_interactLabel.Visible)
+			{
+				_interactLabel.Visible = false;
+			}
 		}
 	}
 

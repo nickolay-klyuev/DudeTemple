@@ -1,18 +1,16 @@
-[gd_scene load_steps=44 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=43 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
-[ext_resource type="Script" path="res://UI/CSScripts/UIManager.cs" id="2_2cwu4"]
-[ext_resource type="PackedScene" uid="uid://cyxw06ofkcujw" path="res://UI/Shop/Scenes/ShopUI.tscn" id="4_vkkum"]
+[ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
 [ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
-[ext_resource type="PackedScene" uid="uid://cbtcp1ld8crwc" path="res://UI/PauseMenu/PauseMenu.tscn" id="9_gpxng"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
 [ext_resource type="Script" path="res://BowlingBall/CS/BowlingBallSetup.cs" id="12_soymh"]
 [ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
-[ext_resource type="Script" path="res://UserData/CS/UserDataHolder.cs" id="14_pai1m"]
+[ext_resource type="Script" path="res://SaveSystem/UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
 [ext_resource type="PackedScene" uid="uid://bjp7al4c2pcfv" path="res://Environment/Console/Scenes/Console.tscn" id="16_mchgi"]
 [ext_resource type="PackedScene" uid="uid://cdur1t76kcw57" path="res://Environment/TV/Scenes/TVTable.tscn" id="16_rmwrf"]
@@ -23,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://fluugsl4cp6s" path="res://BarPrototype/Scenes/BarNormalSize.tscn" id="20_sm8d2"]
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
 [ext_resource type="LightmapGIData" uid="uid://lm57nf0p443f" path="res://Temple.lmbake" id="23_ts3yy"]
+[ext_resource type="PackedScene" uid="uid://df4xxa4gwm83c" path="res://UI/PauseMenu/PauseMenu.tscn" id="24_he8l3"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_energy_multiplier = 0.4
@@ -115,30 +114,33 @@ lightmap_size_hint = Vector2i(7, 5)
 material = SubResource("StandardMaterial3D_avsxf")
 size = Vector2(1, 0.7)
 
-[node name="Temple" type="Node3D" node_paths=PackedStringArray("_userDataHolder")]
+[node name="Temple" type="Node3D"]
 script = ExtResource("1_hpo4a")
-_userDataHolder = NodePath("UserDataHolder")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f4q88")
 
-[node name="UIManager" type="Control" parent="." node_paths=PackedStringArray("_pauseMenu", "_shopMenu", "_interactLabel")]
+[node name="TempleController" type="Node" parent="."]
 process_mode = 3
-editor_description = "This manager is controlling pausing the game and showing UI that is needed."
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("2_2cwu4")
-_pauseMenu = NodePath("PauseMenu")
-_shopMenu = NodePath("ShopUI")
+editor_description = "This node tries to control pause/unpause temple. But maybe I will add more info it. Or it will resolve all player inputs."
+script = ExtResource("2_am0gk")
+_resumeBtnPath = "../PauseMenu/MenuContainer/ResumeMenuButton"
+_exitBtnPath = "../PauseMenu/MenuContainer/ExitMenuButton"
+
+[node name="PauseMenu" parent="." instance=ExtResource("24_he8l3")]
+
+[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
+collision_layer = 0
+script = ExtResource("5_idorm")
+_lookAroundSensitivity = 0.3
+_dudeFace = NodePath("DudeFaceCamera")
+_dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
+_aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
+_grabSocket = NodePath("DudeFaceCamera/GrabSocket")
 _interactLabel = NodePath("InteractLabel")
 
-[node name="CenterPoint" type="Panel" parent="UIManager"]
-layout_mode = 1
+[node name="CenterPoint" type="Panel" parent="Dude"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -153,15 +155,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pg8y2")
 
-[node name="PauseMenu" parent="UIManager" instance=ExtResource("9_gpxng")]
-layout_mode = 1
-
-[node name="ShopUI" parent="UIManager" node_paths=PackedStringArray("_userData") instance=ExtResource("4_vkkum")]
-layout_mode = 1
-_userData = NodePath("../../UserDataHolder")
-
-[node name="InteractLabel" type="Label" parent="UIManager"]
-layout_mode = 1
+[node name="InteractLabel" type="Label" parent="Dude"]
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.677469
@@ -176,16 +170,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 text = "Press E to interact"
 metadata/_edit_use_anchors_ = true
-
-[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
-collision_layer = 0
-script = ExtResource("5_idorm")
-_lookAroundSensitivity = 0.3
-_dudeFace = NodePath("DudeFaceCamera")
-_dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
-_aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
-_grabSocket = NodePath("DudeFaceCamera/GrabSocket")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dude"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22154, 0)
@@ -511,24 +495,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 12)
 [node name="PinsSpawnLocation_8" type="Node3D" parent="PinsManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 
-[node name="UnlockableFurniture" type="Node3D" parent="." node_paths=PackedStringArray("_userData", "_furnitures")]
+[node name="FurnitureManager" type="Node3D" parent="." node_paths=PackedStringArray("_userData", "_furnitures")]
 script = ExtResource("14_teffm")
 _userData = NodePath("../UserDataHolder")
 _furnitures = [NodePath("BarNormalSize"), NodePath("Couch"), NodePath("TVTable"), NodePath("TV"), NodePath("Console")]
 
-[node name="TVTable" parent="UnlockableFurniture" instance=ExtResource("16_rmwrf")]
+[node name="TVTable" parent="FurnitureManager" instance=ExtResource("16_rmwrf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6893, 0, -0.78292)
 
-[node name="TV" parent="UnlockableFurniture" instance=ExtResource("17_d5lhe")]
+[node name="TV" parent="FurnitureManager" instance=ExtResource("17_d5lhe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6748, 0.838658, -0.78967)
 
-[node name="Console" parent="UnlockableFurniture" instance=ExtResource("16_mchgi")]
+[node name="Console" parent="FurnitureManager" instance=ExtResource("16_mchgi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7, 0.371, -0.561673)
 
-[node name="Couch" parent="UnlockableFurniture" instance=ExtResource("19_r7iic")]
+[node name="Couch" parent="FurnitureManager" instance=ExtResource("19_r7iic")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.6894, 0, 2.04388)
 
-[node name="BarNormalSize" parent="UnlockableFurniture" instance=ExtResource("20_sm8d2")]
+[node name="BarNormalSize" parent="FurnitureManager" instance=ExtResource("20_sm8d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6067, 0, 13.0901)
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="."]
@@ -542,14 +526,14 @@ quality = 3
 bounces = 10
 light_data = ExtResource("23_ts3yy")
 
-[connection signal="CloseMenuRequest" from="UIManager/PauseMenu" to="UIManager" method="ClosePauseMenu"]
-[connection signal="OpenShopRequest" from="UIManager/PauseMenu" to="UIManager" method="OpenShopMenu"]
-[connection signal="BuyFurnitureRequest" from="UIManager/ShopUI" to="UnlockableFurniture" method="BuyFurniture"]
-[connection signal="OnInteractProcessChanged" from="Dude" to="UIManager" method="SetInteractLabelVisibility"]
+[connection signal="TemplePaused" from="TempleController" to="." method="BlurTemple"]
+[connection signal="TemplePaused" from="TempleController" to="PauseMenu" method="Open"]
+[connection signal="TempleUnpaused" from="TempleController" to="." method="UnblurTemple"]
+[connection signal="TempleUnpaused" from="TempleController" to="PauseMenu" method="Close"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest2" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest3" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest4" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest5" method="OnPosterImagesLoaded"]
 [connection signal="ScoreChanged" from="UserDataHolder" to="ScoreScreen/ScoreScreenViewport/ScoreScreenUI" method="UpdateScoreLabel"]
-[connection signal="UnlockedFurnituresLoaded" from="UserDataHolder" to="UnlockableFurniture" method="OnUnlockedFurnituresLoaded"]
+[connection signal="UnlockedFurnituresLoaded" from="UserDataHolder" to="FurnitureManager" method="OnUnlockedFurnituresLoaded"]

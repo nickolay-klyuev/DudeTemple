@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://lasvocn6ibyf"]
+
+[ext_resource type="Script" path="res://UI/PauseMenu/CS/ShopItem.cs" id="1_wt5w2"]
+[ext_resource type="Texture2D" uid="uid://kq3xd0gngqkr" path="res://icon.svg" id="1_x8mbp"]
+
+[node name="ShopItem" type="Panel"]
+custom_minimum_size = Vector2(200, 300)
+offset_right = 169.0
+offset_bottom = 216.0
+script = ExtResource("1_wt5w2")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -108.5
+offset_right = 64.0
+offset_bottom = 108.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("1_x8mbp")
+stretch_mode = 3
+
+[node name="Name" type="Label" parent="Container"]
+layout_mode = 2
+text = "Bar counter"
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="Container"]
+layout_mode = 2
+text = "100"
+horizontal_alignment = 1
+
+[node name="BuyContainer" type="CenterContainer" parent="Container"]
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="Container/BuyContainer"]
+layout_mode = 2
+text = "Buy"
+
+[node name="UnlockedLabel" type="Label" parent="Container/BuyContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Unlocked"
+
+[node name="UnavailableLabel" type="Label" parent="Container/BuyContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Unavailable"
+
+[connection signal="pressed" from="Container/BuyContainer/BuyButton" to="." method="BuyItem"]
