@@ -28,6 +28,19 @@ public partial class DudeController : CharacterBody3D
 	[Export]
 	private Label _interactLabel;
 
+	[Export]
+	private float _addingForceMod = 100.0f;
+
+	[Export]
+	private Vector2 _throwForce = new Vector2(25.0f, 150.0f);
+
+	[Export]
+	private ProgressBar _throwForceBar;
+
+	private bool _bIsAddingForce = false;
+
+	private float _currentForce = 0.0f;
+
 	public const float JumpVelocity = 4.5f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -43,13 +56,27 @@ public partial class DudeController : CharacterBody3D
 	public override void _Ready()
 	{
 		#if DEBUG
-		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel);
+		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel, _throwForceBar);
 		#endif
 
+		_throwForceBar.Visible = false;
+
 		_dudeCollision = GetChild<CollisionShape3D>(0);
+		_currentForce = _throwForce.X;
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+		if (_bIsAddingForce && _currentForce < _throwForce.Y)
+		{
+			_currentForce += (float)delta * _addingForceMod;
+			_throwForceBar.Value = (_currentForce - _throwForce.X) * 100.0f / (_throwForce.Y - _throwForce.X);
+		}
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		if (_bIsDisabled)
 		{
@@ -173,6 +200,11 @@ public partial class DudeController : CharacterBody3D
 
 			if (Input.IsActionJustPressed("MainAction"))
 			{
+				_bIsAddingForce = true;
+				_throwForceBar.Visible = true;
+			}
+			else if (Input.IsActionJustReleased("MainAction"))
+			{
 				ReleaseThing();
 			}
 		}
@@ -193,7 +225,12 @@ public partial class DudeController : CharacterBody3D
 			throwDirection = _aimRaycast.ToGlobal(_aimRaycast.TargetPosition) - _grabSocket.GlobalPosition;
 		}
 
-		((IGrabbable)_holdingThing).ThrowToDirection(throwDirection, 90.0f);// TODO: Make force dynamic.
+		((IGrabbable)_holdingThing).ThrowToDirection(throwDirection, _currentForce);
+
+		_throwForceBar.Visible = false;
 		_holdingThing = null;
+		_bIsAddingForce = false;
+		_currentForce = _throwForce.X;
+		_throwForceBar.Value = 0.0f;
 	}
 }

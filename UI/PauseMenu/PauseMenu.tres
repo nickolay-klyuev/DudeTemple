@@ -21,7 +21,7 @@ grow_begin = 0.0
 grow_end = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbvkp"]
-bg_color = Color(0.682, 0.718, 0.702, 0.5)
+bg_color = Color(0.682353, 0.717647, 0.701961, 0.501961)
 
 [resource]
 Button/colors/font_color = Color(0.882353, 0.937255, 0.901961, 1)

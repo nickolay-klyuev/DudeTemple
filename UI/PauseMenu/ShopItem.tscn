@@ -1,31 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://lasvocn6ibyf"]
+[gd_scene load_steps=4 format=3 uid="uid://lasvocn6ibyf"]
 
+[ext_resource type="Theme" uid="uid://ipewr46dthur" path="res://UI/PauseMenu/ShopItem.tres" id="1_eujce"]
 [ext_resource type="Script" path="res://UI/PauseMenu/CS/ShopItem.cs" id="1_wt5w2"]
-[ext_resource type="Texture2D" uid="uid://kq3xd0gngqkr" path="res://icon.svg" id="1_x8mbp"]
+[ext_resource type="Texture2D" uid="uid://fuxog4a6jvw" path="res://UI/PauseMenu/ShopTextures/Bar.png" id="2_ibxar"]
 
 [node name="ShopItem" type="Panel"]
-custom_minimum_size = Vector2(200, 300)
-offset_right = 169.0
-offset_bottom = 216.0
+custom_minimum_size = Vector2(200, 250)
+offset_right = 200.0
+offset_bottom = 250.0
+theme = ExtResource("1_eujce")
 script = ExtResource("1_wt5w2")
 
 [node name="Container" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -108.5
-offset_right = 64.0
-offset_bottom = 108.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Icon" type="TextureRect" parent="Container"]
 layout_mode = 2
-texture = ExtResource("1_x8mbp")
+texture = ExtResource("2_ibxar")
 stretch_mode = 3
 
 [node name="Name" type="Label" parent="Container"]

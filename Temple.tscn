@@ -129,7 +129,7 @@ _exitBtnPath = "../PauseMenu/MenuContainer/ExitMenuButton"
 
 [node name="PauseMenu" parent="." instance=ExtResource("24_he8l3")]
 
-[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel")]
+[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_throwForceBar")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
 collision_layer = 0
 script = ExtResource("5_idorm")
@@ -139,6 +139,7 @@ _dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
 _aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
 _grabSocket = NodePath("DudeFaceCamera/GrabSocket")
 _interactLabel = NodePath("InteractLabel")
+_throwForceBar = NodePath("ThrowForce")
 
 [node name="CenterPoint" type="Panel" parent="Dude"]
 anchors_preset = 8
@@ -154,6 +155,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pg8y2")
+
+[node name="ThrowForce" type="ProgressBar" parent="Dude"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_top = -198.0
+offset_right = 129.0
+offset_bottom = -171.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="InteractLabel" type="Label" parent="Dude"]
 anchors_preset = -1

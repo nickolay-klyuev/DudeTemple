@@ -52,6 +52,7 @@ public partial class ShopItem : Panel
 	{
 		GetNode<Label>("Container/Name").Text = BuildingDataHelper.GetFurnitureName(_type);
 		GetNode<Label>("Container/Cost").Text = BuildingDataHelper.GetFurnitureCost(_type).ToString();
+		GetNode<TextureRect>("Container/Icon").Texture = ResourceLoader.Load<Texture2D>(BuildingDataHelper.GetFurnitureIconPath(_type));
 	}
 
 	private void UpdateInGame()
