@@ -31,11 +31,12 @@ public partial class DudeController : CharacterBody3D
 	[Export]
 	private float _addingForceMod = 100.0f;
 
+	[ExportCategory("Throwing")]
 	[Export]
 	private Vector2 _throwForce = new Vector2(25.0f, 150.0f);
 
 	[Export]
-	private ProgressBar _throwForceBar;
+	private ThrowForce _throwForceBar;
 
 	private bool _bIsAddingForce = false;
 
@@ -72,7 +73,7 @@ public partial class DudeController : CharacterBody3D
 		if (_bIsAddingForce && _currentForce < _throwForce.Y)
 		{
 			_currentForce += (float)delta * _addingForceMod;
-			_throwForceBar.Value = (_currentForce - _throwForce.X) * 100.0f / (_throwForce.Y - _throwForce.X);
+			_throwForceBar.SetForcePercentage((_currentForce - _throwForce.X) / (_throwForce.Y - _throwForce.X));
 		}
     }
 

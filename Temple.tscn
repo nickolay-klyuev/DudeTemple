@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=46 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
+[ext_resource type="Script" path="res://Dude/CS/ThrowForce.cs" id="5_albop"]
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
 [ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
 [ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
@@ -35,6 +36,12 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fp5as"]
+bg_color = Color(0.078, 0.078, 0.078, 0.7)
+
+[sub_resource type="Theme" id="Theme_k064f"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_fp5as")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
 height = 1.8
@@ -168,6 +175,10 @@ offset_right = 129.0
 offset_bottom = -171.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = SubResource("Theme_k064f")
+script = ExtResource("5_albop")
+_beginColor = Color(0, 0.427451, 0.956863, 1)
+_endColor = Color(0.631373, 0, 0.0705882, 1)
 
 [node name="InteractLabel" type="Label" parent="Dude"]
 anchors_preset = -1
