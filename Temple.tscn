@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
 [ext_resource type="Script" path="res://Dude/CS/ThrowForce.cs" id="5_albop"]
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
-[ext_resource type="PackedScene" uid="uid://6qw3gie53svf" path="res://Pins/SimpleCandlePin/SimpleCandlePins.tscn" id="6_buwsq"]
 [ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
 [ext_resource type="Script" path="res://SaveSystem/UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
+[ext_resource type="PackedScene" uid="uid://b5mknp5ak1cwd" path="res://Pins/TenPin/TenPinsSpawner.tscn" id="16_g2po3"]
 [ext_resource type="PackedScene" uid="uid://bjp7al4c2pcfv" path="res://Environment/Console/Scenes/Console.tscn" id="16_mchgi"]
 [ext_resource type="PackedScene" uid="uid://cdur1t76kcw57" path="res://Environment/TV/Scenes/TVTable.tscn" id="16_rmwrf"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
@@ -492,7 +492,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2.03864, 10)
 
 [node name="PinsManager" type="Node3D" parent="." node_paths=PackedStringArray("_userData")]
 script = ExtResource("20_sm84q")
-_pinsScene = ExtResource("6_buwsq")
+_pinsScene = ExtResource("16_g2po3")
 _userData = NodePath("../UserDataHolder")
 
 [node name="PinsSpawnLocation_1" type="Node3D" parent="PinsManager"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfgjj530tp70o"]
+
+[ext_resource type="Script" path="res://Pins/CS/PinsGroupHandler.cs" id="1_rlp4w"]
+[ext_resource type="Script" path="res://Pins/CS/PinsBuilderTool.cs" id="2_a8bhj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gd2c1"]
+size = Vector3(3, 1, 1.5)
+
+[node name="SimpleCandlePins" type="Node3D" node_paths=PackedStringArray("_pinsHolder", "_scoreCountdownTimer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 0)
+script = ExtResource("1_rlp4w")
+_pinsHolder = NodePath("PinsBuilder")
+_scoreCountdownTimer = NodePath("ScoreCountdownTimer")
+
+[node name="PinsBuilder" type="Node3D" parent="."]
+script = ExtResource("2_a8bhj")
+
+[node name="BallTriggerArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0778856, 0.291554, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BallTriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.879868, 0, 0)
+shape = SubResource("BoxShape3D_gd2c1")
+
+[node name="ScoreCountdownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="BallTriggerArea" to="." method="OnBallTriggerAreaBodyEntered"]

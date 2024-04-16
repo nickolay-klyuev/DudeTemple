@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5mknp5ak1cwd"]
+
+[ext_resource type="PackedScene" uid="uid://dfgjj530tp70o" path="res://Pins/PinsSpawner.tscn" id="1_0eg42"]
+[ext_resource type="PackedScene" uid="uid://chrh011yma2kh" path="res://Pins/TenPin/TenPin.tscn" id="2_4yqgo"]
+
+[node name="SimpleCandlePins" instance=ExtResource("1_0eg42")]
+
+[node name="PinsBuilder" parent="." index="0"]
+PinScene = ExtResource("2_4yqgo")
