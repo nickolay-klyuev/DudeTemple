@@ -5,9 +5,6 @@ using System;
 public partial class DudeController : CharacterBody3D
 {
 	[Export]
-	private float _lookAroundSensitivity = 1.0f;
-
-	[Export]
 	private Camera3D _dudeFace;
 
 	[Export]
@@ -54,8 +51,17 @@ public partial class DudeController : CharacterBody3D
 	private bool _bIsHoldingThing = false;
 	private Node3D _holdingThing;
 
+	private DudeSettings _settings;
+
+	private float _cameraSpeed = 1.0f;
+
 	public override void _Ready()
 	{
+		_settings = GetTree().Root.GetNode<DudeSettings>("DudeSettings");
+
+		UpdateCameraSpeed();
+		_settings.SettingsUpdated += UpdateCameraSpeed;
+
 		#if DEBUG
 		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel, _throwForceBar);
 		#endif
@@ -139,7 +145,7 @@ public partial class DudeController : CharacterBody3D
 		// Turn dude around by mouse X axis
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
-			var TurnModifier = 0.01f * _lookAroundSensitivity;
+			var TurnModifier = 0.01f * _cameraSpeed;
 
 			RotateY(-mouseMotion.Relative.X * TurnModifier);
 			_dudeFace.RotateX(-mouseMotion.Relative.Y * TurnModifier);
@@ -233,5 +239,10 @@ public partial class DudeController : CharacterBody3D
 		_bIsAddingForce = false;
 		_currentForce = _throwForce.X;
 		_throwForceBar.Value = 0.0f;
+	}
+
+	private void UpdateCameraSpeed()
+	{
+		_cameraSpeed = _settings.GetCameraSpeed();
 	}
 }

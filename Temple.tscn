@@ -38,7 +38,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fp5as"]
-bg_color = Color(0.078, 0.078, 0.078, 0.7)
+bg_color = Color(0.078, 0.078, 0.078, 0.5)
 
 [sub_resource type="Theme" id="Theme_k064f"]
 ProgressBar/styles/background = SubResource("StyleBoxFlat_fp5as")
@@ -140,7 +140,6 @@ _exitBtnPath = "../PauseMenu/MenuContainer/ExitMenuButton"
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
 collision_layer = 0
 script = ExtResource("5_idorm")
-_lookAroundSensitivity = 0.3
 _dudeFace = NodePath("DudeFaceCamera")
 _dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
 _aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
