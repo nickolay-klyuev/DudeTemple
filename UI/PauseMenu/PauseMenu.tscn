@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://df4xxa4gwm83c"]
+[gd_scene load_steps=7 format=3 uid="uid://df4xxa4gwm83c"]
 
 [ext_resource type="Theme" uid="uid://k5wcmjh1ndtk" path="res://UI/PauseMenu/PauseMenu.tres" id="1_rt2um"]
 [ext_resource type="PackedScene" uid="uid://b4emh6se6gse7" path="res://UI/PauseMenu/MenuButton.tscn" id="1_ut0qb"]
 [ext_resource type="Script" path="res://UI/PauseMenu/CS/PauseMenu.cs" id="2_e6vme"]
 [ext_resource type="PackedScene" uid="uid://j0ww1x3u0jgb" path="res://UI/PauseMenu/Shop.tscn" id="4_ihx7k"]
+[ext_resource type="Script" path="res://UI/PauseMenu/CS/SettingsUI.cs" id="5_fwt1f"]
+[ext_resource type="Script" path="res://UI/PauseMenu/CS/PercentageDisplay.cs" id="6_sni7e"]
 
 [node name="PauseMenu" type="Control" node_paths=PackedStringArray("_content", "_shop", "_settings")]
 process_mode = 2
@@ -17,7 +19,7 @@ theme = ExtResource("1_rt2um")
 script = ExtResource("2_e6vme")
 _content = NodePath("Content")
 _shop = NodePath("Content/NewShop")
-_settings = NodePath("Content/SettingsTest")
+_settings = NodePath("Content/SettingsUI")
 
 [node name="MenuContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -71,31 +73,101 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="NewShop" parent="Content" instance=ExtResource("4_ihx7k")]
+visible = false
 layout_mode = 1
 
-[node name="SettingsTest" type="Panel" parent="Content"]
-visible = false
+[node name="SettingsUI" type="Panel" parent="Content" node_paths=PackedStringArray("_cameraSpeed", "_cameraSpeedPercent", "_displayMode")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_fwt1f")
+_cameraSpeed = NodePath("VBoxContainer/CameraSpeedContainer/CameraSpeed")
+_cameraSpeedPercent = NodePath("VBoxContainer/CameraSpeedContainer/PercentageDisplay")
+_displayMode = NodePath("VBoxContainer/DisplayModeContainer/DisplayMode")
 
-[node name="Label" type="Label" parent="Content/SettingsTest"]
+[node name="Label" type="Label" parent="Content/SettingsUI"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -19.5
-offset_right = 20.0
-offset_bottom = 19.5
+offset_left = -54.5
+offset_top = 47.0
+offset_right = 54.5
+offset_bottom = 86.0
+grow_horizontal = 2
+text = "Settings"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/SettingsUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0549828
+anchor_top = 0.170213
+anchor_right = 0.943872
+anchor_bottom = 0.944354
 grow_horizontal = 2
 grow_vertical = 2
-text = "Settings"
+theme_override_constants/separation = 25
+metadata/_edit_use_anchors_ = true
+
+[node name="CameraSpeedContainer" type="HBoxContainer" parent="Content/SettingsUI/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="CameraSpeedLabel" type="Label" parent="Content/SettingsUI/VBoxContainer/CameraSpeedContainer"]
+layout_mode = 2
+text = "Camera speed: "
+
+[node name="CameraSpeed" type="HSlider" parent="Content/SettingsUI/VBoxContainer/CameraSpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.3
+
+[node name="PercentageDisplay" type="Label" parent="Content/SettingsUI/VBoxContainer/CameraSpeedContainer"]
+layout_mode = 2
+text = "100%"
+script = ExtResource("6_sni7e")
+
+[node name="DisplayModeContainer" type="HBoxContainer" parent="Content/SettingsUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="DisplayModeLabel" type="Label" parent="Content/SettingsUI/VBoxContainer/DisplayModeContainer"]
+layout_mode = 2
+text = "Display mode:"
+
+[node name="DisplayMode" type="OptionButton" parent="Content/SettingsUI/VBoxContainer/DisplayModeContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 3
+selected = 0
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 3
+popup/item_2/text = "ExclusiveFullscreen"
+popup/item_2/id = 4
+
+[node name="ApplyResetContainer" type="HBoxContainer" parent="Content/SettingsUI/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Apply" type="Button" parent="Content/SettingsUI/VBoxContainer/ApplyResetContainer"]
+layout_mode = 2
+disabled = true
+text = "Apply"
+
+[node name="Reset" type="Button" parent="Content/SettingsUI/VBoxContainer/ApplyResetContainer"]
+layout_mode = 2
+disabled = true
+text = "Reset"
 
 [connection signal="pressed" from="MenuContainer/ShopMenuButton" to="." method="ShowShop"]
 [connection signal="pressed" from="MenuContainer/SettingsMenuButton" to="." method="ShowSettings"]
+[connection signal="value_changed" from="Content/SettingsUI/VBoxContainer/CameraSpeedContainer/CameraSpeed" to="Content/SettingsUI/VBoxContainer/CameraSpeedContainer/PercentageDisplay" method="Update"]
