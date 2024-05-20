@@ -23,12 +23,13 @@ public partial class FurnitureManager : Node3D
 	public override void _Process(double delta)
 	{
 	}
-
-	public void BuyFurniture(int index)
+	
+	/* return false if already unlocked or not enough score to buy */
+	public bool BuyFurniture(int index)
 	{
 		if (_userData.IsFurnitureUnlocked(index))
 		{
-			return;
+			return false;
 		}
 
 		int cost = BuildingDataHelper.GetFurnitureCost((EFurniture)index);
@@ -36,7 +37,11 @@ public partial class FurnitureManager : Node3D
 		{
 			_userData.AddUnlockedFurniture((EFurniture)index);
 			EnableFurniture(index);
+
+			return true;
 		}
+
+		return false;
 	}
 
 	public void OnUnlockedFurnituresLoaded(Array<EFurniture> unlockedFurnitures)

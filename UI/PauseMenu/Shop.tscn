@@ -1,35 +1,140 @@
-[gd_scene load_steps=2 format=3 uid="uid://j0ww1x3u0jgb"]
+[gd_scene load_steps=7 format=3 uid="uid://j0ww1x3u0jgb"]
 
+[ext_resource type="Script" path="res://UI/PauseMenu/Shop/CS/ScoreDisplay.cs" id="1_fxmck"]
 [ext_resource type="PackedScene" uid="uid://lasvocn6ibyf" path="res://UI/PauseMenu/ShopItem.tscn" id="1_ybnh7"]
 
-[node name="NewShop" type="ScrollContainer"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hwtlr"]
+
+[sub_resource type="Animation" id="Animation_nqla1"]
+resource_name = "FadeInMessage"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bgpma"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7fqlm"]
+_data = {
+"FadeInMessage": SubResource("Animation_nqla1"),
+"RESET": SubResource("Animation_bgpma")
+}
+
+[node name="Shop" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
+[node name="ScoreDisplayContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.026
+anchor_right = 1.0
+anchor_bottom = 0.13
+offset_top = 0.152
+offset_bottom = -0.240005
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="ShopItem" parent="HFlowContainer" instance=ExtResource("1_ybnh7")]
+[node name="ScoreDisplay" type="Label" parent="ScoreDisplayContainer"]
 layout_mode = 2
+text = "Score: 0"
+script = ExtResource("1_fxmck")
 
-[node name="ShopItem2" parent="HFlowContainer" instance=ExtResource("1_ybnh7")]
+[node name="VSeparator" type="VSeparator" parent="ScoreDisplayContainer"]
 layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_hwtlr")
+
+[node name="Message" type="Label" parent="ScoreDisplayContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0, 0, 1)
+text = "You do NOT have enough score!"
+
+[node name="MessageAnimationPlayer" type="AnimationPlayer" parent="ScoreDisplayContainer/Message"]
+libraries = {
+"": SubResource("AnimationLibrary_7fqlm")
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.179
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.00799561
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="ShopItem" parent="ScrollContainer/HFlowContainer/HBoxContainer" node_paths=PackedStringArray("_animPlayer") instance=ExtResource("1_ybnh7")]
+layout_mode = 2
+size_flags_vertical = 4
+_animPlayer = NodePath("../../../../ScoreDisplayContainer/Message/MessageAnimationPlayer")
+
+[node name="ShopItem2" parent="ScrollContainer/HFlowContainer/HBoxContainer" node_paths=PackedStringArray("_animPlayer") instance=ExtResource("1_ybnh7")]
+layout_mode = 2
+size_flags_vertical = 4
 ItemType = 1
+_animPlayer = NodePath("../../../../ScoreDisplayContainer/Message/MessageAnimationPlayer")
 
-[node name="ShopItem3" parent="HFlowContainer" instance=ExtResource("1_ybnh7")]
+[node name="VSeparator" type="VSeparator" parent="ScrollContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ShopItem3" parent="ScrollContainer/HFlowContainer/VBoxContainer" node_paths=PackedStringArray("_animPlayer") instance=ExtResource("1_ybnh7")]
 layout_mode = 2
 ItemType = 2
+_animPlayer = NodePath("../../../../ScoreDisplayContainer/Message/MessageAnimationPlayer")
 
-[node name="ShopItem4" parent="HFlowContainer" instance=ExtResource("1_ybnh7")]
+[node name="ShopItem4" parent="ScrollContainer/HFlowContainer/VBoxContainer" node_paths=PackedStringArray("_animPlayer") instance=ExtResource("1_ybnh7")]
 layout_mode = 2
 ItemType = 3
+_animPlayer = NodePath("../../../../ScoreDisplayContainer/Message/MessageAnimationPlayer")
 
-[node name="ShopItem5" parent="HFlowContainer" instance=ExtResource("1_ybnh7")]
+[node name="ShopItem5" parent="ScrollContainer/HFlowContainer/VBoxContainer" node_paths=PackedStringArray("_animPlayer") instance=ExtResource("1_ybnh7")]
 layout_mode = 2
 ItemType = 4
+_animPlayer = NodePath("../../../../ScoreDisplayContainer/Message/MessageAnimationPlayer")

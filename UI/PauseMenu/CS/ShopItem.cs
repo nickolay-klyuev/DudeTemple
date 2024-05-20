@@ -21,6 +21,8 @@ public partial class ShopItem : Panel
 		}
 	}
 
+	[Export] private AnimationPlayer _animPlayer;
+
 	private Control _buyContainer;
 	private UserDataHolder _userData;
 
@@ -50,8 +52,8 @@ public partial class ShopItem : Panel
 
 	private void UpdateInEditor()
 	{
-		GetNode<Label>("Container/Name").Text = BuildingDataHelper.GetFurnitureName(_type);
-		GetNode<Label>("Container/Cost").Text = BuildingDataHelper.GetFurnitureCost(_type).ToString();
+		GetNode<Label>("Container/HBoxContainer/Name").Text = BuildingDataHelper.GetFurnitureName(_type);
+		GetNode<Label>("Container/HBoxContainer/Cost").Text = BuildingDataHelper.GetFurnitureCost(_type).ToString();
 		GetNode<TextureRect>("Container/Icon").Texture = ResourceLoader.Load<Texture2D>(BuildingDataHelper.GetFurnitureIconPath(_type));
 	}
 
@@ -96,6 +98,11 @@ public partial class ShopItem : Panel
 			return;
 		}
 
-		GetTree().Root.GetNode<TempleState>("Temple").GetFurnitureManager().BuyFurniture((int)_type);
+		bool buyResult = GetTree().Root.GetNode<TempleState>("Temple").GetFurnitureManager().BuyFurniture((int)_type);
+
+		if (!buyResult && _animPlayer != null && !_animPlayer.IsPlaying())
+		{
+			_animPlayer.Play("FadeInMessage");
+		}
 	}
 }

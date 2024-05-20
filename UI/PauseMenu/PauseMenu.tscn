@@ -73,10 +73,10 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="NewShop" parent="Content" instance=ExtResource("4_ihx7k")]
-visible = false
 layout_mode = 1
 
 [node name="SettingsUI" type="Panel" parent="Content" node_paths=PackedStringArray("_cameraSpeed", "_cameraSpeedPercent", "_displayMode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
