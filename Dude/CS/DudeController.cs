@@ -25,6 +25,8 @@ public partial class DudeController : CharacterBody3D
 	[Export]
 	private Label _interactLabel;
 
+	private bool _bInteractLabelVisibilityCache;
+
 	[Export]
 	private float _addingForceMod = 100.0f;
 
@@ -34,6 +36,10 @@ public partial class DudeController : CharacterBody3D
 
 	[Export]
 	private ThrowForce _throwForceBar;
+
+	private bool _bThrowForceBarVisibilityCache;
+
+	[Export] private Control _crossHair;
 
 	private bool _bIsAddingForce = false;
 
@@ -57,19 +63,24 @@ public partial class DudeController : CharacterBody3D
 
 	public override void _Ready()
 	{
+		_crossHair ??= GetNode<Control>("CenterPoint");
+		
 		_settings = GetTree().Root.GetNode<DudeSettings>("DudeSettings");
 
 		UpdateCameraSpeed();
 		_settings.SettingsUpdated += UpdateCameraSpeed;
 
 		#if DEBUG
-		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel, _throwForceBar);
+		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel, _throwForceBar, _crossHair);
 		#endif
 
 		_throwForceBar.Visible = false;
 
 		_dudeCollision = GetChild<CollisionShape3D>(0);
 		_currentForce = _throwForce.X;
+
+		_bInteractLabelVisibilityCache = _interactLabel.Visible;
+		_bThrowForceBarVisibilityCache = _throwForceBar.Visible;
 	}
 
     public override void _Process(double delta)
@@ -244,5 +255,23 @@ public partial class DudeController : CharacterBody3D
 	private void UpdateCameraSpeed()
 	{
 		_cameraSpeed = _settings.GetCameraSpeed();
+	}
+
+	private void OnPauseMenuOpened()
+	{
+		_bInteractLabelVisibilityCache = _interactLabel.Visible;
+		_bThrowForceBarVisibilityCache = _throwForceBar.Visible;
+		
+		_throwForceBar.Visible = false;
+		_interactLabel.Visible = false;
+		_crossHair.Visible = false;
+	}
+
+	private void OnPauseMenuClosed()
+	{
+		_throwForceBar.Visible = _bThrowForceBarVisibilityCache;
+		_interactLabel.Visible = _bInteractLabelVisibilityCache;
+		
+		_crossHair.Visible = true;
 	}
 }

@@ -2,6 +2,12 @@ using Godot;
 
 public partial class PauseMenu : Control
 {
+	[Signal]
+	public delegate void PauseMenuClosedEventHandler();
+
+	[Signal]
+	public delegate void PauseMenuOpenedEventHandler();
+	
 	[Export]
 	private Control _content;
 
@@ -43,6 +49,8 @@ public partial class PauseMenu : Control
 
 		Visible = true;
 		bIsOpened = true;
+
+		EmitSignal(SignalName.PauseMenuOpened);
 	}
 
 	public void Close()
@@ -54,6 +62,8 @@ public partial class PauseMenu : Control
 
 		Visible = false;
 		bIsOpened = false;
+
+		EmitSignal(SignalName.PauseMenuClosed);
 	}
 
 	private void HideContentChildren()

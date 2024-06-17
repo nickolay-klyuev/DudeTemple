@@ -554,6 +554,8 @@ light_data = ExtResource("23_ts3yy")
 [connection signal="TemplePaused" from="TempleController" to="PauseMenu" method="Open"]
 [connection signal="TempleUnpaused" from="TempleController" to="." method="UnblurTemple"]
 [connection signal="TempleUnpaused" from="TempleController" to="PauseMenu" method="Close"]
+[connection signal="PauseMenuClosed" from="PauseMenu" to="Dude" method="OnPauseMenuClosed"]
+[connection signal="PauseMenuOpened" from="PauseMenu" to="Dude" method="OnPauseMenuOpened"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest2" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest3" method="OnPosterImagesLoaded"]
