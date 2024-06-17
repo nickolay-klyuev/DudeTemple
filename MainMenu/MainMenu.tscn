@@ -1,0 +1,421 @@
+[gd_scene load_steps=24 format=3 uid="uid://bhvew5dx0o66n"]
+
+[ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="1_k7o33"]
+[ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="2_umoh5"]
+[ext_resource type="PackedScene" uid="uid://dd2wugdjlm60t" path="res://Environment/DynamicNeonSign/DynamicNeonSign.tscn" id="3_cpr8t"]
+[ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="4_d4l6b"]
+[ext_resource type="Script" path="res://Pins/CS/PinsBuilderTool.cs" id="5_3bgf7"]
+[ext_resource type="LightmapGIData" uid="uid://lm57nf0p443f" path="res://Temple.lmbake" id="5_7l73a"]
+[ext_resource type="PackedScene" uid="uid://chrh011yma2kh" path="res://Pins/TenPin/TenPin.tscn" id="6_js8mq"]
+[ext_resource type="Theme" uid="uid://b7lymoh6ssgha" path="res://MainMenu/MainMenu.tres" id="8_bijd5"]
+[ext_resource type="Script" path="res://MainMenu/CS/MainMenuUI.cs" id="9_7a76p"]
+
+[sub_resource type="Environment" id="Environment_bhx4j"]
+background_energy_multiplier = 0.4
+glow_enabled = true
+glow_normalized = true
+glow_blend_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipaq"]
+albedo_color = Color(0.301961, 0.301961, 0.219608, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7nsg6"]
+lightmap_size_hint = Vector2i(84, 84)
+material = SubResource("StandardMaterial3D_tipaq")
+add_uv2 = true
+size = Vector2(16.5, 16.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x0q66"]
+points = PackedVector3Array(-8.25, 0, -8.25, -8.25, 0, 8.25, 8.25, 0, -8.25, 8.25, 0, 8.25)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_paiia"]
+lightmap_size_hint = Vector2i(27, 84)
+material = ExtResource("1_k7o33")
+add_uv2 = true
+size = Vector2(5, 16.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qpkrx"]
+points = PackedVector3Array(2.5, 0, 8.25, -2.5, 0, 8.25, 2.5, 0, -8.25, -2.5, 0, -8.25)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5nqwv"]
+points = PackedVector3Array(2.5, 0, 8.25, -2.5, 0, 8.25, 2.5, 0, -8.25, -2.5, 0, -8.25)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xq6a5"]
+lightmap_size_hint = Vector2i(202, 27)
+material = ExtResource("1_k7o33")
+add_uv2 = true
+size = Vector2(40, 5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6omw0"]
+points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kkaus"]
+points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx6bd"]
+albedo_color = Color(0.211765, 0.211765, 0.211765, 1)
+metallic = 0.2
+roughness = 0.35
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rycsa"]
+lightmap_size_hint = Vector2i(202, 102)
+material = SubResource("StandardMaterial3D_hx6bd")
+add_uv2 = true
+size = Vector2(40, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl01h"]
+albedo_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
+metallic = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aitef"]
+lightmap_size_hint = Vector2i(97, 4)
+material = SubResource("StandardMaterial3D_pl01h")
+add_uv2 = true
+size = Vector2(19.16, 0.48)
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bhx4j")
+
+[node name="DumbTempleObjects" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="DumbTempleObjects"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.83, 0, 7)
+mesh = SubResource("PlaneMesh_7nsg6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.83, 0, 7)
+shape = SubResource("ConvexPolygonShape3D_x0q66")
+
+[node name="Wall_1" type="StaticBody3D" parent="DumbTempleObjects"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/Wall_1"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -26.08, 2.5, 7)
+mesh = SubResource("PlaneMesh_paiia")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_1"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -26.08, 2.5, 7)
+shape = SubResource("ConvexPolygonShape3D_qpkrx")
+
+[node name="Wall_2" type="StaticBody3D" parent="DumbTempleObjects"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DumbTempleObjects/Wall_2"]
+transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, 10.8457, 2.5, 7)
+mesh = SubResource("PlaneMesh_paiia")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_2"]
+transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, 10.8457, 2.5, 7)
+shape = SubResource("ConvexPolygonShape3D_5nqwv")
+
+[node name="Wall_3" type="StaticBody3D" parent="DumbTempleObjects"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/Wall_3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.9252, 2.5, -1.25)
+mesh = SubResource("PlaneMesh_xq6a5")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.9252, 2.5, -1.25)
+shape = SubResource("ConvexPolygonShape3D_6omw0")
+
+[node name="Wall_4" type="StaticBody3D" parent="DumbTempleObjects"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DumbTempleObjects/Wall_4"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -6.925, 2.5, 15.2)
+mesh = SubResource("PlaneMesh_xq6a5")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_4"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -6.925, 2.5, 15.2)
+shape = SubResource("ConvexPolygonShape3D_kkaus")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 7.45856)
+mesh = SubResource("PlaneMesh_rycsa")
+
+[node name="Lighting" type="Node3D" parent="DumbTempleObjects"]
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 0)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 2.05016)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 3.99413)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 6.06253)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 8.0715)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 9.99766)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 12.0308)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 14.0459)
+light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
+omni_range = 1.2
+
+[node name="TopLamp" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63909, 4.5684, 1.04973)
+
+[node name="TopLamp2" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63909, 4.5684, 6.88223)
+
+[node name="TopLamp3" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63909, 4.5684, 12.7688)
+
+[node name="TopLamp4" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.864437, 4.5684, 1.04973)
+
+[node name="TopLamp5" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.864437, 4.5684, 6.88223)
+
+[node name="TopLamp6" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.864437, 4.5684, 12.7688)
+
+[node name="TopLamp7" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05199, 4.5684, 1.04973)
+
+[node name="TopLamp8" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05199, 4.5684, 6.88223)
+
+[node name="TopLamp9" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05199, 4.5684, 12.7688)
+
+[node name="TopLamp10" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5362, 4.5684, 1.04973)
+
+[node name="TopLamp11" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5362, 4.5684, 6.88223)
+
+[node name="TopLamp12" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5362, 4.5684, 12.7688)
+
+[node name="TopLamp13" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 1.04973)
+
+[node name="TopLamp14" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 6.88223)
+
+[node name="TopLamp15" parent="DumbTempleObjects/Lighting" instance=ExtResource("2_umoh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 12.7688)
+
+[node name="DynamicNeonSign" parent="." instance=ExtResource("3_cpr8t")]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 10.6319, 2.81033, 5.04055)
+
+[node name="BowlingLanes" type="Node3D" parent="."]
+
+[node name="LaneSeparator" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, -1.01036)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_1" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+
+[node name="LaneSeparator2" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 1.00228)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_2" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="LaneSeparator3" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 2.99511)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_3" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="LaneSeparator4" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 4.99628)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_4" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="LaneSeparator5" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 7.00864)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_5" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="LaneSeparator6" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 9.00525)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_6" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="LaneSeparator7" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 11.011)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_7" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="LaneSeparator8" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 12.9948)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="BowlingLane_8" parent="BowlingLanes" instance=ExtResource("4_d4l6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+
+[node name="LaneSeparator9" type="MeshInstance3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 15.0092)
+mesh = SubResource("PlaneMesh_aitef")
+skeleton = NodePath("../..")
+
+[node name="PinsBuilder" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 0)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="PinsBuilder2" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 1.99931)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="PinsBuilder3" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 4.01295)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="PinsBuilder4" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 6.00838)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="PinsBuilder5" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 8.01774)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="PinsBuilder6" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 10.008)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="PinsBuilder7" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 12.0146)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="PinsBuilder8" type="Node3D" parent="BowlingLanes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.99546, -0.011941, 14.0096)
+script = ExtResource("5_3bgf7")
+PinScene = ExtResource("6_js8mq")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2766, 2.5805, 7.46106)
+size = Vector3(40, 6, 18.235)
+box_projection = true
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2678, 1.68684, 7.52171)
+quality = 3
+bounces = 10
+denoiser_strength = 0.3
+light_data = ExtResource("5_7l73a")
+
+[node name="MainMenuCamera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.29404, 0, -0.955793, 0, 1, 0, 0.955793, 0, 0.29404, 0, 1.283, 10.351)
+fov = 62.5
+far = 20.0
+
+[node name="MainMenuUI" type="Control" parent="." node_paths=PackedStringArray("_startBtn", "_quitBtn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_bijd5")
+script = ExtResource("9_7a76p")
+_startBtn = NodePath("CenterContainer/VBoxContainer/StartGameBtn")
+_quitBtn = NodePath("CenterContainer/VBoxContainer/ExitGameBtn")
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenuUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -397.0
+offset_right = 200.0
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="MainMenuUI/CenterContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuUI/CenterContainer"]
+layout_mode = 2
+
+[node name="StartGameBtn" type="Button" parent="MainMenuUI/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Start"
+
+[node name="ExitGameBtn" type="Button" parent="MainMenuUI/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Quit"
+
+[connection signal="pressed" from="MainMenuUI/CenterContainer/VBoxContainer/StartGameBtn" to="MainMenuUI" method="Start"]
+[connection signal="pressed" from="MainMenuUI/CenterContainer/VBoxContainer/ExitGameBtn" to="MainMenuUI" method="Quit"]

@@ -46,22 +46,22 @@ ProgressBar/styles/background = SubResource("StyleBoxFlat_fp5as")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
 height = 1.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl01h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nma52"]
 albedo_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
 metallic = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2uf1j"]
 lightmap_size_hint = Vector2i(97, 4)
-material = SubResource("StandardMaterial3D_pl01h")
+material = SubResource("StandardMaterial3D_nma52")
 add_uv2 = true
 size = Vector2(19.16, 0.48)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipaq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1xxm"]
 albedo_color = Color(0.301961, 0.301961, 0.219608, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8kvq3"]
 lightmap_size_hint = Vector2i(84, 84)
-material = SubResource("StandardMaterial3D_tipaq")
+material = SubResource("StandardMaterial3D_b1xxm")
 add_uv2 = true
 size = Vector2(16.5, 16.5)
 
@@ -92,14 +92,14 @@ points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ga3vx"]
 points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx6bd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg70l"]
 albedo_color = Color(0.211765, 0.211765, 0.211765, 1)
 metallic = 0.2
 roughness = 0.35
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1arfw"]
 lightmap_size_hint = Vector2i(202, 102)
-material = SubResource("StandardMaterial3D_hx6bd")
+material = SubResource("StandardMaterial3D_pg70l")
 add_uv2 = true
 size = Vector2(40, 20)
 
