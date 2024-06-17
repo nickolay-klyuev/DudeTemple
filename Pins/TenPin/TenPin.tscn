@@ -87,6 +87,7 @@ sleeping = true
 freeze = true
 
 [node name="Ten-pin" type="MeshInstance3D" parent="."]
+gi_mode = 2
 mesh = SubResource("ArrayMesh_5de3s")
 skeleton = NodePath("")
 

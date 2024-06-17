@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
 [ext_resource type="Script" path="res://BowlingBall/CS/BowlingBallSetup.cs" id="12_soymh"]
-[ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="13_t2s33"]
 [ext_resource type="Script" path="res://SaveSystem/UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
 [ext_resource type="PackedScene" uid="uid://b5mknp5ak1cwd" path="res://Pins/TenPin/TenPinsSpawner.tscn" id="16_g2po3"]
@@ -22,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://fluugsl4cp6s" path="res://BarPrototype/Scenes/BarNormalSize.tscn" id="20_sm8d2"]
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
 [ext_resource type="LightmapGIData" uid="uid://lm57nf0p443f" path="res://Temple.lmbake" id="23_ts3yy"]
+[ext_resource type="PackedScene" uid="uid://dd2wugdjlm60t" path="res://Environment/DynamicNeonSign/DynamicNeonSign.tscn" id="24_4jptv"]
 [ext_resource type="PackedScene" uid="uid://df4xxa4gwm83c" path="res://UI/PauseMenu/PauseMenu.tscn" id="24_he8l3"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
@@ -348,49 +348,62 @@ shape = SubResource("ConvexPolygonShape3D_ga3vx")
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 7.45856)
 mesh = SubResource("PlaneMesh_1arfw")
 
-[node name="neon-sign" parent="DumbTempleObjects" instance=ExtResource("13_t2s33")]
-transform = Transform3D(-9.61651e-08, 0, -2.2, 0, 2.2, 0, 2.2, 0, -9.61651e-08, 10.6132, 2.88402, 4.64701)
-
 [node name="Lighting" type="Node3D" parent="DumbTempleObjects"]
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 0)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 2.05016)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="OmniLight3D9" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 3.99413)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="OmniLight3D10" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 6.06253)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="OmniLight3D11" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 8.0715)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="OmniLight3D12" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 9.99766)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="OmniLight3D13" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 12.0308)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="OmniLight3D14" type="OmniLight3D" parent="DumbTempleObjects/Lighting"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39842, 0.694363, 14.0459)
 light_color = Color(0.141176, 0.721569, 1, 1)
+shadow_enabled = true
+shadow_blur = 5.0
 omni_range = 1.2
 
 [node name="TopLamp" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
@@ -539,6 +552,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.68
 [node name="BarNormalSize" parent="FurnitureManager" instance=ExtResource("20_sm8d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6067, 0, 13.0901)
 
+[node name="DynamicNeonSign" parent="." instance=ExtResource("24_4jptv")]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 10.6319, 2.81033, 5.04055)
+
 [node name="ReflectionProbe" type="ReflectionProbe" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2766, 2.5805, 7.46106)
 size = Vector3(40, 6, 18.235)
@@ -548,6 +564,7 @@ box_projection = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2678, 1.68684, 7.52171)
 quality = 3
 bounces = 10
+denoiser_strength = 0.3
 light_data = ExtResource("23_ts3yy")
 
 [connection signal="TemplePaused" from="TempleController" to="." method="BlurTemple"]
