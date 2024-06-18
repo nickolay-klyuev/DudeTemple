@@ -22,15 +22,20 @@ public partial class UserDataHolder : Node
     [Export]
     private Timer _dirtyTimer;
 
+    private LoadingIcon _loading;
+
     private SUserData _userData = new SUserData();
 
     private bool _bIsDirty = false;
+    private bool _bCheckingForSaveCompleted = false;
 
     public override void _Ready()
     {
-        #if DEBUG
-        CheckHelper.CheckNode(_dirtyTimer, this);
-        #endif
+        _loading = GetNode<LoadingIcon>("/root/LoadingIcon");
+        
+#if DEBUG
+        CheckHelper.Check(this, _dirtyTimer, _loading);
+#endif
 
         _dirtyTimer.Timeout += SaveDirtyData;
         TreeExiting += ForceSaveDataOnExit;
@@ -45,6 +50,18 @@ public partial class UserDataHolder : Node
         EmitSignal(SignalName.ScoreChanged, _userData.Score);
         EmitSignal(SignalName.UnlockedFurnituresLoaded, _userData.UnlockedFurnitures);
         EmitSignal(SignalName.PosterImagesLoaded, _userData.PosterImages);
+    }
+
+    public override void _Process(double delta)
+    {
+        if (_bCheckingForSaveCompleted)
+        {
+            if (!SaveDataHelper.IsSaving)
+            {
+                _bCheckingForSaveCompleted = false;
+                _loading.Deactivate();
+            }
+        }
     }
 
     public void AddScore(int amount)
@@ -130,6 +147,11 @@ public partial class UserDataHolder : Node
     {
         SaveDataHelper.SaveDataAsync(_userData);
         _bIsDirty = false;
+        
+        _loading.Activate();
+
+        SceneTreeTimer timer = GetTree().CreateTimer(0.5);
+        timer.Timeout += () => { _bCheckingForSaveCompleted = true; };
     }
 
     private void ForceSaveDataOnExit()

@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 
 public static class SaveDataHelper
 {
+    public static bool IsSaving { get; private set; } = false;
+
     private const string DATA_FILE_PATH = "user://dude-data.var";
     private const string FILE_HELPER = "wjetGsdgSFDksphas9SAFD";
 
     public static async void SaveDataAsync(SUserData userData)
     {
+        IsSaving = true;
         await Task.Run(() => StorageData(userData));
     }
 
@@ -25,6 +28,8 @@ public static class SaveDataHelper
         saveFile.StoreVar(unlockedFurnituresVar);
         saveFile.StoreVar(posterImages);
         saveFile.Close();
+
+        IsSaving = false;
     }
 
     public static SUserData LoadData()

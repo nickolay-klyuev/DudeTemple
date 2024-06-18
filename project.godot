@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="DudeTemple"
-run/main_scene="res://Temple.tscn"
+run/main_scene="res://MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://LoadingIcon/bowling-ball-icon.png"
 
 [autoload]
 
 DudeSettings="*res://Settings/DudeSettings.cs"
+LoadingIcon="*res://LoadingIcon/LoadingIcon.tscn"
 
 [display]
 

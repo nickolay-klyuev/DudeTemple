@@ -468,7 +468,7 @@ script = ExtResource("14_pai1m")
 _dirtyTimer = NodePath("SaveDirtyDataTimer")
 
 [node name="SaveDirtyDataTimer" type="Timer" parent="UserDataHolder"]
-wait_time = 30.0
+wait_time = 10.0
 one_shot = true
 
 [node name="BowlingBallSetup" type="Node" parent="."]

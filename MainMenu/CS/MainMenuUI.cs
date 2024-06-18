@@ -10,10 +10,14 @@ public partial class MainMenuUI : Control
 	
 	private bool _bIsLoading = false;
 
+	private LoadingIcon _loadingIcon;
+
 	public override void _Ready()
 	{
+		_loadingIcon = GetNode<LoadingIcon>("/root/LoadingIcon");
+		
 #if DEBUG
-		CheckHelper.Check(this, _startBtn, _quitBtn);
+		CheckHelper.Check(this, _startBtn, _quitBtn, _loadingIcon);
 #endif
 	}
 
@@ -45,6 +49,8 @@ public partial class MainMenuUI : Control
 	{
 		if (ResourceLoader.LoadThreadedGet(MAIN_SCENE_PATH) is PackedScene loadedScene)
 		{
+			_loadingIcon.Deactivate();
+			
 			GetTree().ChangeSceneToPacked(loadedScene);
 		}
 	}
@@ -55,6 +61,7 @@ public partial class MainMenuUI : Control
 		
 		ResourceLoader.LoadThreadedRequest(MAIN_SCENE_PATH);
 		_bIsLoading = true;
+		_loadingIcon.Activate();
 	}
 
 	private void Quit()
