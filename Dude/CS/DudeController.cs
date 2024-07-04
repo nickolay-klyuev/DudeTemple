@@ -32,7 +32,9 @@ public partial class DudeController : CharacterBody3D
 
 	[ExportCategory("Throwing")]
 	[Export]
-	private Vector2 _throwForce = new Vector2(25.0f, 150.0f);
+	private Vector2 _throwForce = new Vector2(25.0f, 150.0f); // X - Min, Y - Max
+
+	[Export] private Node3D _throwMaxForceLoc;
 
 	[Export]
 	private ThrowForce _throwForceBar;
@@ -56,6 +58,7 @@ public partial class DudeController : CharacterBody3D
 
 	private bool _bIsHoldingThing = false;
 	private Node3D _holdingThing;
+	private float _currentForcePercent = 0.0f;
 
 	private DudeSettings _settings;
 
@@ -64,20 +67,22 @@ public partial class DudeController : CharacterBody3D
 	public override void _Ready()
 	{
 		_crossHair ??= GetNode<Control>("CenterPoint");
+		_throwMaxForceLoc ??= GetNode<Node3D>("ThrowMaxForceLoc");
 		
 		_settings = GetTree().Root.GetNode<DudeSettings>("DudeSettings");
 
 		UpdateCameraSpeed();
 		_settings.SettingsUpdated += UpdateCameraSpeed;
 
-		#if DEBUG
-		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel, _throwForceBar, _crossHair);
-		#endif
+#if DEBUG
+		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel, 
+			_throwForceBar, _crossHair, _throwMaxForceLoc);
+#endif
 
 		_throwForceBar.Visible = false;
-
-		_dudeCollision = GetChild<CollisionShape3D>(0);
 		_currentForce = _throwForce.X;
+		
+		_dudeCollision = GetChild<CollisionShape3D>(0);
 
 		_bInteractLabelVisibilityCache = _interactLabel.Visible;
 		_bThrowForceBarVisibilityCache = _throwForceBar.Visible;
@@ -86,11 +91,14 @@ public partial class DudeController : CharacterBody3D
     public override void _Process(double delta)
     {
         base._Process(delta);
-
+		
+        // Adding force to throw
 		if (_bIsAddingForce && _currentForce < _throwForce.Y)
 		{
 			_currentForce += (float)delta * _addingForceMod;
-			_throwForceBar.SetForcePercentage((_currentForce - _throwForce.X) / (_throwForce.Y - _throwForce.X));
+
+			_currentForcePercent = (_currentForce - _throwForce.X) / (_throwForce.Y - _throwForce.X);
+			_throwForceBar.SetForcePercentage(_currentForcePercent);
 		}
     }
 
@@ -205,17 +213,22 @@ public partial class DudeController : CharacterBody3D
 			return;
 		}
 
-		thing.GlobalPosition = _grabSocket.GlobalPosition;
-		_holdingThing = thing;
-		_bIsHoldingThing = true;
+		Tween grabTween = CreateTween();
+		grabTween.TweenProperty(thing, "position", _grabSocket.GlobalPosition, 0.1f);
+		grabTween.Finished += () =>
+		{
+			_holdingThing = thing;
+			_bIsHoldingThing = true;
+		};
 	}
 
 	private void HoldingThingProcess() // TODO: maybe it's possible to rid off this process?
 	{
 		if (_bIsHoldingThing && _holdingThing != null)
 		{
-			_holdingThing.GlobalPosition = _grabSocket.GlobalPosition;
-
+			// Update holding ball location
+			_holdingThing.GlobalPosition = _grabSocket.GlobalPosition.Lerp(_throwMaxForceLoc.GlobalPosition, _currentForcePercent);
+			
 			if (Input.IsActionJustPressed("MainAction"))
 			{
 				_bIsAddingForce = true;
@@ -224,6 +237,7 @@ public partial class DudeController : CharacterBody3D
 			else if (Input.IsActionJustReleased("MainAction"))
 			{
 				ReleaseThing();
+				_currentForcePercent = 0.0f;
 			}
 		}
 	}

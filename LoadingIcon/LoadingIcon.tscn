@@ -15,7 +15,7 @@ script = ExtResource("1_1dm2h")
 _texture = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

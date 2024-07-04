@@ -217,6 +217,9 @@ target_position = Vector3(0, -50, 0)
 debug_shape_custom_color = Color(1, 0.239216, 0.513726, 1)
 debug_shape_thickness = 1
 
+[node name="ThrowMaxForceLoc" type="Node3D" parent="Dude"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273565, 0.960816, 0.417999)
+
 [node name="BowlingLanes" type="Node3D" parent="."]
 
 [node name="LaneSeparator" type="MeshInstance3D" parent="BowlingLanes"]

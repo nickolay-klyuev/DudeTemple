@@ -39,7 +39,6 @@ public partial class LoadingIcon : Control
 
 		Tween tween = CreateTween();
 		tween.TweenProperty(_texture, "modulate", new Color(1.0f, 1.0f, 1.0f, 0.8f), 0.5);
-		GD.Print("agfkhdrfgiuhdrk");
 	}
 
 	public void Deactivate()
