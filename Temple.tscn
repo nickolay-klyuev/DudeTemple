@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=47 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
-[ext_resource type="Script" path="res://BowlingBall/CS/BowlingBallSetup.cs" id="12_soymh"]
+[ext_resource type="Script" path="res://BallReturn/CS/BallReturn.cs" id="14_ki3k3"]
 [ext_resource type="Script" path="res://SaveSystem/UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
 [ext_resource type="PackedScene" uid="uid://b5mknp5ak1cwd" path="res://Pins/TenPin/TenPinsSpawner.tscn" id="16_g2po3"]
@@ -16,13 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://cdur1t76kcw57" path="res://Environment/TV/Scenes/TVTable.tscn" id="16_rmwrf"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
 [ext_resource type="PackedScene" uid="uid://ba1gaacj3ueqy" path="res://Environment/TV/Scenes/TV.tscn" id="17_d5lhe"]
-[ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/GrabbableBowlingBall.tscn" id="19_l0jl4"]
+[ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/BowlingBall.tscn" id="19_l0jl4"]
 [ext_resource type="PackedScene" uid="uid://c6qcraf8okeu7" path="res://Environment/Couch/Scenes/Couch.tscn" id="19_r7iic"]
 [ext_resource type="PackedScene" uid="uid://fluugsl4cp6s" path="res://BarPrototype/Scenes/BarNormalSize.tscn" id="20_sm8d2"]
 [ext_resource type="Script" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
 [ext_resource type="LightmapGIData" uid="uid://lm57nf0p443f" path="res://Temple.lmbake" id="23_ts3yy"]
 [ext_resource type="PackedScene" uid="uid://dd2wugdjlm60t" path="res://Environment/DynamicNeonSign/DynamicNeonSign.tscn" id="24_4jptv"]
 [ext_resource type="PackedScene" uid="uid://df4xxa4gwm83c" path="res://UI/PauseMenu/PauseMenu.tscn" id="24_he8l3"]
+[ext_resource type="PackedScene" uid="uid://bs5kp8hdxb4df" path="res://BallReturn/BallReturn.tscn" id="24_x3p8o"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_energy_multiplier = 0.4
@@ -136,7 +137,7 @@ _exitBtnPath = "../PauseMenu/MenuContainer/ExitMenuButton"
 
 [node name="PauseMenu" parent="." instance=ExtResource("24_he8l3")]
 
-[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_throwForceBar")]
+[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_throwMaxForceLoc", "_throwForceBar", "_crossHair")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
 collision_layer = 0
 script = ExtResource("5_idorm")
@@ -145,7 +146,9 @@ _dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
 _aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
 _grabSocket = NodePath("DudeFaceCamera/GrabSocket")
 _interactLabel = NodePath("InteractLabel")
+_throwMaxForceLoc = NodePath("ThrowMaxForceLoc")
 _throwForceBar = NodePath("ThrowForce")
+_crossHair = NodePath("CenterPoint")
 
 [node name="CenterPoint" type="Panel" parent="Dude"]
 anchors_preset = 8
@@ -201,9 +204,10 @@ shape = SubResource("CapsuleShape3D_0vrco")
 
 [node name="DudeFaceCamera" type="Camera3D" parent="Dude"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9119, 0)
+fov = 50.0
 
 [node name="GrabSocket" type="Node3D" parent="Dude/DudeFaceCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0290618, -0.237393, -0.259171)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0290618, -0.237393, -0.39012)
 
 [node name="InteractRaycast" type="RayCast3D" parent="Dude/DudeFaceCamera"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -474,9 +478,6 @@ _dirtyTimer = NodePath("SaveDirtyDataTimer")
 wait_time = 10.0
 one_shot = true
 
-[node name="BowlingBallSetup" type="Node" parent="."]
-script = ExtResource("12_soymh")
-
 [node name="Posters" type="Node3D" parent="."]
 
 [node name="CustomPosterTest" parent="Posters" node_paths=PackedStringArray("_dataHolder") instance=ExtResource("17_1s2qa")]
@@ -503,8 +504,16 @@ transform = Transform3D(0.9991, 1.85407e-09, 0.0424166, 0.0424166, -4.3672e-08, 
 _posterId = "poster-5"
 _dataHolder = NodePath("../../UserDataHolder")
 
-[node name="GrabbableBowlingBall" parent="." instance=ExtResource("19_l0jl4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2.03864, 10)
+[node name="BallReturn" parent="." instance=ExtResource("24_x3p8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9937, 0.439936, 7.00111)
+script = ExtResource("14_ki3k3")
+_ballTemplate = ExtResource("19_l0jl4")
+
+[node name="SpawnPoint_1" type="Node3D" parent="BallReturn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976586, 0.309161, -0.0783601)
+
+[node name="SpawnPoint_2" type="Node3D" parent="BallReturn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976586, 0.309161, 0.0729976)
 
 [node name="PinsManager" type="Node3D" parent="." node_paths=PackedStringArray("_userData")]
 script = ExtResource("20_sm84q")

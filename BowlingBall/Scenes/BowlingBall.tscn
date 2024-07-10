@@ -1,15 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://r6cr03ilaj2o"]
+[gd_scene load_steps=8 format=3 uid="uid://r6cr03ilaj2o"]
 
-[ext_resource type="Script" path="res://BowlingBall/Scenes/BowlingBallHandler.cs" id="1_ilkw8"]
+[ext_resource type="Script" path="res://BowlingBall/CS/BowlingBall.cs" id="1_fv8g0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yduyg"]
 friction = 0.05
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yee6x"]
+noise_type = 5
+seed = 545
+frequency = 0.0385
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kn3on"]
+noise = SubResource("FastNoiseLite_yee6x")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1slf3"]
 albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
-metallic_specular = 0.7
+metallic_specular = 0.6
 roughness = 0.4
-emission_enabled = true
+roughness_texture = SubResource("NoiseTexture2D_kn3on")
 emission = Color(0.454902, 0.4, 0, 1)
 emission_energy_multiplier = 10.0
 
@@ -21,13 +29,13 @@ height = 0.217
 [sub_resource type="SphereShape3D" id="SphereShape3D_cxqmm"]
 radius = 0.109
 
-[node name="GrabbableBowlingBall" type="RigidBody3D" node_paths=PackedStringArray("_ballMesh")]
+[node name="BowlingBall" type="RigidBody3D" node_paths=PackedStringArray("_ballMesh")]
 collision_layer = 3078
 collision_mask = 7
-mass = 7.26
+mass = 7.3
 physics_material_override = SubResource("PhysicsMaterial_yduyg")
 continuous_cd = true
-script = ExtResource("1_ilkw8")
+script = ExtResource("1_fv8g0")
 _ballMesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

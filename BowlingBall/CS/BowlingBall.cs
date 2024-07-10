@@ -1,27 +1,21 @@
 using Godot;
 using System;
 
-public partial class BowlingBallHandler : RigidBody3D, IGrabbable
+public partial class BowlingBall : RigidBody3D, IGrabbable
 {
 	[Export]
 	private MeshInstance3D _ballMesh;
-
-	//private BowlingBallSetup _bowlingBallSetup;
+	
 	private Transform3D _initialTransform;
 	private StandardMaterial3D _ballMaterial;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//_bowlingBallSetup = FindHelper.FindBowlingBallSetup(this);
-
-		#if DEBUG
-		//CheckHelper.Check(this, _ballMesh, _bowlingBallSetup);
+#if DEBUG
 		CheckHelper.Check(this, _ballMesh);
-		#endif
-
-		//_bowlingBallSetup.BallSetupIsDirty += OnBallSetupIsDirty;
-
+#endif
+		
 		_initialTransform = Transform;
 
 		_ballMaterial = _ballMesh.GetActiveMaterial(0) as StandardMaterial3D;
@@ -39,6 +33,12 @@ public partial class BowlingBallHandler : RigidBody3D, IGrabbable
 		{
 			ResetBall();
 		}
+    }
+    
+    public void OverrideLocation(Vector3 loc)
+    {
+	    GlobalPosition = loc;
+	    _initialTransform = Transform;
     }
 
 	private void ResetBall()
@@ -67,40 +67,5 @@ public partial class BowlingBallHandler : RigidBody3D, IGrabbable
 	{
 		Release();
 		ApplyImpulse(direction.Normalized() * force);
-	}
-
-	// #################### Visuals ################################
-	private void OnBallSetupIsDirty(int property)
-	{
-		switch (property)
-		{
-			case 0:
-				//UpdateColor(_bowlingBallSetup.BallColor);
-				return;
-			case 1:
-				//_ballMaterial.EmissionEnabled = _bowlingBallSetup.IsGlowing;
-				return;
-			case 2:
-				//UpdateEmittionStrength(_bowlingBallSetup.GlowingStrength);
-				return;
-		}
-	}
-
-	private void UpdateColor(Color newColor)
-	{
-		_ballMaterial.AlbedoColor = newColor;
-		_ballMaterial.Emission = newColor;
-	}
-
-	private void UpdateEmittionStrength(float newStrength)
-	{
-		if (newStrength < 0.0f)
-		{
-			_ballMaterial.EmissionEnergyMultiplier = 0.0f;
-		}
-		else
-		{
-			_ballMaterial.EmissionEnergyMultiplier = newStrength;
-		}
 	}
 }

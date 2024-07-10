@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfej2ixqo1g5m"]
+
+[ext_resource type="Theme" uid="uid://k5wcmjh1ndtk" path="res://UI/PauseMenu/PauseMenu.tres" id="1_uf473"]
+[ext_resource type="Texture2D" uid="uid://cgtxqh11bkolg" path="res://Tutorial/dude-drink.png" id="2_fs58y"]
+[ext_resource type="Script" path="res://Tutorial/Tutorial.cs" id="2_wqkcd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slexg"]
+bg_color = Color(0, 0.633, 0.793, 0.5)
+skew = Vector2(0.03, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(2.02149e-06, 0.613152, 0.785035, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 2
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 5
+shadow_offset = Vector2(2, 2)
+
+[node name="Tutorial" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uf473")
+script = ExtResource("2_wqkcd")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(750, 450)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_right = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slexg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -23.5
+offset_right = 150.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "This is test of the tutorial.
+		Dude can say here something during this tutorial to welcome a player and explain about the possibilities and goal of the game.
+
+Be cool dudes!!!"
+fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_fs58y")
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Okay let's go"
+
+[connection signal="pressed" from="Panel/VBoxContainer/CloseButton" to="." method="CloseAndDestroy"]
