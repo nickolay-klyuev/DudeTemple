@@ -1,9 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=48 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
 [ext_resource type="Script" path="res://Dude/CS/ThrowForce.cs" id="5_albop"]
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
+[ext_resource type="AudioStream" uid="uid://bjh3er436qucs" path="res://Sounds/step.wav" id="6_p8m0v"]
 [ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
@@ -137,7 +138,7 @@ _exitBtnPath = "../PauseMenu/MenuContainer/ExitMenuButton"
 
 [node name="PauseMenu" parent="." instance=ExtResource("24_he8l3")]
 
-[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_throwMaxForceLoc", "_throwForceBar", "_crossHair")]
+[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_stepsPlayer", "_throwMaxForceLoc", "_throwForceBar", "_crossHair")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
 collision_layer = 0
 script = ExtResource("5_idorm")
@@ -146,6 +147,7 @@ _dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
 _aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
 _grabSocket = NodePath("DudeFaceCamera/GrabSocket")
 _interactLabel = NodePath("InteractLabel")
+_stepsPlayer = NodePath("StepsAudioPlayer")
 _throwMaxForceLoc = NodePath("ThrowMaxForceLoc")
 _throwForceBar = NodePath("ThrowForce")
 _crossHair = NodePath("CenterPoint")
@@ -223,6 +225,11 @@ debug_shape_thickness = 1
 
 [node name="ThrowMaxForceLoc" type="Node3D" parent="Dude"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273565, 0.960816, 0.417999)
+
+[node name="StepsAudioPlayer" type="AudioStreamPlayer3D" parent="Dude"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326554, 0)
+stream = ExtResource("6_p8m0v")
+max_distance = 3.5
 
 [node name="BowlingLanes" type="Node3D" parent="."]
 

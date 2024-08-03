@@ -30,6 +30,12 @@ public partial class DudeController : CharacterBody3D
 	[Export]
 	private float _addingForceMod = 100.0f;
 
+	[Export]
+	private AudioStreamPlayer3D _stepsPlayer;
+
+	[Export] private float _stepLength = 200.0f;
+	private float _currentStepLength = 0.0f;
+
 	[ExportCategory("Throwing")]
 	[Export]
 	private Vector2 _throwForce = new Vector2(25.0f, 150.0f); // X - Min, Y - Max
@@ -74,9 +80,11 @@ public partial class DudeController : CharacterBody3D
 		UpdateCameraSpeed();
 		_settings.SettingsUpdated += UpdateCameraSpeed;
 
+		_stepsPlayer ??= GetNode<AudioStreamPlayer3D>("StepsAudioPlayer");
+
 #if DEBUG
 		CheckHelper.Check(this, _dudeFace, _dudeHand, _aimRaycast, _grabSocket, _interactLabel, 
-			_throwForceBar, _crossHair, _throwMaxForceLoc);
+			_throwForceBar, _crossHair, _throwMaxForceLoc, _stepsPlayer);
 #endif
 
 		_throwForceBar.Visible = false;
@@ -145,6 +153,18 @@ public partial class DudeController : CharacterBody3D
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, currentSpeed);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, currentSpeed);
+		}
+
+		if (IsOnFloor())
+		{
+			_currentStepLength += velocity.Length();
+			
+			if (_currentStepLength >= _stepLength)
+			{
+				_currentStepLength = 0.0f;
+				_stepsPlayer.Stop();
+				_stepsPlayer.Play();
+			}
 		}
 
 		Velocity = velocity;
