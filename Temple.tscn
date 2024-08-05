@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
+[ext_resource type="PackedScene" uid="uid://ojejbrp2hepx" path="res://Environment/Door/Door.tscn" id="9_y88qk"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
 [ext_resource type="Script" path="res://BallReturn/CS/BallReturn.cs" id="14_ki3k3"]
 [ext_resource type="Script" path="res://SaveSystem/UserData/CS/UserDataHolder.cs" id="14_pai1m"]
@@ -46,6 +47,7 @@ bg_color = Color(0.078, 0.078, 0.078, 0.5)
 ProgressBar/styles/background = SubResource("StyleBoxFlat_fp5as")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
+radius = 0.35
 height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nma52"]
@@ -89,9 +91,6 @@ add_uv2 = true
 size = Vector2(40, 5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1tse"]
-points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ga3vx"]
 points = PackedVector3Array(-20, 0, -2.5, -20, 0, 2.5, 20, 0, -2.5, 20, 0, 2.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg70l"]
@@ -347,16 +346,22 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.9252, 2.5, -1.25)
 shape = SubResource("ConvexPolygonShape3D_n1tse")
 
-[node name="Wall_4" type="StaticBody3D" parent="DumbTempleObjects"]
+[node name="Door" parent="DumbTempleObjects" instance=ExtResource("9_y88qk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8447, -4.76837e-07, 15.2752)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="DumbTempleObjects/Wall_4"]
-transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -6.925, 2.5, 15.2)
-mesh = SubResource("PlaneMesh_0ix34")
-skeleton = NodePath("../../..")
+[node name="Wall_4" type="CSGCombiner3D" parent="DumbTempleObjects"]
+use_collision = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/Wall_4"]
-transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -6.925, 2.5, 15.2)
-shape = SubResource("ConvexPolygonShape3D_ga3vx")
+[node name="CSGBox3D" type="CSGBox3D" parent="DumbTempleObjects/Wall_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9277, 2.49221, 15.2845)
+use_collision = true
+size = Vector3(40.0165, 4.98828, 0.0623779)
+material = ExtResource("7_bk3b3")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="DumbTempleObjects/Wall_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3432, 0.991115, 15.2953)
+operation = 2
+size = Vector3(0.990495, 1.99683, 0.572021)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 7.45856)
@@ -466,7 +471,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 6.88223)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 12.7688)
 
 [node name="ScoreScreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -13.7417, 1.55752, 15.1995)
+transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -21.6111, 1.55752, 15.1995)
 mesh = SubResource("PlaneMesh_ixssc")
 
 [node name="ScoreScreenViewport" type="SubViewport" parent="ScoreScreen"]
