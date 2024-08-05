@@ -18,7 +18,7 @@ public partial class DudeSettings : Node
 	private const string CAMERA_SPEED = "CameraSpeed";
 	private const string DISPLAY_MODE = "DisplayMode";
 	
-	private Dictionary<string, Variant> _currentSettings;
+	private Dictionary<string, Variant> _currentSettings = new Dictionary<string, Variant>();
 	private Dictionary<string, Variant> _tempSettings = new Dictionary<string, Variant>();
 	
 	private bool _bIsDirty = false;
@@ -66,28 +66,14 @@ public partial class DudeSettings : Node
 // Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// Set Default settings
+		_currentSettings[CAMERA_SPEED] = 0.3f;
+		_currentSettings[DISPLAY_MODE] = (int)DisplayServer.WindowMode.Fullscreen;
+		
 		if (FileAccess.FileExists(SETTINGS_FILE_PATH))
 		{
 			LoadDudeSettings();
 		}
-		else
-		{
-			LoadDefaultSettings();
-			AcceptSettings();
-		}
-	}
-
-	private void LoadDefaultSettings()
-	{
-		#if DEBUG
-		GD.Print("Loading default settings.");
-		#endif
-		
-		_tempSettings = new Dictionary<string, Variant>()
-		{
-			{ CAMERA_SPEED, 0.3f },
-			{ DISPLAY_MODE, (int)DisplayServer.WindowMode.Fullscreen }
-		};
 	}
 
 	private void LoadDudeSettings()
@@ -105,11 +91,14 @@ public partial class DudeSettings : Node
 			GD.PrintErr("Couldn't load DudeSettings!");
 			#endif
 
-			LoadDefaultSettings();
+			//LoadDefaultSettings();
 			return;
 		}
 
-		_currentSettings = loadedSettings;
+		foreach (var setting in loadedSettings)
+		{
+			_currentSettings[setting.Key] = setting.Value;	
+		}
 		
 		DisplayServer.WindowSetMode(GetDisplayMode());
 	}
@@ -124,13 +113,7 @@ public partial class DudeSettings : Node
 
 		foreach (var temp in _tempSettings)
 		{
-			if (_currentSettings.ContainsKey(temp.Key))
-			{
-				_currentSettings[temp.Key] = temp.Value;
-				continue;
-			}
-			
-			GD.PrintErr("Something wrong in _tempSettings!");
+			_currentSettings[temp.Key] = temp.Value;
 		}
 		
 		using FileAccess settingsFile = FileAccess.Open(SETTINGS_FILE_PATH, FileAccess.ModeFlags.Write);
