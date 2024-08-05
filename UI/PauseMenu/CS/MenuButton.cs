@@ -14,27 +14,27 @@ public partial class MenuButton : Button
 	[Export]
 	private AnimationPlayer _animPlayer;
 
+	[Export] private AudioStreamPlayer _hoverPlayer;
+	[Export] private AudioStreamPlayer _pressedPlayer;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if (_animPlayer == null)
-		{
-			_animPlayer = GetNode<AnimationPlayer>("ButtonAnimPlayer");
-		}
+		_animPlayer ??= GetNode<AnimationPlayer>("ButtonAnimPlayer");
+		_hoverPlayer ??= GetNode<AudioStreamPlayer>("HoverStreamPlayer");
+		_pressedPlayer ??= GetNode<AudioStreamPlayer>("PressedStreamPlayer");
 
-		#if DEBUG
-		CheckHelper.Check(this, _animPlayer);
-		#endif
+#if DEBUG
+		CheckHelper.Check(this, _animPlayer, _hoverPlayer, _pressedPlayer);
+#endif
 
-		if (_animPlayer == null)
-		{
-			_animPlayer = new AnimationPlayer();
-		}
+		_animPlayer ??= new AnimationPlayer();
 
 		SetPivotToCenter();
 
-		MouseEntered += PlayHoverAnim;
+		MouseEntered += PlayHoverAnimAndSound;
 		MouseExited += PlayHoverAnimBack;
+		Pressed += PlayPressedSound;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,9 +42,15 @@ public partial class MenuButton : Button
 	{
 	}
 
-	private void PlayHoverAnim()
+	private void PlayHoverAnimAndSound()
 	{
 		_animPlayer.Play(_hoverAnimName);
+		_hoverPlayer.Play();
+	}
+
+	private void PlayPressedSound()
+	{
+		_pressedPlayer.Play();
 	}
 
 	private void PlayHoverAnimBack()
