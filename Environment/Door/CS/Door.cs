@@ -1,10 +1,11 @@
 using Godot;
 using System;
 
-public partial class Door : Node3D
+public partial class Door : Node3D, IFurniture
 {
 	[Export] private AnimationPlayer _animPlayer;
-	
+
+	private bool _bIsEnabled = false;
 	private bool _bIsClosed = true;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -24,6 +25,11 @@ public partial class Door : Node3D
 
 	public void DoorInteraction()
 	{
+		if (!_bIsEnabled)
+		{
+			return;
+		}
+		
 		if (_bIsClosed)
 		{
 			_bIsClosed = false;
@@ -34,5 +40,15 @@ public partial class Door : Node3D
 			_bIsClosed = true;
 			_animPlayer.Play("CloseDoor");
 		}
+	}
+
+	public void EnableFurniture()
+	{
+		_bIsEnabled = true;
+	}
+
+	public void DisableFurniture()
+	{
+		_bIsEnabled = false;
 	}
 }

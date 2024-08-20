@@ -4,5 +4,6 @@ public enum EFurniture
     Couch,
     TVTable,
     TV,
-    Console
+    Console,
+    WCRoom
 }

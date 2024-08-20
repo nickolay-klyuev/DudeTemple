@@ -346,9 +346,6 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.9252, 2.5, -1.25)
 shape = SubResource("ConvexPolygonShape3D_n1tse")
 
-[node name="Door" parent="DumbTempleObjects" instance=ExtResource("9_y88qk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8447, -4.76837e-07, 15.2752)
-
 [node name="Wall_4" type="CSGCombiner3D" parent="DumbTempleObjects"]
 use_collision = true
 
@@ -559,7 +556,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 [node name="FurnitureManager" type="Node3D" parent="." node_paths=PackedStringArray("_userData", "_furnitures")]
 script = ExtResource("14_teffm")
 _userData = NodePath("../UserDataHolder")
-_furnitures = [NodePath("BarNormalSize"), NodePath("Couch"), NodePath("TVTable"), NodePath("TV"), NodePath("Console")]
+_furnitures = [NodePath("BarNormalSize"), NodePath("Couch"), NodePath("TVTable"), NodePath("TV"), NodePath("Console"), NodePath("Door")]
 
 [node name="TVTable" parent="FurnitureManager" instance=ExtResource("16_rmwrf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6893, 0, -0.78292)
@@ -575,6 +572,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.68
 
 [node name="BarNormalSize" parent="FurnitureManager" instance=ExtResource("20_sm8d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6067, 0, 13.0901)
+
+[node name="Door" parent="FurnitureManager" instance=ExtResource("9_y88qk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8447, -4.76837e-07, 15.2752)
 
 [node name="DynamicNeonSign" parent="." instance=ExtResource("24_4jptv")]
 transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 10.6319, 2.81033, 5.04055)

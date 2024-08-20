@@ -8,15 +8,23 @@ public partial class FurnitureManager : Node3D
 	private UserDataHolder _userData;
 
 	[Export]
-	private Node3D[] _furnitures = new Node3D[5];
+	private Node3D[] _furnitures = new Node3D[6];
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		#if DEBUG
+#if DEBUG
 		CheckHelper.Check(this, _furnitures);
 		CheckHelper.Check(this, _userData);
-		#endif
+
+		foreach (var furniture in _furnitures)
+		{
+			if (furniture is not IFurniture)
+			{
+				GD.PrintErr($"{furniture.Name}: does NOT implement required IFurniture interface!");
+			}
+		}
+#endif
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
