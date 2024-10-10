@@ -279,5 +279,3 @@ texture_normal = ExtResource("2_5u8os")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00066, 0.00231934)
 shape = SubResource("BoxShape3D_hicva")
-
-[connection signal="OnInteract" from="DoorBody" to="." method="DoorInteraction"]

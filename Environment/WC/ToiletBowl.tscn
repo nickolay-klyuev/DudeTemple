@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://u8crpqlj5pht"]
+
+[ext_resource type="PackedScene" uid="uid://1ag5nao1m1n1" path="res://Blender/toilet-bowl.glb" id="1_c3231"]
+[ext_resource type="Material" uid="uid://1gd68ukj5s7h" path="res://Environment/WC/ToiletBowl.tres" id="2_yrmu6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gexou"]
+albedo_color = Color(0.469266, 0.501361, 0.64442, 1)
+metallic_specular = 1.0
+roughness = 0.2
+
+[node name="ToiletBowl" instance=ExtResource("1_c3231")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_yrmu6")
+
+[node name="Water" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_gexou")
+
+[node name="Cube" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_yrmu6")

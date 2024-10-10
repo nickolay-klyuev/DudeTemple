@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=51 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
 [ext_resource type="AudioStream" uid="uid://bjh3er436qucs" path="res://Sounds/step.wav" id="6_p8m0v"]
 [ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
+[ext_resource type="Material" uid="uid://6kxu4pxj0jna" path="res://TempleFloor.tres" id="8_f1ptp"]
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://ojejbrp2hepx" path="res://Environment/Door/Door.tscn" id="9_y88qk"]
@@ -26,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dd2wugdjlm60t" path="res://Environment/DynamicNeonSign/DynamicNeonSign.tscn" id="24_4jptv"]
 [ext_resource type="PackedScene" uid="uid://df4xxa4gwm83c" path="res://UI/PauseMenu/PauseMenu.tscn" id="24_he8l3"]
 [ext_resource type="PackedScene" uid="uid://bs5kp8hdxb4df" path="res://BallReturn/BallReturn.tscn" id="24_x3p8o"]
+[ext_resource type="PackedScene" uid="uid://u8crpqlj5pht" path="res://Environment/WC/ToiletBowl.tscn" id="28_ig3xg"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_energy_multiplier = 0.4
@@ -60,12 +62,9 @@ material = SubResource("StandardMaterial3D_nma52")
 add_uv2 = true
 size = Vector2(19.16, 0.48)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1xxm"]
-albedo_color = Color(0.301961, 0.301961, 0.219608, 1)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_8kvq3"]
 lightmap_size_hint = Vector2i(84, 84)
-material = SubResource("StandardMaterial3D_b1xxm")
+material = ExtResource("8_f1ptp")
 add_uv2 = true
 size = Vector2(16.5, 16.5)
 
@@ -103,6 +102,12 @@ lightmap_size_hint = Vector2i(202, 102)
 material = SubResource("StandardMaterial3D_pg70l")
 add_uv2 = true
 size = Vector2(40, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dsbvd"]
+size = Vector2(6, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_esnvg"]
+points = PackedVector3Array(-3, 0, -3, -3, 0, 3, 3, 0, -3, 3, 0, 3)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o4v64"]
 viewport_path = NodePath("ScoreScreen/ScoreScreenViewport")
@@ -467,6 +472,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 6.88223)
 [node name="TopLamp15" parent="DumbTempleObjects/Lighting" instance=ExtResource("8_pjvn0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4208, 4.5684, 12.7688)
 
+[node name="WC_Pivot" type="Node3D" parent="DumbTempleObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5196, 0, 15.9997)
+
+[node name="Floor" type="StaticBody3D" parent="DumbTempleObjects/WC_Pivot"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/WC_Pivot/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89993, 0, 2.30781)
+mesh = SubResource("PlaneMesh_dsbvd")
+surface_material_override/0 = ExtResource("8_f1ptp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/WC_Pivot/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89993, 0, 2.30781)
+shape = SubResource("ConvexPolygonShape3D_esnvg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="DumbTempleObjects/WC_Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74634, 1.86277, 2.37699)
+
 [node name="ScoreScreen" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -21.6111, 1.55752, 15.1995)
 mesh = SubResource("PlaneMesh_ixssc")
@@ -590,6 +612,15 @@ quality = 3
 bounces = 10
 denoiser_strength = 0.3
 light_data = ExtResource("23_ts3yy")
+
+[node name="ToiletBowl" parent="." instance=ExtResource("28_ig3xg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.0159, 0, 17.8981)
+
+[node name="ToiletBowl2" parent="." instance=ExtResource("28_ig3xg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.0159, 0, 19.0806)
+
+[node name="ToiletBowl3" parent="." instance=ExtResource("28_ig3xg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.0159, 0, 20.0857)
 
 [connection signal="TemplePaused" from="TempleController" to="." method="BlurTemple"]
 [connection signal="TemplePaused" from="TempleController" to="PauseMenu" method="Open"]
