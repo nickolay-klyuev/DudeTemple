@@ -20,7 +20,7 @@ shadow_color = Color(0, 0, 0, 0.1)
 shadow_size = 5
 shadow_offset = Vector2(2, 2)
 
-[node name="Tutorial" type="Control"]
+[node name="Tutorial" type="Control" node_paths=PackedStringArray("_dontShowCheckBox")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -30,6 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_uf473")
 script = ExtResource("2_wqkcd")
+_dontShowCheckBox = NodePath("Panel/HBoxContainer/DontShowCheckBox")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(750, 450)
@@ -65,8 +66,16 @@ layout_mode = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-text = "This is test of the tutorial.
-		Dude can say here something during this tutorial to welcome a player and explain about the possibilities and goal of the game.
+theme_override_font_sizes/normal_font_size = 12
+text = "Thanks for downloading this game!
+
+The main goal is to chill and relax playing bowling.
+
+After playing for a bit and getting some points you can buy new furniture for the bowling room.
+
+Also you can customize posters on the wall with your own images, just interact with icons on the walls.
+
+Hope you will have fun!
 
 Be cool dudes!!!"
 fit_content = true
@@ -84,5 +93,24 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Okay let's go"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -43.0
+offset_right = 114.0
+offset_bottom = -19.0
+grow_vertical = 0
+
+[node name="DontShowCheckBox" type="CheckBox" parent="Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "don't show"
 
 [connection signal="pressed" from="Panel/VBoxContainer/CloseButton" to="." method="CloseAndDestroy"]

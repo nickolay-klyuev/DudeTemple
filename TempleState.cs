@@ -36,8 +36,6 @@ public partial class TempleState : Node3D
 		#endif
 
 		_cachedEnv.CacheEnv(_templeEnvironment.Environment);
-
-		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

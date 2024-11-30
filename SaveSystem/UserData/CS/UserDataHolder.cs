@@ -132,6 +132,18 @@ public partial class UserDataHolder : Node
         MarkAsDirty();
     }
 
+    public void SetDontShowTutorial(bool bDontShow)
+    {
+        _userData.DontShowTutorial = bDontShow;
+
+        MarkAsDirty();
+    }
+
+    public bool GetDontShowTutorial()
+    {
+        return _userData.DontShowTutorial;
+    }
+
     private void MarkAsDirty()
     {
         // Mark data as dirty. It will wait for _dirtyTimer and then save all data to a file.

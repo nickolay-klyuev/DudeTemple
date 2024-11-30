@@ -23,10 +23,12 @@ public static class SaveDataHelper
         Variant scoreVar = userData.Score;
         Variant unlockedFurnituresVar = userData.UnlockedFurnitures;
         Variant posterImages = userData.PosterImages;
+        Variant dontShowTutorial = userData.DontShowTutorial;
 
         saveFile.StoreVar(scoreVar);
         saveFile.StoreVar(unlockedFurnituresVar);
         saveFile.StoreVar(posterImages);
+        saveFile.StoreVar(dontShowTutorial);
         saveFile.Close();
 
         IsSaving = false;
@@ -42,10 +44,11 @@ public static class SaveDataHelper
             int loadedScore = (int)saveFile.GetVar();
             Array<EFurniture> unlockedFurnitures = (Array<EFurniture>)saveFile.GetVar();
             Dictionary<string, string> posterImages = (Dictionary<string, string>)saveFile.GetVar();
+            bool dontShowTutorial = (bool)saveFile.GetVar();
 
             saveFile.Close();
 
-            return new SUserData(loadedScore, unlockedFurnitures, posterImages);
+            return new SUserData(loadedScore, unlockedFurnitures, posterImages, dontShowTutorial);
         }
         else
         {
