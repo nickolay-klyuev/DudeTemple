@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=60 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
@@ -98,16 +98,49 @@ metallic = 0.2
 roughness = 0.35
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1arfw"]
-lightmap_size_hint = Vector2i(202, 102)
+lightmap_size_hint = Vector2i(202, 127)
 material = SubResource("StandardMaterial3D_pg70l")
 add_uv2 = true
-size = Vector2(40, 20)
+size = Vector2(40, 25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dsbvd"]
 size = Vector2(6, 6)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_esnvg"]
 points = PackedVector3Array(-3, 0, -3, -3, 0, 3, 3, 0, -3, 3, 0, 3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_awejy"]
+material = ExtResource("7_bk3b3")
+size = Vector2(6, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gra7d"]
+points = PackedVector3Array(-3, 0, -3, -3, 0, 3, 3, 0, -3, 3, 0, 3)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hpvl8"]
+noise_type = 4
+frequency = 0.0085
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u8vqg"]
+noise = SubResource("FastNoiseLite_hpvl8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rapax"]
+noise_type = 4
+frequency = 0.0125
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6cp07"]
+noise = SubResource("FastNoiseLite_rapax")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbno1"]
+albedo_color = Color(0.678072, 0.433253, 3.85046e-07, 1)
+albedo_texture = SubResource("NoiseTexture2D_u8vqg")
+roughness_texture = SubResource("NoiseTexture2D_6cp07")
+
+[sub_resource type="BoxMesh" id="BoxMesh_yla68"]
+material = SubResource("StandardMaterial3D_mbno1")
+size = Vector3(2, 2.8, 0.02)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tssld"]
+points = PackedVector3Array(-1, -1.4, -0.01, -1, -1.4, 0.01, -1, 1.39973, -0.01, 1, -1.4, -0.01, 1, -1.4, 0.01, -1, 1.39973, 0.01, 1, 1.39973, -0.01, 1, 1.39973, 0.01)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o4v64"]
 viewport_path = NodePath("ScoreScreen/ScoreScreenViewport")
@@ -366,7 +399,7 @@ operation = 2
 size = Vector3(0.990495, 1.99683, 0.572021)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects"]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 7.45856)
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -7.77302, 5.01814, 9.72399)
 mesh = SubResource("PlaneMesh_1arfw")
 
 [node name="Lighting" type="Node3D" parent="DumbTempleObjects"]
@@ -486,8 +519,53 @@ surface_material_override/0 = ExtResource("8_f1ptp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89993, 0, 2.30781)
 shape = SubResource("ConvexPolygonShape3D_esnvg")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="DumbTempleObjects/WC_Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74634, 1.86277, 2.37699)
+[node name="Wall_1" type="StaticBody3D" parent="DumbTempleObjects/WC_Pivot"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.07572, 2.41102, 2.31341)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/WC_Pivot/Wall_1"]
+mesh = SubResource("PlaneMesh_awejy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/WC_Pivot/Wall_1"]
+shape = SubResource("ConvexPolygonShape3D_gra7d")
+
+[node name="Wall_2" type="StaticBody3D" parent="DumbTempleObjects/WC_Pivot"]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, 4.9586, 2.41102, 2.31341)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/WC_Pivot/Wall_2"]
+mesh = SubResource("PlaneMesh_awejy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/WC_Pivot/Wall_2"]
+shape = SubResource("ConvexPolygonShape3D_gra7d")
+
+[node name="Wall_3" type="StaticBody3D" parent="DumbTempleObjects/WC_Pivot"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 1.94265, 2.41102, 5.26964)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/WC_Pivot/Wall_3"]
+mesh = SubResource("PlaneMesh_awejy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/WC_Pivot/Wall_3"]
+shape = SubResource("ConvexPolygonShape3D_gra7d")
+
+[node name="TopLamp" parent="DumbTempleObjects/WC_Pivot" instance=ExtResource("8_pjvn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96113, 4.5684, 2.46234)
+
+[node name="SectionWall_1" type="StaticBody3D" parent="DumbTempleObjects/WC_Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97045, 1.55856, 3.39044)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/WC_Pivot/SectionWall_1"]
+mesh = SubResource("BoxMesh_yla68")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/WC_Pivot/SectionWall_1"]
+shape = SubResource("ConvexPolygonShape3D_tssld")
+
+[node name="SectionWall_2" type="StaticBody3D" parent="DumbTempleObjects/WC_Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97045, 1.55856, 1.3585)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DumbTempleObjects/WC_Pivot/SectionWall_2"]
+mesh = SubResource("BoxMesh_yla68")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DumbTempleObjects/WC_Pivot/SectionWall_2"]
+shape = SubResource("ConvexPolygonShape3D_tssld")
 
 [node name="ScoreScreen" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -21.6111, 1.55752, 15.1995)
@@ -516,7 +594,7 @@ _posterId = "poster-1"
 _dataHolder = NodePath("../../UserDataHolder")
 
 [node name="CustomPosterTest2" parent="Posters" node_paths=PackedStringArray("_dataHolder") instance=ExtResource("17_1s2qa")]
-transform = Transform3D(0.966273, 1.12566e-08, 0.257521, 0.257521, -4.22371e-08, -0.966273, 1.03747e-15, 1, -4.37114e-08, -8.61794, 2.28306, 15.3195)
+transform = Transform3D(0.966273, 1.12566e-08, 0.257521, 0.257521, -4.22371e-08, -0.966273, 1.03747e-15, 1, -4.37114e-08, -7.27263, 2.28306, 15.3195)
 _posterId = "poster-2"
 _dataHolder = NodePath("../../UserDataHolder")
 
@@ -614,13 +692,13 @@ denoiser_strength = 0.3
 light_data = ExtResource("23_ts3yy")
 
 [node name="ToiletBowl" parent="." instance=ExtResource("28_ig3xg")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.0159, 0, 17.8981)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10.0065, 0, 16.3519)
 
 [node name="ToiletBowl2" parent="." instance=ExtResource("28_ig3xg")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.0159, 0, 19.0806)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10.0007, 0, 18.3604)
 
 [node name="ToiletBowl3" parent="." instance=ExtResource("28_ig3xg")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.0159, 0, 20.0857)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10.0082, 0, 20.3629)
 
 [connection signal="TemplePaused" from="TempleController" to="." method="BlurTemple"]
 [connection signal="TemplePaused" from="TempleController" to="PauseMenu" method="Open"]

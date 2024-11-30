@@ -129,6 +129,9 @@ albedo_texture = SubResource("NoiseTexture2D_ai42m")
 roughness_texture = SubResource("NoiseTexture2D_v6bne")
 normal_texture = SubResource("NoiseTexture2D_udtrt")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_hicva"]
+size = Vector3(1, 2.00485, 0.0588379)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sq0po"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_87dwj"]
@@ -229,9 +232,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8qj7u")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hicva"]
-size = Vector3(1, 2.00485, 0.0588379)
-
 [node name="Door" type="Node3D"]
 script = ExtResource("1_c4pq3")
 
@@ -252,24 +252,6 @@ mesh = SubResource("ArrayMesh_7ocaw")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_s1kkg")
 
-[node name="Cube_001" type="MeshInstance3D" parent="DoorBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.354006, 1, -0.0388577)
-mesh = SubResource("ArrayMesh_h5w22")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_0lwo0")
-
-[node name="Cylinder" type="MeshInstance3D" parent="DoorBody"]
-transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.301933, 1, -0.0507371)
-mesh = SubResource("ArrayMesh_dknbq")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_0lwo0")
-
-[node name="Cylinder_001" type="MeshInstance3D" parent="DoorBody"]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.353224, 1, -0.0262651)
-mesh = SubResource("ArrayMesh_splbj")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_0lwo0")
-
 [node name="Decal" type="Decal" parent="DoorBody"]
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 1.589, -0.042)
 size = Vector3(0.662994, 0.116592, 0.443626)
@@ -279,3 +261,47 @@ texture_normal = ExtResource("2_5u8os")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00066, 0.00231934)
 shape = SubResource("BoxShape3D_hicva")
+
+[node name="DoorHandle" type="Node3D" parent="DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.342632, 0.979139, 0)
+
+[node name="Cube_001" type="MeshInstance3D" parent="DoorBody/DoorHandle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00022164, 0.0092552, -0.0388577)
+mesh = SubResource("ArrayMesh_h5w22")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0lwo0")
+
+[node name="Cylinder" type="MeshInstance3D" parent="DoorBody/DoorHandle"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, -0.0522946, 0.0092552, -0.0507371)
+mesh = SubResource("ArrayMesh_dknbq")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0lwo0")
+
+[node name="Cylinder_001" type="MeshInstance3D" parent="DoorBody/DoorHandle"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.00100359, 0.0092552, -0.0262651)
+mesh = SubResource("ArrayMesh_splbj")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0lwo0")
+
+[node name="DoorHandle2" type="Node3D" parent="DoorBody"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0.342632, 0.979139, 0.00115296)
+
+[node name="Cube_001" type="MeshInstance3D" parent="DoorBody/DoorHandle2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00022164, 0.0092552, -0.0388577)
+mesh = SubResource("ArrayMesh_h5w22")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0lwo0")
+
+[node name="Cylinder" type="MeshInstance3D" parent="DoorBody/DoorHandle2"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, -0.0522946, 0.0092552, -0.0507371)
+mesh = SubResource("ArrayMesh_dknbq")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0lwo0")
+
+[node name="Cylinder_001" type="MeshInstance3D" parent="DoorBody/DoorHandle2"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.00100359, 0.0092552, -0.0262651)
+mesh = SubResource("ArrayMesh_splbj")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0lwo0")
+
+[connection signal="OnInteract" from="DoorBody" to="." method="DoorInteraction"]
