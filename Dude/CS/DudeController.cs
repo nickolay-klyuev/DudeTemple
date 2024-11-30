@@ -4,6 +4,8 @@ using System;
 
 public partial class DudeController : CharacterBody3D
 {
+	private const string INTERACT_TEXT = "press E to";
+
 	[Export]
 	private Camera3D _dudeFace;
 
@@ -195,11 +197,6 @@ public partial class DudeController : CharacterBody3D
 	{
 		if (_dudeHand.IsColliding())
 		{
-			if (!_interactLabel.Visible)
-			{
-				_interactLabel.Visible = true;
-			}
-
 			IInteractable interactableObject = _dudeHand.GetCollider() as IInteractable;
 			if (interactableObject != null && Input.IsActionJustPressed("Interact"))
 			{
@@ -211,6 +208,20 @@ public partial class DudeController : CharacterBody3D
 			{
 				grabbableThing.Grab();
 				HoldThing(grabbableThing as Node3D);
+			}
+
+			if (!_interactLabel.Visible)
+			{
+				if (interactableObject != null)
+				{
+					_interactLabel.Text = $"{INTERACT_TEXT} {interactableObject.GetInteractLabel()}";
+				}
+				else
+				{
+					_interactLabel.Text = $"{INTERACT_TEXT} grab";
+				}
+
+				_interactLabel.Visible = true;
 			}
 		}
 		else

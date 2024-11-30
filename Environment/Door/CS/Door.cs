@@ -51,4 +51,14 @@ public partial class Door : Node3D, IFurniture
 	{
 		_bIsEnabled = false;
 	}
+
+	public bool IsEnabled()
+	{
+		return _bIsEnabled;
+	}
+
+	public bool IsClosed()
+	{
+		return _bIsClosed;
+	}
 }

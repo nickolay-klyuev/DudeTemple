@@ -20,4 +20,14 @@ public partial class PosterInteractTrigger : Area3D, IInteractable
 	{
 		EmitSignal(SignalName.PosterInteractTriggered);
 	}
+
+	public bool CanInteract()
+	{
+		return true;
+	}
+
+	public string GetInteractLabel()
+	{
+		return "set new poster image";
+	}
 }
