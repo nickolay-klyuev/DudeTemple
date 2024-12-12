@@ -1,18 +1,15 @@
-[gd_scene load_steps=61 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=54 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" path="res://TempleController.cs" id="2_am0gk"]
 [ext_resource type="PackedScene" uid="uid://dfej2ixqo1g5m" path="res://Tutorial/Tutorial.tscn" id="4_5b30d"]
-[ext_resource type="Script" path="res://Dude/CS/ThrowForce.cs" id="5_albop"]
-[ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="5_idorm"]
-[ext_resource type="AudioStream" uid="uid://bjh3er436qucs" path="res://Sounds/step.wav" id="6_p8m0v"]
+[ext_resource type="PackedScene" uid="uid://bfh3khmwpaung" path="res://Dude/Dude.tscn" id="5_fmqe7"]
 [ext_resource type="Material" uid="uid://bis3n5edqpsc0" path="res://Environment/Materials/WallsMaterial.tres" id="7_bk3b3"]
 [ext_resource type="Material" uid="uid://6kxu4pxj0jna" path="res://TempleFloor.tres" id="8_f1ptp"]
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="8_pjvn0"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="9_xx6vd"]
 [ext_resource type="PackedScene" uid="uid://ojejbrp2hepx" path="res://Environment/Door/Door.tscn" id="9_y88qk"]
 [ext_resource type="PackedScene" uid="uid://cwx8hymuqd3jp" path="res://ScoreScreen/ScoreScreenUI.tscn" id="10_hv4nn"]
-[ext_resource type="Script" path="res://BallReturn/CS/BallReturn.cs" id="14_ki3k3"]
 [ext_resource type="Script" path="res://SaveSystem/UserData/CS/UserDataHolder.cs" id="14_pai1m"]
 [ext_resource type="Script" path="res://BuildingSystem/CS/FurnitureManager.cs" id="14_teffm"]
 [ext_resource type="PackedScene" uid="uid://b5mknp5ak1cwd" path="res://Pins/TenPin/TenPinsSpawner.tscn" id="16_g2po3"]
@@ -35,23 +32,6 @@ background_energy_multiplier = 0.4
 glow_enabled = true
 glow_normalized = true
 glow_blend_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg8y2"]
-bg_color = Color(0.901961, 0.901961, 0.901961, 0.588235)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fp5as"]
-bg_color = Color(0.078, 0.078, 0.078, 0.5)
-
-[sub_resource type="Theme" id="Theme_k064f"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_fp5as")
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
-radius = 0.35
-height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nma52"]
 albedo_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
@@ -167,110 +147,20 @@ script = ExtResource("1_hpo4a")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f4q88")
 
-[node name="TempleController" type="Node" parent="."]
+[node name="TempleController" type="Node" parent="." node_paths=PackedStringArray("_templeEnvironment")]
 process_mode = 3
 editor_description = "This node tries to control pause/unpause temple. But maybe I will add more info it. Or it will resolve all player inputs."
 script = ExtResource("2_am0gk")
 _resumeBtnPath = "../PauseMenu/MenuContainer/ResumeMenuButton"
 _exitBtnPath = "../PauseMenu/MenuContainer/ExitMenuButton"
+_templeEnvironment = NodePath("../WorldEnvironment")
 
 [node name="PauseMenu" parent="." instance=ExtResource("24_he8l3")]
 
 [node name="Tutorial" parent="." node_paths=PackedStringArray("_userDataHolder") instance=ExtResource("4_5b30d")]
 _userDataHolder = NodePath("../UserDataHolder")
 
-[node name="Dude" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_stepsPlayer", "_throwMaxForceLoc", "_throwForceBar", "_crossHair")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
-collision_layer = 0
-script = ExtResource("5_idorm")
-_dudeFace = NodePath("DudeFaceCamera")
-_dudeHand = NodePath("DudeFaceCamera/InteractRaycast")
-_aimRaycast = NodePath("DudeFaceCamera/AimRaycast")
-_grabSocket = NodePath("DudeFaceCamera/GrabSocket")
-_interactLabel = NodePath("InteractLabel")
-_stepsPlayer = NodePath("StepsAudioPlayer")
-_throwMaxForceLoc = NodePath("ThrowMaxForceLoc")
-_throwForceBar = NodePath("ThrowForce")
-_crossHair = NodePath("CenterPoint")
-
-[node name="CenterPoint" type="Panel" parent="Dude"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_pg8y2")
-
-[node name="ThrowForce" type="ProgressBar" parent="Dude"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -129.0
-offset_top = -198.0
-offset_right = 129.0
-offset_bottom = -171.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = SubResource("Theme_k064f")
-script = ExtResource("5_albop")
-_beginColor = Color(0, 0.427451, 0.956863, 1)
-_endColor = Color(0.631373, 0, 0.0705882, 1)
-
-[node name="InteractLabel" type="Label" parent="Dude"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.677469
-anchor_right = 0.5
-anchor_bottom = 0.677469
-offset_left = -70.0
-offset_top = -13.0
-offset_right = 70.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-text = "Press E to interact"
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Dude"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22154, 0)
-shape = SubResource("CapsuleShape3D_0vrco")
-
-[node name="DudeFaceCamera" type="Camera3D" parent="Dude"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9119, 0)
-fov = 50.0
-
-[node name="GrabSocket" type="Node3D" parent="Dude/DudeFaceCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0290618, -0.237393, -0.39012)
-
-[node name="InteractRaycast" type="RayCast3D" parent="Dude/DudeFaceCamera"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-target_position = Vector3(0, -2, 0)
-collision_mask = 2048
-collide_with_areas = true
-
-[node name="AimRaycast" type="RayCast3D" parent="Dude/DudeFaceCamera"]
-transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 0, 0, -0.747919)
-target_position = Vector3(0, -50, 0)
-debug_shape_custom_color = Color(1, 0.239216, 0.513726, 1)
-debug_shape_thickness = 1
-
-[node name="ThrowMaxForceLoc" type="Node3D" parent="Dude"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273565, 0.960816, 0.417999)
-
-[node name="StepsAudioPlayer" type="AudioStreamPlayer3D" parent="Dude"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326554, 0)
-stream = ExtResource("6_p8m0v")
-max_distance = 3.5
+[node name="Dude" parent="." instance=ExtResource("5_fmqe7")]
 
 [node name="BowlingLanes" type="Node3D" parent="."]
 
@@ -619,14 +509,7 @@ _dataHolder = NodePath("../../UserDataHolder")
 
 [node name="BallReturn" parent="." instance=ExtResource("24_x3p8o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9937, 0.439936, 7.00111)
-script = ExtResource("14_ki3k3")
 _ballTemplate = ExtResource("19_l0jl4")
-
-[node name="SpawnPoint_1" type="Node3D" parent="BallReturn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976586, 0.309161, -0.0783601)
-
-[node name="SpawnPoint_2" type="Node3D" parent="BallReturn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976586, 0.309161, 0.0729976)
 
 [node name="PinsManager" type="Node3D" parent="." node_paths=PackedStringArray("_userData")]
 script = ExtResource("20_sm84q")
@@ -691,8 +574,8 @@ box_projection = true
 [node name="LightmapGI" type="LightmapGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2678, 1.68684, 7.52171)
 quality = 3
-bounces = 10
-denoiser_strength = 0.3
+bounces = 16
+denoiser_strength = 0.2
 light_data = ExtResource("23_ts3yy")
 
 [node name="ToiletBowl" parent="." instance=ExtResource("28_ig3xg")]
@@ -704,12 +587,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10.00
 [node name="ToiletBowl3" parent="." instance=ExtResource("28_ig3xg")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10.0082, 0, 20.3629)
 
-[connection signal="TemplePaused" from="TempleController" to="." method="BlurTemple"]
 [connection signal="TemplePaused" from="TempleController" to="PauseMenu" method="Open"]
-[connection signal="TempleUnpaused" from="TempleController" to="." method="UnblurTemple"]
 [connection signal="TempleUnpaused" from="TempleController" to="PauseMenu" method="Close"]
-[connection signal="PauseMenuClosed" from="PauseMenu" to="Dude" method="OnPauseMenuClosed"]
-[connection signal="PauseMenuOpened" from="PauseMenu" to="Dude" method="OnPauseMenuOpened"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest2" method="OnPosterImagesLoaded"]
 [connection signal="PosterImagesLoaded" from="UserDataHolder" to="Posters/CustomPosterTest3" method="OnPosterImagesLoaded"]

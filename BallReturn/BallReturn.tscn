@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs5kp8hdxb4df"]
+[gd_scene load_steps=12 format=3 uid="uid://bs5kp8hdxb4df"]
 
 [ext_resource type="PackedScene" uid="uid://bhpf66fcukxlb" path="res://Blender/ball-return.glb" id="1_f7hj2"]
+[ext_resource type="Script" path="res://BallReturn/CS/BallReturn.cs" id="2_2vdrc"]
 [ext_resource type="Material" uid="uid://b7qd536ot6nxc" path="res://BallReturn/Materials/Metalic.tres" id="2_y1bf0"]
 [ext_resource type="Material" uid="uid://bgbjdjxgd83nq" path="res://BallReturn/Materials/Dirty.tres" id="3_21rqu"]
 
@@ -28,6 +29,7 @@ size = Vector3(0.872437, 0.86084, 0.0600586)
 size = Vector3(0.267212, 0.874939, 0.874756)
 
 [node name="BallReturn" instance=ExtResource("1_f7hj2")]
+script = ExtResource("2_2vdrc")
 
 [node name="Cylinder" parent="." index="0"]
 surface_material_override/0 = ExtResource("2_y1bf0")
@@ -98,3 +100,9 @@ shape = SubResource("BoxShape3D_8whw2")
 
 [node name="Cube_002" parent="." index="5"]
 surface_material_override/0 = ExtResource("2_y1bf0")
+
+[node name="SpawnPoint_1" type="Node3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976586, 0.309161, -0.0783601)
+
+[node name="SpawnPoint_2" type="Node3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976586, 0.309161, 0.0729976)
