@@ -186,11 +186,16 @@ public partial class DudeController : CharacterBody3D
 		// Turn dude around by mouse X axis
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
-			var TurnModifier = 0.01f * _cameraSpeed;
-
-			RotateY(-mouseMotion.Relative.X * TurnModifier);
-			_dudeFace.RotateX(-mouseMotion.Relative.Y * TurnModifier);
+			RotateCamera(mouseMotion.Relative.X, mouseMotion.Relative.Y);
 		}
+	}
+
+	public void RotateCamera(float x, float y)
+	{
+		var TurnModifier = 0.01f * _cameraSpeed;
+
+		RotateY(-x * TurnModifier);
+		_dudeFace.RotateX(-y * TurnModifier);
 	}
 
 	private void InteractProcess() // TODO: Try to get rid of this process. 
