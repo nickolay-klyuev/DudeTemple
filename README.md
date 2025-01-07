@@ -21,9 +21,9 @@ You can download a prototype build from a github [Releases page](https://github.
   <img src="/Screenshots/Screenshot_3.png?raw=true" alt="Screenshot_3" width="200"/>
 </div>
 
-## Game Eninge Version
+## Game Engine Version
 
-Godot Engine - .NET 4.2.1
+Godot Engine - .NET 4.3
 
 ## License
 
