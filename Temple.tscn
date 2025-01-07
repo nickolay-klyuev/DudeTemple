@@ -484,26 +484,32 @@ one_shot = true
 [node name="Posters" type="Node3D" parent="."]
 
 [node name="CustomPosterTest" parent="Posters" node_paths=PackedStringArray("_dataHolder") instance=ExtResource("17_1s2qa")]
+transform = Transform3D(-0.985704, -8.67979e-08, 0.168489, -0.168489, -7.3649e-09, -0.985704, 8.67979e-08, -1, -7.36491e-09, -18.1557, 2.33089, 15.3195)
+size = Vector3(2, 1, 2.72913)
 _posterId = "poster-1"
 _dataHolder = NodePath("../../UserDataHolder")
 
 [node name="CustomPosterTest2" parent="Posters" node_paths=PackedStringArray("_dataHolder") instance=ExtResource("17_1s2qa")]
-transform = Transform3D(0.966273, 1.12566e-08, 0.257521, 0.257521, -4.22371e-08, -0.966273, 1.03747e-15, 1, -4.37114e-08, -7.27263, 2.28306, 15.3195)
+transform = Transform3D(-0.966376, 8.5953e-08, -0.257133, 0.257133, -1.12396e-08, -0.966376, -8.5953e-08, -1, -1.12396e-08, -7.27263, 2.28306, 15.3195)
+size = Vector3(2, 1, 2.72913)
 _posterId = "poster-2"
 _dataHolder = NodePath("../../UserDataHolder")
 
 [node name="CustomPosterTest3" parent="Posters" node_paths=PackedStringArray("_dataHolder") instance=ExtResource("17_1s2qa")]
 transform = Transform3D(0.979032, -8.90445e-09, -0.20371, -0.20371, -4.27948e-08, -0.979032, 1.79248e-16, 1, -4.37114e-08, -8.61794, 2.28306, -1.3569)
+size = Vector3(2, 1, 2.72913)
 _posterId = "poster-3"
 _dataHolder = NodePath("../../UserDataHolder")
 
 [node name="CustomPosterTest4" parent="Posters" node_paths=PackedStringArray("_dataHolder") instance=ExtResource("17_1s2qa")]
 transform = Transform3D(0.995221, 4.26852e-09, 0.0976527, 0.0976527, -4.35024e-08, -0.995221, 1.79248e-16, 1, -4.37114e-08, -1.55569, 2.28306, -1.3569)
+size = Vector3(2, 1, 2.72913)
 _posterId = "poster-4"
 _dataHolder = NodePath("../../UserDataHolder")
 
 [node name="CustomPosterTest5" parent="Posters" node_paths=PackedStringArray("_dataHolder") instance=ExtResource("17_1s2qa")]
 transform = Transform3D(0.9991, 1.85407e-09, 0.0424166, 0.0424166, -4.3672e-08, -0.9991, -1.67685e-16, 1, -4.37114e-08, -21.7551, 2.28306, -1.3569)
+size = Vector3(2, 1, 2.72913)
 _posterId = "poster-5"
 _dataHolder = NodePath("../../UserDataHolder")
 

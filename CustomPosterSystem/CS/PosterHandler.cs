@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Drawing;
 
 public partial class PosterHandler : Decal
 {
@@ -14,12 +15,14 @@ public partial class PosterHandler : Decal
 	[Export]
 	private UserDataHolder _dataHolder;
 
-	private Vector3 _initDecalSize = Vector3.Zero;
+	private Vector3 _posterBaseSize = new Vector3(2.0f, 1.0f, 2.0f);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		#if DEBUG
+		_posterBaseSize.Y = Size.Y;
+
+#if DEBUG
 		CheckHelper.CheckNode(_posterFileDialog, this);
 
 		if (String.IsNullOrEmpty(_posterId))
@@ -28,7 +31,7 @@ public partial class PosterHandler : Decal
 		}
 
 		CheckHelper.CheckNode(_dataHolder, this);
-		#endif
+#endif
 
 		_posterFileDialog.FileSelected += OnPosterImageSelected;
 
@@ -81,22 +84,16 @@ public partial class PosterHandler : Decal
 		poster.Load(imagePath);
 
 		ImageTexture posterTexture = ImageTexture.CreateFromImage(poster);
-		Vector2 posterSize = posterTexture.GetSize();
-
-		// TODO: A bit of weird hack. Try to change it in the future.
-		if (_initDecalSize == Vector3.Zero)
-		{
-			_initDecalSize = Size;
-		}
+		Vector2 textureSize = posterTexture.GetSize();
 
 		// Resize decal to look good with custom image.
-		if (posterSize.Y > posterSize.X)
+		if (textureSize.Y > textureSize.X)
 		{
-			Size = new Vector3(_initDecalSize.X, _initDecalSize.Y, _initDecalSize.Z * posterSize.Y / posterSize.X);
+			Size = new Vector3(_posterBaseSize.X, _posterBaseSize.Y, _posterBaseSize.Z * textureSize.Y / textureSize.X);
 		}
 		else
 		{
-			Size = new Vector3(_initDecalSize.X * posterSize.X / posterSize.Y, _initDecalSize.Y, _initDecalSize.Z);
+			Size = new Vector3(_posterBaseSize.X * textureSize.X / textureSize.Y, _posterBaseSize.Y, _posterBaseSize.Z);
 		}
 
 		TextureAlbedo = posterTexture;
