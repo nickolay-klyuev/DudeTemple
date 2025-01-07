@@ -13,11 +13,6 @@ public partial class FurnitureController : Node3D, IFurniture
 		{
 			_collision = GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D");
 		}
-
-		// Collision can be null
-		#if DEBUG
-		//CheckHelper.Check(this, _collision);
-		#endif
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

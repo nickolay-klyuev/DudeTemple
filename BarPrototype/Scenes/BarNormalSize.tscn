@@ -40,8 +40,9 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 2.0
 
-[node name="BarNormalSize" instance=ExtResource("1_qliyg")]
+[node name="BarNormalSize" node_paths=PackedStringArray("_collision") instance=ExtResource("1_qliyg")]
 script = ExtResource("2_vnmmd")
+_collision = NodePath("BarCollision/CollisionShape3D")
 
 [node name="BarCollision" type="StaticBody3D" parent="." index="0"]
 

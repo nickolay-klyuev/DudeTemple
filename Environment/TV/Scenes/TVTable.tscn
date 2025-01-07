@@ -17,8 +17,9 @@ albedo_color = Color(0.243137, 0.243137, 0.243137, 1)
 metallic = 0.5
 roughness = 0.6
 
-[node name="TVTable" instance=ExtResource("1_5mfof")]
+[node name="TVTable" node_paths=PackedStringArray("_collision") instance=ExtResource("1_5mfof")]
 script = ExtResource("2_1xvc2")
+_collision = NodePath("TVTableCollision/CollisionShape3D")
 
 [node name="TVTableCollision" type="StaticBody3D" parent="." index="0"]
 
