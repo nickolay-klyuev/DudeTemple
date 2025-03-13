@@ -198,9 +198,9 @@ public partial class DudeController : CharacterBody3D
 		_dudeFace.RotateX(-y * TurnModifier);
 	}
 
-	private void InteractProcess() // TODO: Try to get rid of this process. 
+	private void InteractProcess()
 	{
-		if (_dudeHand.IsColliding())
+		if (!_bIsHoldingThing && _dudeHand.IsColliding()) // Interact only when hands are empty (_bIsHoldingThing == false)
 		{
 			IInteractable interactableObject = _dudeHand.GetCollider() as IInteractable;
 			if (interactableObject != null && Input.IsActionJustPressed("Interact"))
