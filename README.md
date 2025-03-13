@@ -23,7 +23,7 @@ You can download a prototype build from a github [Releases page](https://github.
 
 ## Game Engine Version
 
-Godot Engine - .NET 4.3
+Godot Engine - .NET 4.4
 
 ## License
 
