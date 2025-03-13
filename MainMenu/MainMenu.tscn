@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://cigfrwe7s6om5" path="res://Environment/Lights/TopLamp.tscn" id="2_umoh5"]
 [ext_resource type="PackedScene" uid="uid://dd2wugdjlm60t" path="res://Environment/DynamicNeonSign/DynamicNeonSign.tscn" id="3_cpr8t"]
 [ext_resource type="PackedScene" uid="uid://bbasi3gngb4go" path="res://BowlingLane.tscn" id="4_d4l6b"]
-[ext_resource type="Script" path="res://Pins/CS/PinsBuilderTool.cs" id="5_3bgf7"]
+[ext_resource type="Script" uid="uid://sybs0k05nc0r" path="res://Pins/CS/PinsBuilderTool.cs" id="5_3bgf7"]
 [ext_resource type="LightmapGIData" uid="uid://lm57nf0p443f" path="res://Temple.lmbake" id="5_7l73a"]
 [ext_resource type="PackedScene" uid="uid://chrh011yma2kh" path="res://Pins/TenPin/TenPin.tscn" id="6_js8mq"]
 [ext_resource type="Theme" uid="uid://b7lymoh6ssgha" path="res://MainMenu/MainMenu.tres" id="8_bijd5"]
-[ext_resource type="Script" path="res://MainMenu/CS/MainMenuUI.cs" id="9_7a76p"]
+[ext_resource type="Script" uid="uid://crgyitgyl6boq" path="res://MainMenu/CS/MainMenuUI.cs" id="9_7a76p"]
 
 [sub_resource type="Environment" id="Environment_bhx4j"]
 background_energy_multiplier = 0.4

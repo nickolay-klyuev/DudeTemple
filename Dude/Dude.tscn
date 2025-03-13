@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bfh3khmwpaung"]
 
-[ext_resource type="Script" path="res://Dude/CS/DudeController.cs" id="1_blwry"]
-[ext_resource type="Script" path="res://Dude/CS/ThrowForce.cs" id="2_8ef73"]
+[ext_resource type="Script" uid="uid://bxmiw60fu4jy1" path="res://Dude/CS/DudeController.cs" id="1_blwry"]
+[ext_resource type="Script" uid="uid://bwo1cgxo2p2ps" path="res://Dude/CS/ThrowForce.cs" id="2_8ef73"]
 [ext_resource type="AudioStream" uid="uid://bjh3er436qucs" path="res://Sounds/step.wav" id="3_u4pw1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg8y2"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cdur1t76kcw57"]
 
 [ext_resource type="PackedScene" uid="uid://bqi0kw5dupi7q" path="res://Blender/tv-table.glb" id="1_5mfof"]
-[ext_resource type="Script" path="res://BarPrototype/CS/FurnitureController.cs" id="2_1xvc2"]
+[ext_resource type="Script" uid="uid://b2t8ml3d7yiw5" path="res://BarPrototype/CS/FurnitureController.cs" id="2_1xvc2"]
 [ext_resource type="Material" uid="uid://cgxpwfli76kyr" path="res://Environment/TV/Materials/TVTable-glass-material.tres" id="2_5q3td"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8jkiy"]

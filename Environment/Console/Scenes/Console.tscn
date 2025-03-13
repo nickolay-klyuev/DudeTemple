@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bjp7al4c2pcfv"]
 
 [ext_resource type="PackedScene" uid="uid://b8bgjfgu43uwh" path="res://Blender/sega.glb" id="1_yhh7a"]
-[ext_resource type="Script" path="res://BarPrototype/CS/FurnitureController.cs" id="2_f2p5l"]
+[ext_resource type="Script" uid="uid://b2t8ml3d7yiw5" path="res://BarPrototype/CS/FurnitureController.cs" id="2_f2p5l"]
 [ext_resource type="Material" uid="uid://cwtbdlxunlg05" path="res://Environment/Console/Materials/ConsoleMainMaterial.tres" id="2_x5ctl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cljd4"]

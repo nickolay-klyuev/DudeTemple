@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b4emh6se6gse7"]
 
 [ext_resource type="AudioStream" uid="uid://clwotqiw6e02o" path="res://Sounds/ui-hover.wav" id="2_4qbw0"]
-[ext_resource type="Script" path="res://UI/PauseMenu/CS/MenuButton.cs" id="2_c4h75"]
+[ext_resource type="Script" uid="uid://cski5q03u88eq" path="res://UI/PauseMenu/CS/MenuButton.cs" id="2_c4h75"]
 [ext_resource type="AudioStream" uid="uid://dtq2eiw8k52cx" path="res://Sounds/ui-pressed.wav" id="3_vto3i"]
 
 [sub_resource type="Animation" id="Animation_w1qtw"]
@@ -53,9 +53,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kwwhu"]
 _data = {
-"HoverAnim": SubResource("Animation_w1qtw"),
-"RESET": SubResource("Animation_pkb7g"),
-"UnhoverAnim": SubResource("Animation_lcn4d")
+&"HoverAnim": SubResource("Animation_w1qtw"),
+&"RESET": SubResource("Animation_pkb7g"),
+&"UnhoverAnim": SubResource("Animation_lcn4d")
 }
 
 [node name="MenuButton" type="Button"]

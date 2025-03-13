@@ -2,10 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://k5wcmjh1ndtk" path="res://UI/PauseMenu/PauseMenu.tres" id="1_rt2um"]
 [ext_resource type="PackedScene" uid="uid://b4emh6se6gse7" path="res://UI/PauseMenu/MenuButton.tscn" id="1_ut0qb"]
-[ext_resource type="Script" path="res://UI/PauseMenu/CS/PauseMenu.cs" id="2_e6vme"]
+[ext_resource type="Script" uid="uid://byj6obaw1tagc" path="res://UI/PauseMenu/CS/PauseMenu.cs" id="2_e6vme"]
 [ext_resource type="PackedScene" uid="uid://j0ww1x3u0jgb" path="res://UI/PauseMenu/Shop.tscn" id="4_ihx7k"]
-[ext_resource type="Script" path="res://UI/PauseMenu/CS/SettingsUI.cs" id="5_fwt1f"]
-[ext_resource type="Script" path="res://UI/PauseMenu/CS/PercentageDisplay.cs" id="6_sni7e"]
+[ext_resource type="Script" uid="uid://dtnv075jitefb" path="res://UI/PauseMenu/CS/SettingsUI.cs" id="5_fwt1f"]
+[ext_resource type="Script" uid="uid://5qada6o1cbk7" path="res://UI/PauseMenu/CS/PercentageDisplay.cs" id="6_sni7e"]
 
 [node name="PauseMenu" type="Control" node_paths=PackedStringArray("_content", "_shop", "_settings")]
 process_mode = 2

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjsfkv5kqmenn"]
 
 [ext_resource type="Texture2D" uid="uid://5vleo4pq2133" path="res://CustomPosterSystem/poster-place.png" id="1_edkw0"]
-[ext_resource type="Script" path="res://CustomPosterSystem/CS/PosterHandler.cs" id="2_2pe1g"]
-[ext_resource type="Script" path="res://CustomPosterSystem/CS/PosterInteractTrigger.cs" id="3_2bnnn"]
+[ext_resource type="Script" uid="uid://bmghltqi1pgjv" path="res://CustomPosterSystem/CS/PosterHandler.cs" id="2_2pe1g"]
+[ext_resource type="Script" uid="uid://cxke83qb015xb" path="res://CustomPosterSystem/CS/PosterInteractTrigger.cs" id="3_2bnnn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ojh2"]
 size = Vector3(2, 2, 2.72424)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dfgjj530tp70o"]
 
-[ext_resource type="Script" path="res://Pins/CS/PinsGroupHandler.cs" id="1_rlp4w"]
-[ext_resource type="Script" path="res://Pins/CS/PinsBuilderTool.cs" id="2_a8bhj"]
+[ext_resource type="Script" uid="uid://do1a5e1u5abpt" path="res://Pins/CS/PinsGroupHandler.cs" id="1_rlp4w"]
+[ext_resource type="Script" uid="uid://sybs0k05nc0r" path="res://Pins/CS/PinsBuilderTool.cs" id="2_a8bhj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gd2c1"]
 size = Vector3(3, 1, 1.5)

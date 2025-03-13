@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bs5kp8hdxb4df"]
 
 [ext_resource type="PackedScene" uid="uid://bhpf66fcukxlb" path="res://Blender/ball-return.glb" id="1_f7hj2"]
-[ext_resource type="Script" path="res://BallReturn/CS/BallReturn.cs" id="2_2vdrc"]
+[ext_resource type="Script" uid="uid://bk0scmbabm1r0" path="res://BallReturn/CS/BallReturn.cs" id="2_2vdrc"]
 [ext_resource type="Material" uid="uid://b7qd536ot6nxc" path="res://BallReturn/Materials/Metalic.tres" id="2_y1bf0"]
 [ext_resource type="Material" uid="uid://bgbjdjxgd83nq" path="res://BallReturn/Materials/Dirty.tres" id="3_21rqu"]
 

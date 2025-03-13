@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6qw3gie53svf"]
 
-[ext_resource type="Script" path="res://Pins/CS/PinsGroupHandler.cs" id="1_37v5e"]
+[ext_resource type="Script" uid="uid://do1a5e1u5abpt" path="res://Pins/CS/PinsGroupHandler.cs" id="1_37v5e"]
 [ext_resource type="PackedScene" uid="uid://b1ec7pxs575sm" path="res://Pins/SimpleCandlePin/SimpleCandlePin.tscn" id="1_xr1ca"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gd2c1"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c6qcraf8okeu7"]
 
 [ext_resource type="PackedScene" uid="uid://35g6v2cf2on4" path="res://Blender/couch.glb" id="1_3bgoq"]
-[ext_resource type="Script" path="res://BarPrototype/CS/FurnitureController.cs" id="2_awtp2"]
+[ext_resource type="Script" uid="uid://b2t8ml3d7yiw5" path="res://BarPrototype/CS/FurnitureController.cs" id="2_awtp2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4xvj1"]
 size = Vector3(1, 1, 2.34)

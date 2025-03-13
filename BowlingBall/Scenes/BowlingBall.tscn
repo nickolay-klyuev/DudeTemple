@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://r6cr03ilaj2o"]
 
-[ext_resource type="Script" path="res://BowlingBall/CS/BowlingBall.cs" id="1_fv8g0"]
+[ext_resource type="Script" uid="uid://dw102q2vxtm6k" path="res://BowlingBall/CS/BowlingBall.cs" id="1_fv8g0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yduyg"]
 friction = 0.05

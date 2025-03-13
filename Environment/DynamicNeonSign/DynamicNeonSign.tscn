@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dd2wugdjlm60t"]
 
 [ext_resource type="PackedScene" uid="uid://cv6nqqdbno8sn" path="res://Blender/neon-sign.glb" id="1_c6bvg"]
-[ext_resource type="Script" path="res://Environment/DynamicNeonSign/CS/DynamicNeonSign.cs" id="2_4mr8o"]
+[ext_resource type="Script" uid="uid://dijwm21ibcw7i" path="res://Environment/DynamicNeonSign/CS/DynamicNeonSign.cs" id="2_4mr8o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yinp6"]
 emission_enabled = true

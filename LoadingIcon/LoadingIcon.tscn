@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cd7oocdjniodn"]
 
-[ext_resource type="Script" path="res://LoadingIcon/CS/LoadingIcon.cs" id="1_1dm2h"]
+[ext_resource type="Script" uid="uid://blrqtrw0g8877" path="res://LoadingIcon/CS/LoadingIcon.cs" id="1_1dm2h"]
 [ext_resource type="Texture2D" uid="uid://cf2tevfflj4tl" path="res://LoadingIcon/bowling-ball-icon.png" id="1_x2mr6"]
 
 [node name="LoadingIcon" type="Control" node_paths=PackedStringArray("_texture")]

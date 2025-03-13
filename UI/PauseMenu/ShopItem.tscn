@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://lasvocn6ibyf"]
 
 [ext_resource type="Theme" uid="uid://ipewr46dthur" path="res://UI/PauseMenu/ShopItem.tres" id="1_eujce"]
-[ext_resource type="Script" path="res://UI/PauseMenu/CS/ShopItem.cs" id="1_wt5w2"]
+[ext_resource type="Script" uid="uid://bxdoyxaiai6xx" path="res://UI/PauseMenu/CS/ShopItem.cs" id="1_wt5w2"]
 [ext_resource type="Texture2D" uid="uid://fuxog4a6jvw" path="res://UI/PauseMenu/ShopTextures/Bar.png" id="2_ibxar"]
 
 [node name="ShopItem" type="Panel"]

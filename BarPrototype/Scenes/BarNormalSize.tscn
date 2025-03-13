@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://lo874bf85r2v" path="res://Blender/bar-normal-size.glb" id="1_qliyg"]
 [ext_resource type="Material" uid="uid://bsqahixw4a0r7" path="res://BarPrototype/Materials/BarTableMaterial.tres" id="2_fo80w"]
-[ext_resource type="Script" path="res://BarPrototype/CS/FurnitureController.cs" id="2_vnmmd"]
+[ext_resource type="Script" uid="uid://b2t8ml3d7yiw5" path="res://BarPrototype/CS/FurnitureController.cs" id="2_vnmmd"]
 [ext_resource type="Material" uid="uid://dcocax377r8er" path="res://BarPrototype/Materials/BarCabinetMaterial.tres" id="3_2v7y7"]
 [ext_resource type="PackedScene" uid="uid://cyhy3s6pg3p10" path="res://BarPrototype/Scenes/Bottles/MysticsBeerBottle.tscn" id="4_4kaso"]
 [ext_resource type="PackedScene" uid="uid://dpx41vnabpa0n" path="res://BarPrototype/Scenes/Bottles/SwordBeerBottle.tscn" id="5_0cbco"]

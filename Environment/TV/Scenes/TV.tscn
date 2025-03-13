@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://ba1gaacj3ueqy"]
 
 [ext_resource type="PackedScene" uid="uid://bcel7iq0us7ha" path="res://Blender/tv.glb" id="1_xufsj"]
-[ext_resource type="Script" path="res://BarPrototype/CS/FurnitureController.cs" id="2_3g5yl"]
-[ext_resource type="Script" path="res://Environment/TV/GDScripts/AnimationAutoPlay.gd" id="4_62mk4"]
+[ext_resource type="Script" uid="uid://b2t8ml3d7yiw5" path="res://BarPrototype/CS/FurnitureController.cs" id="2_3g5yl"]
+[ext_resource type="Script" uid="uid://bg461jyc4sndr" path="res://Environment/TV/GDScripts/AnimationAutoPlay.gd" id="4_62mk4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vslqh"]
 albedo_color = Color(0.415686, 0.415686, 0.415686, 1)

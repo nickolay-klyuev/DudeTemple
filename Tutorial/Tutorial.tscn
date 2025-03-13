@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://k5wcmjh1ndtk" path="res://UI/PauseMenu/PauseMenu.tres" id="1_uf473"]
 [ext_resource type="Texture2D" uid="uid://cgtxqh11bkolg" path="res://Tutorial/dude-drink.png" id="2_fs58y"]
-[ext_resource type="Script" path="res://Tutorial/Tutorial.cs" id="2_wqkcd"]
+[ext_resource type="Script" uid="uid://463175vrj88q" path="res://Tutorial/Tutorial.cs" id="2_wqkcd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slexg"]
 bg_color = Color(0, 0.633, 0.793, 0.5)
