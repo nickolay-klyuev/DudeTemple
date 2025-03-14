@@ -161,6 +161,7 @@ _templeEnvironment = NodePath("../WorldEnvironment")
 _userDataHolder = NodePath("../UserDataHolder")
 
 [node name="Dude" parent="." instance=ExtResource("5_fmqe7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18.0673, 0, 8.69978)
 
 [node name="BowlingLanes" type="Node3D" parent="."]
 

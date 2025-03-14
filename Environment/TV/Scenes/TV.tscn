@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba1gaacj3ueqy"]
+[gd_scene load_steps=11 format=3 uid="uid://ba1gaacj3ueqy"]
 
 [ext_resource type="PackedScene" uid="uid://bcel7iq0us7ha" path="res://Blender/tv.glb" id="1_xufsj"]
 [ext_resource type="Script" uid="uid://b2t8ml3d7yiw5" path="res://BarPrototype/CS/FurnitureController.cs" id="2_3g5yl"]
@@ -25,18 +25,6 @@ albedo_color = Color(0, 0.67451, 0.207843, 1)
 roughness = 0.2
 emission_enabled = true
 emission = Color(0, 0.67451, 0.207843, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_cxvti"]
-viewport_path = NodePath("Screen/TVScreenViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_6yx44"]
-viewport_path = NodePath("Screen/TVScreenViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3l3t"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_cxvti")
-emission_enabled = true
-emission_texture = SubResource("ViewportTexture_6yx44")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7yefj"]
 
@@ -66,7 +54,6 @@ material_override = SubResource("StandardMaterial3D_0dwe7")
 [node name="Screen" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 0, -0.573103, 0, 1, 0, 0, 0.542974, 0.00934583)
 visible = false
-material_override = SubResource("StandardMaterial3D_h3l3t")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Screen" index="0"]
 transform = Transform3D(0.29481, 0, 0, 0, 0, 0.3, 0, -0.468622, 0, 0, 0.000297367, -0.00153852)

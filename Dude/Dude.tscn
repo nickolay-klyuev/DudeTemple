@@ -22,7 +22,6 @@ radius = 0.35
 height = 1.8
 
 [node name="Dude" type="CharacterBody3D" node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_stepsPlayer", "_throwMaxForceLoc", "_throwForceBar", "_crossHair")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4744, 0, 5.39337)
 collision_layer = 0
 script = ExtResource("1_blwry")
 _dudeFace = NodePath("DudeFaceCamera")

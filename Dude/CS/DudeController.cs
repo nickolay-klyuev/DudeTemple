@@ -62,8 +62,6 @@ public partial class DudeController : CharacterBody3D
 
 	private bool _bIsDisabled = false;
 
-	private CollisionShape3D _dudeCollision;
-
 	private bool _bIsHoldingThing = false;
 	private Node3D _holdingThing;
 	private float _currentForcePercent = 0.0f;
@@ -91,8 +89,6 @@ public partial class DudeController : CharacterBody3D
 
 		_throwForceBar.Visible = false;
 		_currentForce = _throwForce.X;
-		
-		_dudeCollision = GetChild<CollisionShape3D>(0);
 
 		_bInteractLabelVisibilityCache = _interactLabel.Visible;
 		_bThrowForceBarVisibilityCache = _throwForceBar.Visible;

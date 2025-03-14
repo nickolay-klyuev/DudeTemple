@@ -11,7 +11,7 @@ public partial class FurnitureController : Node3D, IFurniture
 	{
 		if (_collision == null)
 		{
-			_collision = GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D");
+			_collision = GetNodeOrNull<CollisionShape3D>("StaticBody3D/CollisionShape3D");
 		}
 	}
 
