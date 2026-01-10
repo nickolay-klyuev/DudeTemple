@@ -20,6 +20,7 @@ config/icon="res://LoadingIcon/bowling-ball-icon.png"
 DudeSettings="*res://Settings/DudeSettings.cs"
 LoadingIcon="*res://LoadingIcon/LoadingIcon.tscn"
 NodeStorage="*res://Levels/CS/NodeStorage.cs"
+ControlSettings="*res://Settings/ControlSettings.cs"
 
 [display]
 

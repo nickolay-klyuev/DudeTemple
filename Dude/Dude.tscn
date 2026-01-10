@@ -88,7 +88,8 @@ shape = SubResource("CapsuleShape3D_0vrco")
 
 [node name="DudeFaceCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9119, 0)
-fov = 50.0
+fov = 60.0
+near = 0.001
 
 [node name="GrabSocket" type="Node3D" parent="DudeFaceCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0290618, -0.237393, -0.39012)

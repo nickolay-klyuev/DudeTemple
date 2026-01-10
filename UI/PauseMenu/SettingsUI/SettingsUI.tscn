@@ -1,0 +1,166 @@
+[gd_scene load_steps=6 format=3 uid="uid://1rrven6x4g73"]
+
+[ext_resource type="Theme" uid="uid://dftc7yvgsjtra" path="res://UI/PauseMenu/SettingsUI/SettingsUI.tres" id="1_bvkce"]
+[ext_resource type="Script" uid="uid://dtnv075jitefb" path="res://UI/PauseMenu/CS/SettingsUI.cs" id="1_p6plj"]
+[ext_resource type="Script" uid="uid://5qada6o1cbk7" path="res://UI/PauseMenu/CS/PercentageDisplay.cs" id="2_bvkce"]
+[ext_resource type="Script" uid="uid://bkffvkygoukrs" path="res://UI/PauseMenu/SettingsUI/CS/RebindKeyButton.cs" id="4_ijes6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijes6"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[node name="SettingsUI" type="Panel" node_paths=PackedStringArray("_cameraSpeed", "_cameraSpeedPercent", "_displayMode", "_applyButton", "_resetButton", "_rebindKeyMessage", "_controlsContainer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bvkce")
+script = ExtResource("1_p6plj")
+_cameraSpeed = NodePath("TabContainer/General/CameraSpeedContainer/CameraSpeed")
+_cameraSpeedPercent = NodePath("TabContainer/General/CameraSpeedContainer/PercentageDisplay")
+_displayMode = NodePath("TabContainer/General/DisplayModeContainer/DisplayMode")
+_applyButton = NodePath("TabContainer/General/ApplyResetContainer/Apply")
+_resetButton = NodePath("TabContainer/General/ApplyResetContainer/Reset")
+_rebindKeyMessage = NodePath("RebindingKeyMessage")
+_controlsContainer = NodePath("TabContainer/Controls")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.5
+offset_top = 11.0
+offset_right = 54.5
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "Settings"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.091
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.0319977
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 1
+
+[node name="General" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 25
+metadata/_edit_use_anchors_ = true
+metadata/_tab_index = 0
+
+[node name="CameraSpeedContainer" type="HBoxContainer" parent="TabContainer/General"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="CameraSpeedLabel" type="Label" parent="TabContainer/General/CameraSpeedContainer"]
+layout_mode = 2
+text = "Camera speed: "
+
+[node name="CameraSpeed" type="HSlider" parent="TabContainer/General/CameraSpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.3
+
+[node name="PercentageDisplay" type="Label" parent="TabContainer/General/CameraSpeedContainer"]
+layout_mode = 2
+text = "100%"
+script = ExtResource("2_bvkce")
+
+[node name="DisplayModeContainer" type="HBoxContainer" parent="TabContainer/General"]
+layout_mode = 2
+
+[node name="DisplayModeLabel" type="Label" parent="TabContainer/General/DisplayModeContainer"]
+layout_mode = 2
+text = "Display mode:"
+
+[node name="DisplayMode" type="OptionButton" parent="TabContainer/General/DisplayModeContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+selected = 0
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 3
+popup/item_2/text = "ExclusiveFullscreen"
+popup/item_2/id = 4
+
+[node name="ApplyResetContainer" type="HBoxContainer" parent="TabContainer/General"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Apply" type="Button" parent="TabContainer/General/ApplyResetContainer"]
+layout_mode = 2
+disabled = true
+text = "Apply"
+
+[node name="Reset" type="Button" parent="TabContainer/General/ApplyResetContainer"]
+layout_mode = 2
+disabled = true
+text = "Reset"
+
+[node name="Controls" type="VBoxContainer" parent="TabContainer"]
+editor_description = "Node scructure is hard ref to C#, don't change! Used in SettingsUI script!"
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MoveForward" type="HBoxContainer" parent="TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MoveForward"]
+layout_mode = 2
+text = "MoveForward: "
+
+[node name="RebindKeyButton" type="Button" parent="TabContainer/Controls/MoveForward"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+text = "W"
+script = ExtResource("4_ijes6")
+_actionName = "MoveForward"
+
+[node name="MoveBackward" type="HBoxContainer" parent="TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MoveBackward"]
+layout_mode = 2
+text = "MoveBackward: "
+
+[node name="RebindKeyButton" type="Button" parent="TabContainer/Controls/MoveBackward"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+text = "S"
+script = ExtResource("4_ijes6")
+_actionName = "MoveBackward"
+
+[node name="RebindingKeyMessage" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="RebindingKeyMessage"]
+custom_minimum_size = Vector2(2000, 2000)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijes6")
+
+[node name="Label" type="Label" parent="RebindingKeyMessage"]
+layout_mode = 2
+text = "Press ANY key for change..."
+
+[connection signal="value_changed" from="TabContainer/General/CameraSpeedContainer/CameraSpeed" to="TabContainer/General/CameraSpeedContainer/PercentageDisplay" method="Update"]
+[connection signal="RebindKeyButtonPressed" from="TabContainer/Controls/MoveForward/RebindKeyButton" to="." method="OnRebindKeyButtonPressed"]
+[connection signal="RebindKeyButtonPressed" from="TabContainer/Controls/MoveBackward/RebindKeyButton" to="." method="OnRebindKeyButtonPressed"]

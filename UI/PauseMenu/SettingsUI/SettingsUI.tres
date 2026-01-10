@@ -1,0 +1,66 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dftc7yvgsjtra"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi816"]
+bg_color = Color(0.486275, 0.486275, 0.486275, 0.392157)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hya3"]
+bg_color = Color(0.617454, 0.617455, 0.617455, 0.392157)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.862745)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8dnv"]
+bg_color = Color(0.486275, 0.486275, 0.486275, 0.392157)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.867686, 0.881869, 0.874702, 0.862745)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d86e3"]
+bg_color = Color(0.314316, 0.314316, 0.314316, 0.392157)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.471527, 0.502712, 0.487177, 0.862745)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_w6nin"]
+color = Color(0.937, 0.796, 0.408, 0.5)
+grow_begin = 0.0
+grow_end = 0.0
+
+[resource]
+Button/colors/font_color = Color(0.882353, 0.937255, 0.901961, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_bi816")
+Button/styles/hover = SubResource("StyleBoxFlat_5hya3")
+Button/styles/normal = SubResource("StyleBoxFlat_s8dnv")
+Button/styles/pressed = SubResource("StyleBoxFlat_d86e3")
+HSeparator/constants/separation = 1
+HSeparator/styles/separator = SubResource("StyleBoxLine_w6nin")
+Label/colors/font_color = Color(0.882353, 0.937255, 0.901961, 1)
+Label/font_sizes/font_size = 28
+VBoxContainer/constants/separation = 0
