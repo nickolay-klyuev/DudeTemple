@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://66y0bs2gjy50"]
+[gd_scene load_steps=59 format=3 uid="uid://66y0bs2gjy50"]
 
 [ext_resource type="Script" uid="uid://bpik32npf7o22" path="res://TempleState.cs" id="1_hpo4a"]
 [ext_resource type="Script" uid="uid://cfdo7hiexk7q7" path="res://TempleController.cs" id="2_am0gk"]
@@ -17,15 +17,20 @@
 [ext_resource type="PackedScene" uid="uid://cdur1t76kcw57" path="res://Environment/TV/Scenes/TVTable.tscn" id="16_rmwrf"]
 [ext_resource type="PackedScene" uid="uid://bjsfkv5kqmenn" path="res://CustomPosterSystem/Scenes/CustomPosterTest.tscn" id="17_1s2qa"]
 [ext_resource type="PackedScene" uid="uid://ba1gaacj3ueqy" path="res://Environment/TV/Scenes/TV.tscn" id="17_d5lhe"]
+[ext_resource type="PackedScene" uid="uid://jrfibdbtlycb" path="res://Environment/TV/Scenes/TV_Physics.tscn" id="19_jg44n"]
 [ext_resource type="PackedScene" uid="uid://r6cr03ilaj2o" path="res://BowlingBall/Scenes/BowlingBall.tscn" id="19_l0jl4"]
 [ext_resource type="PackedScene" uid="uid://c6qcraf8okeu7" path="res://Environment/Couch/Scenes/Couch.tscn" id="19_r7iic"]
 [ext_resource type="PackedScene" uid="uid://fluugsl4cp6s" path="res://BarPrototype/Scenes/BarNormalSize.tscn" id="20_sm8d2"]
 [ext_resource type="Script" uid="uid://deawfmhic1mhx" path="res://Pins/CS/PinsManager.cs" id="20_sm84q"]
 [ext_resource type="LightmapGIData" uid="uid://lm57nf0p443f" path="res://Temple.lmbake" id="23_ts3yy"]
 [ext_resource type="PackedScene" uid="uid://dd2wugdjlm60t" path="res://Environment/DynamicNeonSign/DynamicNeonSign.tscn" id="24_4jptv"]
+[ext_resource type="PackedScene" uid="uid://b5twva22fxyi3" path="res://Environment/Console/Scenes/ConsolePhysics.tscn" id="24_cjc7y"]
 [ext_resource type="PackedScene" uid="uid://df4xxa4gwm83c" path="res://UI/PauseMenu/PauseMenu.tscn" id="24_he8l3"]
 [ext_resource type="PackedScene" uid="uid://bs5kp8hdxb4df" path="res://BallReturn/BallReturn.tscn" id="24_x3p8o"]
+[ext_resource type="PackedScene" uid="uid://chowe1uwapotj" path="res://Environment/Couch/Scenes/CouchPhysics.tscn" id="27_qxj8q"]
 [ext_resource type="PackedScene" uid="uid://u8crpqlj5pht" path="res://Environment/WC/ToiletBowl.tscn" id="28_ig3xg"]
+[ext_resource type="PackedScene" uid="uid://rh538n000evq" path="res://BarPrototype/Scenes/BarPhysics.tscn" id="28_nbxi8"]
+[ext_resource type="PackedScene" uid="uid://cecfbfm7wx1kd" path="res://Environment/TV/Scenes/TVTable_Physics.tscn" id="29_ikli0"]
 
 [sub_resource type="Environment" id="Environment_f4q88"]
 background_energy_multiplier = 0.4
@@ -543,6 +548,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 12)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145, 0, 14)
 
 [node name="FurnitureManager" type="Node3D" parent="." node_paths=PackedStringArray("_userData", "_furnitures")]
+process_mode = 4
+visible = false
 script = ExtResource("14_teffm")
 _userData = NodePath("../UserDataHolder")
 _furnitures = [NodePath("BarNormalSize"), NodePath("Couch"), NodePath("TVTable"), NodePath("TV"), NodePath("Console"), NodePath("Door")]
@@ -551,10 +558,10 @@ _furnitures = [NodePath("BarNormalSize"), NodePath("Couch"), NodePath("TVTable")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6893, 0, -0.78292)
 
 [node name="TV" parent="FurnitureManager" instance=ExtResource("17_d5lhe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6748, 0.838658, -0.78967)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8154, 0.838658, -0.78967)
 
 [node name="Console" parent="FurnitureManager" instance=ExtResource("16_mchgi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7, 0.371, -0.561673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6855, 0.371, -0.561673)
 
 [node name="Couch" parent="FurnitureManager" instance=ExtResource("19_r7iic")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.6894, 0, 2.04388)
@@ -564,6 +571,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6067, 0, 13.0901)
 
 [node name="Door" parent="FurnitureManager" instance=ExtResource("9_y88qk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8447, -4.76837e-07, 15.2752)
+
+[node name="FurniturePhysics" type="Node3D" parent="."]
+
+[node name="TVTable_Physics" parent="FurniturePhysics" instance=ExtResource("29_ikli0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5971, 0.0147323, -0.879971)
+
+[node name="TV_Physics" parent="FurniturePhysics" instance=ExtResource("19_jg44n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8048, 0.843236, -0.710735)
+
+[node name="Console_Physics" parent="FurniturePhysics" instance=ExtResource("24_cjc7y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8041, 0.861736, -0.702649)
+
+[node name="Couch_Physics" parent="FurniturePhysics" instance=ExtResource("27_qxj8q")]
+transform = Transform3D(-0.0128453, 0, 0.999918, 0, 1, 0, -0.999918, 0, -0.0128453, -12.4169, 0, 1.72247)
+
+[node name="Bar_Physics" parent="FurniturePhysics" instance=ExtResource("28_nbxi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1456, 0.0380142, 11.4144)
 
 [node name="DynamicNeonSign" parent="." instance=ExtResource("24_4jptv")]
 transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 10.6319, 2.81033, 5.04055)

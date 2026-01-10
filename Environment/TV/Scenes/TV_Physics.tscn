@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://jrfibdbtlycb"]
+
+[ext_resource type="PackedScene" uid="uid://ba1gaacj3ueqy" path="res://Environment/TV/Scenes/TV.tscn" id="1_2ksjn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ksjn"]
+size = Vector3(0.6026, 0.0248413, 0.304626)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7tx2"]
+size = Vector3(1.48627, 0.86438, 0.0507202)
+
+[node name="TV_Physics" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 7
+
+[node name="TV" parent="." instance=ExtResource("1_2ksjn")]
+
+[node name="CollisionShape3D_Base" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000396729, 0.000213623, 3.05176e-05)
+shape = SubResource("BoxShape3D_2ksjn")
+
+[node name="CollisionShape3D_Screen" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00088501, 0.544861, -0.00180054)
+shape = SubResource("BoxShape3D_d7tx2")

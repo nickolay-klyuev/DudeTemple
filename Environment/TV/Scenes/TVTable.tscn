@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://cgxpwfli76kyr" path="res://Environment/TV/Materials/TVTable-glass-material.tres" id="2_5q3td"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8jkiy"]
-size = Vector3(2.5274, 2.25262, 0.714111)
+size = Vector3(2.5274, 0.849296, 0.714111)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gitsc"]
 albedo_color = Color(0.423529, 0.32549, 0.298039, 1)
@@ -24,7 +24,7 @@ _collision = NodePath("TVTableCollision/CollisionShape3D")
 [node name="TVTableCollision" type="StaticBody3D" parent="." index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TVTableCollision" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00595093, 1.08573, 0.00012207)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00595093, 0.408588, 0.00012207)
 shape = SubResource("BoxShape3D_8jkiy")
 
 [node name="Cube_004" parent="." index="1"]

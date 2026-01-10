@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqjdvfgds5pb1"]
+
+[ext_resource type="PackedScene" uid="uid://c0pn1hkaxas8w" path="res://BarPrototype/Scenes/Bottles/Glass.tscn" id="1_hu70h"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_is3iv"]
+height = 0.0717773
+radius = 0.046875
+
+[node name="Glass_Physics" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 7
+mass = 0.1
+continuous_cd = true
+
+[node name="Glass" parent="." instance=ExtResource("1_hu70h")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0354004, 0)
+shape = SubResource("CylinderShape3D_is3iv")
