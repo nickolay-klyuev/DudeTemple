@@ -4,14 +4,13 @@ DudeTemple is a bowling game made with [Godot Engine](https://godotengine.org/).
 
 ## Features
 
-Right now it has the following implemented features:
-  - simple bowling gameplay loop
+  - bowling gameplay, based on physics
   - customizing wall posters with your pictures
   - auto save
 
 ## Download
 
-You can download a prototype build from a github [Releases page](https://github.com/nickolay-klyuev/DudeTemple/releases)
+You can download a build from [github releases page](https://github.com/nickolay-klyuev/DudeTemple/releases) or [itch.io site](https://nicko-k.itch.io/dude-temple)
 
 ## Screenshots
 
@@ -21,9 +20,9 @@ You can download a prototype build from a github [Releases page](https://github.
   <img src="/Screenshots/Screenshot_3.png?raw=true" alt="Screenshot_3" width="200"/>
 </div>
 
-## Game Engine Version
+## Game Engine
 
-Godot Engine - .NET 4.4
+Godot Engine - .NET 4.6
 
 ## License
 
