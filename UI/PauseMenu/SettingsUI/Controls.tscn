@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dxov07jn8e7dy"]
+
+[ext_resource type="Script" uid="uid://bkffvkygoukrs" path="res://UI/PauseMenu/SettingsUI/CS/RebindKeyButton.cs" id="1_ewes5"]
+
+[node name="Controls" type="VBoxContainer" unique_id=2005329132]
+editor_description = "Node scructure is hard ref to C#, don't change! Used in SettingsUI script!"
+metadata/_tab_index = 1
+
+[node name="MoveForward" type="HBoxContainer" parent="." unique_id=1439524064]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MoveForward" unique_id=365191525]
+layout_mode = 2
+text = "MoveForward: "
+
+[node name="RebindKeyButton" type="Button" parent="MoveForward" unique_id=1359470331]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+text = "W"
+script = ExtResource("1_ewes5")
+_actionName = "MoveForward"
+
+[node name="MoveBackward" type="HBoxContainer" parent="." unique_id=1988885421]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MoveBackward" unique_id=476470232]
+layout_mode = 2
+text = "MoveBackward: "
+
+[node name="RebindKeyButton" type="Button" parent="MoveBackward" unique_id=361535269]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+text = "S"
+script = ExtResource("1_ewes5")
+_actionName = "MoveBackward"

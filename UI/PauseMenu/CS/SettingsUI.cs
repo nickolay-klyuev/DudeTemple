@@ -13,7 +13,7 @@ public partial class SettingsUI : Panel
 
 	[ExportCategory("Control Settings")]
 	[Export] private Control _rebindKeyMessage;
-	[Export] private Container _controlsContainer;
+	//[Export] private Container _controlsContainer;
 
 	private DudeSettings _generalSettings;
 	private ControlSettings _controlSettings;
@@ -38,7 +38,7 @@ public partial class SettingsUI : Panel
 
 #if DEBUG
 		CheckHelper.Check(this, _generalSettings, _controlSettings, _cameraSpeed, _cameraSpeedPercent,
-			_displayMode, _applyButton, _resetButton, _rebindKeyMessage, _controlsContainer);
+			_displayMode, _applyButton, _resetButton, _rebindKeyMessage);
 #endif
 
 		_rebindKeyMessage.Visible = false;
@@ -134,9 +134,9 @@ public partial class SettingsUI : Panel
 
 	private void UpdateControlsUI()
 	{
-		ControlSettings._cfg settings = _controlSettings.Get();
+		//ControlSettings._cfg settings = _controlSettings.Get();
 
-		Button button = _controlsContainer.GetNode<Button>("MoveForward/RebindKeyButton");
-		button.Text = settings.MoveForward.AsText();
+		//Button button = _controlsContainer.GetNode<Button>("MoveForward/RebindKeyButton");
+		//button.Text = settings.MoveForward.AsText();
 	}
 }

@@ -41,7 +41,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -375.0
+offset_top = -306.0
 offset_right = 375.0
+offset_bottom = 306.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slexg")
@@ -66,21 +68,28 @@ layout_mode = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1904503524]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 14
 text = "Hello!
 
-The main goal is to chill while playing bowling.
+This game doesn't have any goal or a proper game design. It is about chilling and playing bowling for fun.
 
 You can customize walls with your own favorite images by interacting with the poster placeholders.
 
-Hope you will have fun!
+To move you can use WASD keys and mouse for camera rotation. 
 
-Be cool dudes!!!"
+To grab a ball or interact with something you can use E key. 
+
+For throwing a bowling ball you have to hold left mouse button and release it after you get enough power. 
+
+ESC - for menu
+
+Be cool dudes!"
 fit_content = true
 
 [node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1139217156]
 layout_mode = 2
 texture = ExtResource("2_fs58y")
+stretch_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=205703027]
 layout_mode = 2
