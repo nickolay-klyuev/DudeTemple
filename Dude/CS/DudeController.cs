@@ -22,7 +22,10 @@ public partial class DudeController : CharacterBody3D
 	private float _speed = 5.0f;
 
 	[Export]
-	private float _sprintSpeed = 7.0f;
+	private float _sprintSpeed = 9.0f;
+	
+	[Export]
+	private float _withBallSpeedMod = -3.0f;
 
 	[Export]
 	private Label _interactLabel;
@@ -69,6 +72,9 @@ public partial class DudeController : CharacterBody3D
 	private DudeSettings _settings;
 
 	private float _cameraSpeed = 1.0f;
+	
+	private float _currentSpeed = 0.0f;
+	private float _goalSpeed = 0.0f;
 
 	public override void _Ready()
 	{
@@ -116,15 +122,7 @@ public partial class DudeController : CharacterBody3D
 		}
 
 		// Sprint check
-		float currentSpeed;
-		if (Input.IsActionPressed("Sprint"))
-		{
-			currentSpeed = _sprintSpeed;
-		}
-		else
-		{
-			currentSpeed = _speed;
-		}
+		bool isSprint = Input.IsActionPressed("Sprint");
 
 		Vector3 velocity = Velocity;
 
@@ -144,13 +142,32 @@ public partial class DudeController : CharacterBody3D
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{
-			velocity.X = direction.X * currentSpeed;
-			velocity.Z = direction.Z * currentSpeed;
+			if (isSprint)
+			{
+				_goalSpeed = _sprintSpeed;
+			}
+			else
+			{
+				_goalSpeed = _speed;
+			}
+			
+			if (_bIsHoldingThing)
+			{
+				_goalSpeed += _withBallSpeedMod;
+			}
+			
+			_currentSpeed = Mathf.Lerp(_currentSpeed, _goalSpeed, (float)delta * 6.0f);
+			
+			velocity.X = direction.X * _currentSpeed;
+			velocity.Z = direction.Z * _currentSpeed;
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, currentSpeed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, currentSpeed);
+			_goalSpeed = 0.0f;
+			_currentSpeed = Mathf.Lerp(_currentSpeed, _goalSpeed, (float)delta * 6.0f);
+			
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, _currentSpeed);
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, _currentSpeed);
 		}
 
 		if (IsOnFloor())
