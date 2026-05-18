@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://ojejbrp2hepx"]
+[gd_scene format=4 uid="uid://ojejbrp2hepx"]
 
 [ext_resource type="Script" uid="uid://hi1may5lbr31" path="res://Environment/Door/CS/Door.cs" id="1_c4pq3"]
 [ext_resource type="Material" uid="uid://cxg8u7ire2s2b" path="res://Environment/Materials/DoorHandle_metalic.tres" id="2_0lwo0"]
@@ -103,8 +103,8 @@ seed = 1340
 frequency = 0.0035
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ai42m"]
-seamless = true
 noise = SubResource("FastNoiseLite_sva8x")
+seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3ocut"]
 noise_type = 2
@@ -112,16 +112,16 @@ seed = 140
 frequency = 0.022
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_udtrt"]
-seamless = true
 noise = SubResource("FastNoiseLite_3ocut")
+seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8jnh5"]
 noise_type = 5
 seed = 540
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v6bne"]
-seamless = true
 noise = SubResource("FastNoiseLite_8jnh5")
+seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1kkg"]
 albedo_color = Color(0.669051, 0.448253, 0.177451, 1)
@@ -232,73 +232,71 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8qj7u")
 
-[node name="Door" type="Node3D"]
+[node name="Door" type="Node3D" unique_id=1616185724]
 script = ExtResource("1_c4pq3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_216xn")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1363492516]
+libraries/ = SubResource("AnimationLibrary_216xn")
 
-[node name="DoorBody" type="StaticBody3D" parent="."]
+[node name="DoorBody" type="StaticBody3D" parent="." unique_id=1795858484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
 collision_layer = 2049
 collision_mask = 2049
 script = ExtResource("2_jgkun")
 
-[node name="Cube" type="MeshInstance3D" parent="DoorBody"]
+[node name="Cube" type="MeshInstance3D" parent="DoorBody" unique_id=87136849]
 transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.025, 0, 1, 0)
 mesh = SubResource("ArrayMesh_7ocaw")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_s1kkg")
 
-[node name="Decal" type="Decal" parent="DoorBody"]
+[node name="Decal" type="Decal" parent="DoorBody" unique_id=1830509419]
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 1.589, -0.042)
 size = Vector3(0.662994, 0.116592, 0.443626)
 texture_albedo = ExtResource("2_5u8os")
 texture_normal = ExtResource("2_5u8os")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBody" unique_id=373600650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00066, 0.00231934)
 shape = SubResource("BoxShape3D_hicva")
 
-[node name="DoorHandle" type="Node3D" parent="DoorBody"]
+[node name="DoorHandle" type="Node3D" parent="DoorBody" unique_id=1965088286]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.342632, 0.979139, 0)
 
-[node name="Cube_001" type="MeshInstance3D" parent="DoorBody/DoorHandle"]
+[node name="Cube_001" type="MeshInstance3D" parent="DoorBody/DoorHandle" unique_id=338824907]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00022164, 0.0092552, -0.0388577)
 mesh = SubResource("ArrayMesh_h5w22")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_0lwo0")
 
-[node name="Cylinder" type="MeshInstance3D" parent="DoorBody/DoorHandle"]
+[node name="Cylinder" type="MeshInstance3D" parent="DoorBody/DoorHandle" unique_id=32344719]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, -0.0522946, 0.0092552, -0.0507371)
 mesh = SubResource("ArrayMesh_dknbq")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_0lwo0")
 
-[node name="Cylinder_001" type="MeshInstance3D" parent="DoorBody/DoorHandle"]
+[node name="Cylinder_001" type="MeshInstance3D" parent="DoorBody/DoorHandle" unique_id=1528545617]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.00100359, 0.0092552, -0.0262651)
 mesh = SubResource("ArrayMesh_splbj")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_0lwo0")
 
-[node name="DoorHandle2" type="Node3D" parent="DoorBody"]
+[node name="DoorHandle2" type="Node3D" parent="DoorBody" unique_id=874223319]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0.342632, 0.979139, 0.00115296)
 
-[node name="Cube_001" type="MeshInstance3D" parent="DoorBody/DoorHandle2"]
+[node name="Cube_001" type="MeshInstance3D" parent="DoorBody/DoorHandle2" unique_id=36741903]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00022164, 0.0092552, -0.0388577)
 mesh = SubResource("ArrayMesh_h5w22")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_0lwo0")
 
-[node name="Cylinder" type="MeshInstance3D" parent="DoorBody/DoorHandle2"]
+[node name="Cylinder" type="MeshInstance3D" parent="DoorBody/DoorHandle2" unique_id=1943272174]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, -0.0522946, 0.0092552, -0.0507371)
 mesh = SubResource("ArrayMesh_dknbq")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_0lwo0")
 
-[node name="Cylinder_001" type="MeshInstance3D" parent="DoorBody/DoorHandle2"]
+[node name="Cylinder_001" type="MeshInstance3D" parent="DoorBody/DoorHandle2" unique_id=439232148]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.00100359, 0.0092552, -0.0262651)
 mesh = SubResource("ArrayMesh_splbj")
 skeleton = NodePath("")

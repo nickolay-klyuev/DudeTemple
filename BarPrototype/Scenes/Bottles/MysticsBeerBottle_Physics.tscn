@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dtwaccsbseuty"]
+
+[ext_resource type="PackedScene" uid="uid://cyhy3s6pg3p10" path="res://BarPrototype/Scenes/Bottles/MysticsBeerBottle.tscn" id="1_otsvi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_otsvi"]
+size = Vector3(0.06591797, 0.19268036, 0.06628418)
+
+[node name="MysticsBeerBottle_Physics" type="RigidBody3D" unique_id=24816156]
+collision_layer = 2
+collision_mask = 7
+mass = 0.1
+continuous_cd = true
+
+[node name="MysticsBeerBottle" parent="." unique_id=1068208917 instance=ExtResource("1_otsvi")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1142157654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00024414063, 0.09621383, 6.1035156e-05)
+shape = SubResource("BoxShape3D_otsvi")

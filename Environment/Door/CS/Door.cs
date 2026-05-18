@@ -5,7 +5,7 @@ public partial class Door : Node3D, IFurniture
 {
 	[Export] private AnimationPlayer _animPlayer;
 
-	private bool _bIsEnabled = false;
+	private bool _bIsEnabled = true;
 	private bool _bIsClosed = true;
 	
 	// Called when the node enters the scene tree for the first time.

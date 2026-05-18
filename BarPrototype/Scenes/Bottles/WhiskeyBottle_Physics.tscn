@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://f5vb4pmyjct0"]
+
+[ext_resource type="PackedScene" uid="uid://bc780cjl1r1oj" path="res://BarPrototype/Scenes/Bottles/WhiskeyBottle.tscn" id="1_d4564"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wufvt"]
+size = Vector3(0.0562842, 0.237378, 0.0434969)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d4564"]
+height = 0.137163
+radius = 0.025
+
+[node name="WhiskeyBottle_Physics" type="RigidBody3D" unique_id=689576270]
+collision_layer = 2
+collision_mask = 7
+mass = 0.1
+continuous_cd = true
+
+[node name="WhiskeyBottle" parent="." unique_id=732090300 instance=ExtResource("1_d4564")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1733564199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0011548, 0.118811, 0.000730671)
+shape = SubResource("BoxShape3D_wufvt")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1449610091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0691138, -0.0347613)
+shape = SubResource("CylinderShape3D_d4564")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1016334059]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0691138, 0.0347627)
+shape = SubResource("CylinderShape3D_d4564")

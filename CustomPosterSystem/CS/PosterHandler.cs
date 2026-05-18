@@ -75,7 +75,10 @@ public partial class PosterHandler : Decal
 
 	private void OnPosterImagesLoaded(Dictionary<string, string> posterImages)
 	{
-		SetNewPosterImage(posterImages[_posterId]);
+		if (posterImages.ContainsKey(_posterId))
+		{
+			SetNewPosterImage(posterImages[_posterId]);
+		}
 	}
 
 	private void SetNewPosterImage(string imagePath)

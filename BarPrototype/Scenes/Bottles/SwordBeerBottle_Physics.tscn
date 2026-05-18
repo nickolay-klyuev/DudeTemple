@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bk6mxjy5hn8qa"]
+
+[ext_resource type="PackedScene" uid="uid://dpx41vnabpa0n" path="res://BarPrototype/Scenes/Bottles/SwordBeerBottle.tscn" id="1_lflqt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lflqt"]
+size = Vector3(0.06549072, 0.1930542, 0.06626892)
+
+[node name="SwordBeerBottle_Physics" type="RigidBody3D" unique_id=1975084259]
+collision_layer = 2
+collision_mask = 7
+mass = 0.1
+continuous_cd = true
+
+[node name="SwordBeerBottle" parent="." unique_id=406585341 instance=ExtResource("1_lflqt")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=697524716]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000579834, 0.09646851, -0.00016021729)
+shape = SubResource("BoxShape3D_lflqt")
