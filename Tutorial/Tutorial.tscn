@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfej2ixqo1g5m"]
+[gd_scene format=3 uid="uid://dfej2ixqo1g5m"]
 
 [ext_resource type="Theme" uid="uid://k5wcmjh1ndtk" path="res://UI/PauseMenu/PauseMenu.tres" id="1_uf473"]
 [ext_resource type="Texture2D" uid="uid://cgtxqh11bkolg" path="res://Tutorial/dude-drink.png" id="2_fs58y"]
 [ext_resource type="Script" uid="uid://463175vrj88q" path="res://Tutorial/Tutorial.cs" id="2_wqkcd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slexg"]
-bg_color = Color(0, 0.633, 0.793, 0.5)
+bg_color = Color(0, 0.6313726, 0.7921569, 1)
 skew = Vector2(0.03, 0)
 border_width_left = 2
 border_width_top = 2
@@ -20,7 +20,7 @@ shadow_color = Color(0, 0, 0, 0.1)
 shadow_size = 5
 shadow_offset = Vector2(2, 2)
 
-[node name="Tutorial" type="Control" node_paths=PackedStringArray("_dontShowCheckBox")]
+[node name="Tutorial" type="Control" unique_id=1505463372 node_paths=PackedStringArray("_dontShowCheckBox")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -32,7 +32,7 @@ theme = ExtResource("1_uf473")
 script = ExtResource("2_wqkcd")
 _dontShowCheckBox = NodePath("Panel/HBoxContainer/DontShowCheckBox")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=346328072]
 custom_minimum_size = Vector2(750, 450)
 layout_mode = 1
 anchors_preset = 8
@@ -46,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slexg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1758376608]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -60,41 +60,39 @@ offset_bottom = 23.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=320342470]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1904503524]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
-text = "Thanks for downloading this game!
+text = "Hello!
 
-The main goal is to chill and relax playing bowling.
+The main goal is to chill while playing bowling.
 
-After playing for a bit and getting some points you can buy new furniture for the bowling room.
-
-Also you can customize posters on the wall with your own images, just interact with icons on the walls.
+You can customize walls with your own favorite images by interacting with the poster placeholders.
 
 Hope you will have fun!
 
 Be cool dudes!!!"
 fit_content = true
 
-[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1139217156]
 layout_mode = 2
 texture = ExtResource("2_fs58y")
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=205703027]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer" unique_id=1570250948]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Okay let's go"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=800673907]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -105,10 +103,10 @@ offset_right = 114.0
 offset_bottom = -19.0
 grow_vertical = 0
 
-[node name="DontShowCheckBox" type="CheckBox" parent="Panel/HBoxContainer"]
+[node name="DontShowCheckBox" type="CheckBox" parent="Panel/HBoxContainer" unique_id=1139642709]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/HBoxContainer" unique_id=1825065692]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "don't show"

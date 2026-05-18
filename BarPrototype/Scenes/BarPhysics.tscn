@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://rh538n000evq"]
+[gd_scene format=4 uid="uid://rh538n000evq"]
 
 [ext_resource type="Material" uid="uid://bsqahixw4a0r7" path="res://BarPrototype/Materials/BarTableMaterial.tres" id="1_fcnhb"]
 [ext_resource type="Material" uid="uid://dcocax377r8er" path="res://BarPrototype/Materials/BarCabinetMaterial.tres" id="2_1surp"]
@@ -324,226 +324,217 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 2.0
 
-[node name="Bar_Physics" type="Node3D"]
+[node name="Bar_Physics" type="Node3D" unique_id=203436346]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1077864234]
 collision_layer = 2
 collision_mask = 7
 mass = 50.0
+sleeping = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1108366265]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.427155, 0.504395, 0.00210571)
 shape = SubResource("BoxShape3D_fcnhb")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D" unique_id=438864530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.780441, 1.11018, 0.00106812)
 shape = SubResource("BoxShape3D_1surp")
 
-[node name="Cube" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="Cube" type="MeshInstance3D" parent="RigidBody3D" unique_id=1484778179]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.182466, 1.10533, 0)
 mesh = SubResource("ArrayMesh_c2sut")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_fcnhb")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="RigidBody3D/Cube"]
+[node name="SpotLight3D" type="SpotLight3D" parent="RigidBody3D/Cube" unique_id=1576333803]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.908671, -0.0433582, 0)
 light_energy = 2.0
 spot_range = 1.0
 spot_angle = 70.0
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="RigidBody3D/Cube"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="RigidBody3D/Cube" unique_id=138710777]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.908671, -0.0433582, 1.24724)
 light_energy = 2.0
 spot_range = 1.0
 spot_angle = 70.0
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="RigidBody3D/Cube"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="RigidBody3D/Cube" unique_id=1426772615]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.908671, -0.0433582, -1.29865)
 light_energy = 2.0
 spot_range = 1.0
 spot_angle = 70.0
 
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=1101311943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52847, 0.771143, 0.764189)
 collision_layer = 2
 collision_mask = 7
 mass = 20.0
 
-[node name="CollisionShape3D_Left" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Left" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1422670827]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00704956, 0.646948, 0.727955)
 shape = SubResource("BoxShape3D_cyfd7")
 
-[node name="CollisionShape3D_Right" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Right" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1394585563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0108643, 0.646071, -0.308489)
 shape = SubResource("BoxShape3D_cyfd7")
 
-[node name="CollisionShape3D_Top" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Top" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1937570565]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00789642, 2.02024, 0.210571)
 shape = SubResource("BoxShape3D_2iyaj")
 
-[node name="CollisionShape3D_Bottom" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Bottom" type="CollisionShape3D" parent="RigidBody3D2" unique_id=318845429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, -0.728997, 0.209122)
 shape = SubResource("BoxShape3D_2iyaj")
 
-[node name="CollisionShape3D_Middle" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Middle" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1461873630]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00850677, -0.187531, 0.209015)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="CollisionShape3D_Middle2" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Middle2" type="CollisionShape3D" parent="RigidBody3D2" unique_id=373441928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, 0.367266, 0.210629)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="CollisionShape3D_Middle3" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Middle3" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1048607380]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, 0.925848, 0.210629)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="CollisionShape3D_Middle4" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D_Middle4" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1537728610]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, 1.48287, 0.210629)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="Cube_001" type="MeshInstance3D" parent="RigidBody3D2"]
+[node name="Cube_001" type="MeshInstance3D" parent="RigidBody3D2" unique_id=1642567933]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 mesh = SubResource("ArrayMesh_cyfd7")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_1surp")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="RigidBody3D2/Cube_001"]
+[node name="SpotLight3D" type="SpotLight3D" parent="RigidBody3D2/Cube_001" unique_id=1205326205]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.67141, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
-shadow_opacity = 0.7
-shadow_blur = 1.5
+shadow_opacity = 0.5
+shadow_blur = 5.0
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="RigidBody3D2/Cube_001"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="RigidBody3D2/Cube_001" unique_id=1313277493]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.93427, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
-shadow_opacity = 0.7
-shadow_blur = 1.5
+shadow_opacity = 0.5
+shadow_blur = 5.0
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="RigidBody3D2/Cube_001"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="RigidBody3D2/Cube_001" unique_id=946911175]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.20386, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
-shadow_opacity = 0.7
-shadow_blur = 1.5
+shadow_opacity = 0.5
+shadow_blur = 5.0
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="RigidBody3D2/Cube_001"]
+[node name="SpotLight3D4" type="SpotLight3D" parent="RigidBody3D2/Cube_001" unique_id=960418674]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.444315, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
-shadow_opacity = 0.7
-shadow_blur = 1.5
+shadow_opacity = 0.5
+shadow_blur = 5.0
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="RigidBody3D2/Cube_001"]
+[node name="SpotLight3D5" type="SpotLight3D" parent="RigidBody3D2/Cube_001" unique_id=707147855]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.300824, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
-shadow_opacity = 0.7
-shadow_blur = 1.5
+shadow_opacity = 0.5
+shadow_blur = 5.0
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+[node name="RigidBody3D3" type="RigidBody3D" parent="." unique_id=1961040632]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52785, 0.771143, -1.20669)
 collision_layer = 2
 collision_mask = 7
 mass = 20.0
 
-[node name="CollisionShape3D_Left" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Left" type="CollisionShape3D" parent="RigidBody3D3" unique_id=2109417847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00704956, 0.646948, 0.727955)
 shape = SubResource("BoxShape3D_cyfd7")
 
-[node name="CollisionShape3D_Right" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Right" type="CollisionShape3D" parent="RigidBody3D3" unique_id=1474687875]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0108643, 0.646071, -0.308489)
 shape = SubResource("BoxShape3D_cyfd7")
 
-[node name="CollisionShape3D_Top" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Top" type="CollisionShape3D" parent="RigidBody3D3" unique_id=1087387856]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00789642, 2.02024, 0.210571)
 shape = SubResource("BoxShape3D_2iyaj")
 
-[node name="CollisionShape3D_Bottom" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Bottom" type="CollisionShape3D" parent="RigidBody3D3" unique_id=415450081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, -0.728997, 0.209122)
 shape = SubResource("BoxShape3D_2iyaj")
 
-[node name="CollisionShape3D_Middle" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Middle" type="CollisionShape3D" parent="RigidBody3D3" unique_id=996175342]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00850677, -0.187531, 0.209015)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="CollisionShape3D_Middle2" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Middle2" type="CollisionShape3D" parent="RigidBody3D3" unique_id=133104092]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, 0.367266, 0.210629)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="CollisionShape3D_Middle3" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Middle3" type="CollisionShape3D" parent="RigidBody3D3" unique_id=949858267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, 0.925848, 0.210629)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="CollisionShape3D_Middle4" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D_Middle4" type="CollisionShape3D" parent="RigidBody3D3" unique_id=896261430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130005, 1.48287, 0.210629)
 shape = SubResource("BoxShape3D_yusos")
 
-[node name="Cube_002" type="MeshInstance3D" parent="RigidBody3D3"]
+[node name="Cube_002" type="MeshInstance3D" parent="RigidBody3D3" unique_id=423454421]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 mesh = SubResource("ArrayMesh_yusos")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_1surp")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="RigidBody3D3/Cube_002"]
+[node name="SpotLight3D" type="SpotLight3D" parent="RigidBody3D3/Cube_002" unique_id=416270471]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.67141, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
 shadow_opacity = 0.7
 shadow_blur = 1.5
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="RigidBody3D3/Cube_002"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="RigidBody3D3/Cube_002" unique_id=903703615]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.93427, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
 shadow_opacity = 0.7
 shadow_blur = 1.5
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="RigidBody3D3/Cube_002"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="RigidBody3D3/Cube_002" unique_id=763070162]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.20386, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
 shadow_opacity = 0.7
 shadow_blur = 1.5
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="RigidBody3D3/Cube_002"]
+[node name="SpotLight3D4" type="SpotLight3D" parent="RigidBody3D3/Cube_002" unique_id=1135802899]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.444315, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
 shadow_opacity = 0.7
 shadow_blur = 1.5
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="RigidBody3D3/Cube_002"]
+[node name="SpotLight3D5" type="SpotLight3D" parent="RigidBody3D3/Cube_002" unique_id=1708642659]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.300824, 0.225803)
-shadow_enabled = true
 shadow_bias = 0.001
 shadow_opacity = 0.7
 shadow_blur = 1.5
 spot_range = 0.7
 spot_angle = 75.0
 
-[node name="Node3D" type="Node3D" parent="RigidBody3D3"]
+[node name="Node3D" type="Node3D" parent="RigidBody3D3" unique_id=1308715645]
 
-[node name="Mirror" type="RigidBody3D" parent="."]
+[node name="Mirror" type="RigidBody3D" parent="." unique_id=694787455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47124, 1.77095, 0)
 collision_layer = 2
 collision_mask = 7
@@ -553,84 +544,301 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("3_tsihp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirror"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirror" unique_id=599315997]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24088, -0.00274622, -0.00226951)
 shape = SubResource("BoxShape3D_c2sut")
 
-[node name="Cube_003" type="MeshInstance3D" parent="Mirror"]
+[node name="Cube_003" type="MeshInstance3D" parent="Mirror" unique_id=778524691]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 mesh = SubResource("ArrayMesh_2iyaj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_tsihp")
 
-[node name="MirrorFront" type="MeshInstance3D" parent="Mirror"]
+[node name="MirrorFront" type="MeshInstance3D" parent="Mirror" unique_id=1628141243]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.235559, 0.197206, 0)
 mesh = SubResource("ArrayMesh_f372n")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_18p7x")
 
-[node name="Cable" type="MeshInstance3D" parent="."]
+[node name="Cable" type="MeshInstance3D" parent="." unique_id=1202781381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202548, 3.93308, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_qe1lq")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_3k8h4")
 
-[node name="Lamp" type="MeshInstance3D" parent="."]
+[node name="Lamp" type="MeshInstance3D" parent="." unique_id=998080231]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202548, 2.90291, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_qaxi6")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_xc57o")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Lamp"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Lamp" unique_id=1678737000]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-shadow_enabled = true
-shadow_bias = 0.001
-shadow_opacity = 0.5
-shadow_blur = 1.5
+shadow_bias = 0.01
+shadow_opacity = 0.8
 spot_range = 6.0
 spot_angle = 60.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Lamp"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lamp" unique_id=1601647806]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.109227, 0)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_f21ga")
 surface_material_override/0 = SubResource("StandardMaterial3D_ce57o")
 
-[node name="Bottles" type="Node3D" parent="."]
+[node name="Bottles" type="Node3D" parent="." unique_id=688557306]
 
-[node name="WhiskeyBottle_Physics" parent="Bottles" instance=ExtResource("3_2iyaj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80478, 1.20107, 1.19395)
+[node name="WhiskeyBottle_Physics" parent="Bottles" unique_id=378638841 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9279078, 0, 0.37280962, 0, 1, 0, -0.37280962, 0, 0.9279078, 0.80478, 1.1996967, 1.19395)
 
-[node name="Mug_Physics" parent="Bottles" instance=ExtResource("4_tsihp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675346, 1.20101, 0.665913)
+[node name="WhiskeyBottle_Physics2" parent="Bottles" unique_id=51103438 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.89707345, 0, 0.44188172, 0, 1, 0, -0.44188172, 0, 0.89707345, -1.5437623, 0.6299615, 1.315446)
 
-[node name="MysticsBeerBottle_Physics" parent="Bottles" instance=ExtResource("5_f372n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.189752, 1.03772, -0.159844)
+[node name="WhiskeyBottle_Physics6" parent="Bottles" unique_id=315902331 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.82363164, 0, -0.56712514, 0, 1, 0, 0.56712514, 0, 0.82363164, -1.4497507, 0.6299615, 0.5666837)
 
-[node name="SwordBeerBottle_Physics" parent="Bottles" instance=ExtResource("6_18p7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.87266, 1.20072, -0.691527)
+[node name="WhiskeyBottle_Physics3" parent="Bottles" unique_id=559286134 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.89707345, 0, 0.44188172, 0, 1, 0, -0.44188172, 0, 0.89707345, -1.4995058, 1.1805973, 1.1815361)
 
-[node name="Glass_Physics" parent="Bottles" instance=ExtResource("7_qe1lq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.387493, 1.0293, -1.32399)
+[node name="WhiskeyBottle_Physics4" parent="Bottles" unique_id=1863479937 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9917205, 0, -0.12841482, 0, 1, 0, 0.12841482, 0, 0.9917205, -1.4311174, 1.1805973, 0.7546735)
 
-[node name="SwordBeerBottle_Physics2" parent="Bottles" instance=ExtResource("6_18p7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39733, 1.19419, 1.36789)
+[node name="WhiskeyBottle_Physics5" parent="Bottles" unique_id=321875365 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9975603, 0, 0.06980869, 0, 1, 0, -0.06980869, 0, 0.9975603, -1.5342437, 1.7376559, 1.0287056)
 
-[node name="SwordBeerBottle_Physics3" parent="Bottles" instance=ExtResource("6_18p7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39733, 1.19419, 0.937753)
+[node name="WhiskeyBottle_Physics7" parent="Bottles" unique_id=689576270 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.91164726, 0, 0.4109734, 0, 1, 0, -0.4109734, 0, 0.91164726, -1.4473993, 2.2988462, 1.3184255)
 
-[node name="SwordBeerBottle_Physics4" parent="Bottles" instance=ExtResource("6_18p7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39733, 1.73954, 0.937753)
+[node name="WhiskeyBottle_Physics8" parent="Bottles" unique_id=358431757 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9766499, 0, -0.21483755, 0, 1, 0, 0.21483755, 0, 0.9766499, -1.5171486, 2.2988462, 1.0791857)
 
-[node name="MysticsBeerBottle_Physics2" parent="Bottles" instance=ExtResource("5_f372n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45142, 0.627552, -0.848645)
+[node name="WhiskeyBottle_Physics9" parent="Bottles" unique_id=1016941379 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.81680274, 0, -0.5769171, 0, 1, 0, 0.5769171, 0, 0.81680274, -1.4367157, 2.2988462, 0.6886528)
 
-[node name="MysticsBeerBottle_Physics3" parent="Bottles" instance=ExtResource("5_f372n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45142, 0.627552, -1.30287)
+[node name="WhiskeyBottle_Physics10" parent="Bottles" unique_id=1341654467 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9921584, 0, -0.12498689, 0, 1, 0, 0.12498689, 0, 0.9921584, -1.416695, 2.2988462, 0.9083337)
 
-[node name="MysticsBeerBottle_Physics4" parent="Bottles" instance=ExtResource("5_f372n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45142, 1.18288, -1.30287)
+[node name="Mug_Physics" parent="Bottles" unique_id=1796084028 instance=ExtResource("4_tsihp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675346, 1.212109, 0.665913)
+
+[node name="Mug_Physics3" parent="Bottles" unique_id=690162698 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.98855454, 0, 0.15086399, 0, 1, 0, -0.15086399, 0, 0.98855454, -1.584447, 0.06534532, 0.6620743)
+
+[node name="Mug_Physics4" parent="Bottles" unique_id=55686640 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.98855454, 0, 0.15086399, 0, 1, 0, -0.15086399, 0, 0.98855454, -1.5202467, 0.06534532, 0.837108)
+
+[node name="Mug_Physics7" parent="Bottles" unique_id=1476087477 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.46507385, 0, 0.8852719, 0, 1, 0, -0.8852719, 0, 0.46507385, -1.4197756, 0.06534532, 0.98929375)
+
+[node name="Mug_Physics9" parent="Bottles" unique_id=1217251261 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.22005054, 0, 0.97548854, 0, 1, 0, -0.97548854, 0, 0.22005054, -1.3768507, 1.181121, 1.0951878)
+
+[node name="Mug_Physics6" parent="Bottles" unique_id=349018885 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.64931536, 0, 0.76051927, 0, 1, 0, -0.76051927, 0, 0.64931536, -1.565915, 0.06534529, 1.2933025)
+
+[node name="Mug_Physics8" parent="Bottles" unique_id=947505799 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.20116347, 0, 0.97955775, 0, 1, 0, -0.97955775, 0, 0.20116347, -1.6374844, 0.06534529, 1.1014143)
+
+[node name="Mug_Physics5" parent="Bottles" unique_id=202051279 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.98855454, 0, 0.15086399, 0, 1, 0, -0.15086399, 0, 0.98855454, -1.4322912, 0.06534529, 0.6078294)
+
+[node name="Mug_Physics2" parent="Bottles" unique_id=273614724 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.19483359, 0, -0.98083633, 0, 1, 0, 0.98083633, 0, 0.19483359, 0.42597586, 1.0350175, 1.1789701)
+
+[node name="MysticsBeerBottle_Physics" parent="Bottles" unique_id=1318840742 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.51868373, 0, 0.85496616, 0, 1, 0, -0.85496616, 0, 0.51868373, 0.25806856, 1.0461729, -0.065614335)
+
+[node name="SwordBeerBottle_Physics" parent="Bottles" unique_id=351499800 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.5145743, 0, -0.85744584, 0, 1, 0, 0.85744584, 0, -0.5145743, 0.87266, 1.2067379, -0.691527)
+
+[node name="Glass_Physics" parent="Bottles" unique_id=1758893957 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32771897, 1.0328017, -1.32399)
+
+[node name="Glass_Physics2" parent="Bottles" unique_id=1093513401 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(0.56706774, 0, 0.82367116, 0, 1, 0, -0.82367116, 0, 0.56706774, 0.49901173, 1.035558, -0.27353024)
+
+[node name="Glass_Physics3" parent="Bottles" unique_id=1976334045 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.547271, 0, 0.8369554, 0, 1, 0, -0.8369554, 0, -0.547271, 0.8622445, 1.2020652, -0.27353024)
+
+[node name="Glass_Physics4" parent="Bottles" unique_id=445297265 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.916034, 0, 0.40110067, 0, 1, 0, -0.40110067, 0, -0.916034, -1.3841759, 0.62714446, 0.63531893)
+
+[node name="Glass_Physics5" parent="Bottles" unique_id=777714803 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.8226505, 0, -0.56854737, 0, 1, 0, 0.56854737, 0, -0.8226505, -1.3941215, 0.065733925, 0.75085247)
+
+[node name="Glass_Physics9" parent="Bottles" unique_id=1049735747 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.43711594, 0, -0.8994053, 0, 1, 0, 0.8994053, 0, -0.43711594, -1.4171457, 1.7472665, 0.77049774)
+
+[node name="Glass_Physics10" parent="Bottles" unique_id=1174200277 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.24114294, 0, -0.97048974, 0, 1, 0, 0.97048974, 0, -0.24114294, -1.3945241, 2.2978055, 1.1300505)
+
+[node name="Glass_Physics11" parent="Bottles" unique_id=733041367 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.24114294, 0, -0.97048974, 0, 1, 0, 0.97048974, 0, -0.24114294, -1.363958, 2.2978055, 0.7857659)
+
+[node name="WhiskeyBottle_Physics14" parent="Bottles" unique_id=1062179247 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.91164726, 0, 0.4109734, 0, 1, 0, -0.4109734, 0, 0.91164726, -1.4906768, 2.2988462, -0.6403414)
+
+[node name="WhiskeyBottle_Physics15" parent="Bottles" unique_id=1349826055 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9766499, 0, -0.21483755, 0, 1, 0, 0.21483755, 0, 0.9766499, -1.5604261, 2.2988462, -0.8795812)
+
+[node name="WhiskeyBottle_Physics16" parent="Bottles" unique_id=874466823 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.81680274, 0, -0.5769171, 0, 1, 0, 0.5769171, 0, 0.81680274, -1.4799932, 2.2988462, -1.2701142)
+
+[node name="WhiskeyBottle_Physics17" parent="Bottles" unique_id=1361048632 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9921584, 0, -0.12498689, 0, 1, 0, 0.12498689, 0, 0.9921584, -1.4599725, 2.2988462, -1.0504332)
+
+[node name="Glass_Physics17" parent="Bottles" unique_id=524962988 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.24114294, 0, -0.97048974, 0, 1, 0, 0.97048974, 0, -0.24114294, -1.4378016, 2.2978055, -0.8287164)
+
+[node name="Glass_Physics18" parent="Bottles" unique_id=787336675 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.24114294, 0, -0.97048974, 0, 1, 0, 0.97048974, 0, -0.24114294, -1.4072355, 2.2978055, -1.173001)
+
+[node name="Glass_Physics19" parent="Bottles" unique_id=1233658217 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(0.19308704, 0, -0.98118174, 0, 1, 0, 0.98118174, 0, 0.19308704, -1.3709158, 2.2978055, -0.6795712)
+
+[node name="Glass_Physics6" parent="Bottles" unique_id=418555064 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.8226505, 0, -0.56854737, 0, 1, 0, 0.56854737, 0, -0.8226505, -1.5848798, 0.065733925, 0.97065884)
+
+[node name="Glass_Physics7" parent="Bottles" unique_id=1468919555 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.5494751, 0, -0.8355102, 0, 1, 0, 0.8355102, 0, -0.5494751, -1.4106847, 0.065733925, 1.1759467)
+
+[node name="Glass_Physics8" parent="Bottles" unique_id=92963133 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(0.17718774, 0, -0.9841771, 0, 1, 0, 0.9841771, 0, 0.17718774, -1.4396354, 0.065733925, 1.3882753)
+
+[node name="Mug_Physics11" parent="Bottles" unique_id=49991371 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.98855454, 0, 0.15086399, 0, 1, 0, -0.15086399, 0, 0.98855454, -1.584447, 0.06534532, -1.3065088)
+
+[node name="Mug_Physics12" parent="Bottles" unique_id=797045342 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.98855454, 0, 0.15086399, 0, 1, 0, -0.15086399, 0, 0.98855454, -1.5202467, 0.06534532, -1.1314751)
+
+[node name="Mug_Physics13" parent="Bottles" unique_id=762442663 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.46507385, 0, 0.8852719, 0, 1, 0, -0.8852719, 0, 0.46507385, -1.4197756, 0.06534532, -0.97928935)
+
+[node name="Mug_Physics14" parent="Bottles" unique_id=41496842 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.64931536, 0, 0.76051927, 0, 1, 0, -0.76051927, 0, 0.64931536, -1.565915, 0.06534529, -0.6752806)
+
+[node name="Mug_Physics15" parent="Bottles" unique_id=455438241 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.20116347, 0, 0.97955775, 0, 1, 0, -0.97955775, 0, 0.20116347, -1.6374844, 0.06534529, -0.8671688)
+
+[node name="Mug_Physics16" parent="Bottles" unique_id=778603441 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.98855454, 0, 0.15086399, 0, 1, 0, -0.15086399, 0, 0.98855454, -1.4322912, 0.06534529, -1.3607537)
+
+[node name="Glass_Physics13" parent="Bottles" unique_id=871280600 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.8226505, 0, -0.56854737, 0, 1, 0, 0.56854737, 0, -0.8226505, -1.3941215, 0.065733925, -1.2177306)
+
+[node name="Glass_Physics14" parent="Bottles" unique_id=1979039976 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.8226505, 0, -0.56854737, 0, 1, 0, 0.56854737, 0, -0.8226505, -1.5848798, 0.065733925, -0.99792427)
+
+[node name="Glass_Physics15" parent="Bottles" unique_id=1668931752 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.5494751, 0, -0.8355102, 0, 1, 0, 0.8355102, 0, -0.5494751, -1.4106847, 0.065733925, -0.7926364)
+
+[node name="Glass_Physics16" parent="Bottles" unique_id=777382376 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(0.17718774, 0, -0.9841771, 0, 1, 0, 0.9841771, 0, 0.17718774, -1.4396354, 0.065733925, -0.58030784)
+
+[node name="SwordBeerBottle_Physics2" parent="Bottles" unique_id=740224192 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.69416857, 0, 0.71981245, 0, 1, 0, -0.71981245, 0, 0.69416857, -1.39733, 1.19419, 1.36789)
+
+[node name="SwordBeerBottle_Physics3" parent="Bottles" unique_id=1919547867 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.22411764, 0, 0.9745621, 0, 1, 0, -0.9745621, 0, -0.22411764, -1.39733, 1.1790764, 0.937753)
+
+[node name="WhiskeyBottle_Physics12" parent="Bottles" unique_id=248949269 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.89707345, 0, 0.44188172, 0, 1, 0, -0.44188172, 0, 0.89707345, -1.5950329, 1.1805973, -0.76978624)
+
+[node name="WhiskeyBottle_Physics13" parent="Bottles" unique_id=1942238730 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9917205, 0, -0.12841482, 0, 1, 0, 0.12841482, 0, 0.9917205, -1.5266446, 1.1805973, -1.1966488)
+
+[node name="Mug_Physics10" parent="Bottles" unique_id=888746965 instance=ExtResource("4_tsihp")]
+transform = Transform3D(0.22005054, 0, 0.97548854, 0, 1, 0, -0.97548854, 0, 0.22005054, -1.4723779, 1.181121, -0.85613453)
+
+[node name="SwordBeerBottle_Physics14" parent="Bottles" unique_id=1975084259 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.69416857, 0, 0.71981245, 0, 1, 0, -0.71981245, 0, 0.69416857, -1.4928572, 1.19419, -0.5834323)
+
+[node name="SwordBeerBottle_Physics15" parent="Bottles" unique_id=2140063144 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.22411764, 0, 0.9745621, 0, 1, 0, -0.9745621, 0, -0.22411764, -1.4928572, 1.1790764, -1.0135694)
+
+[node name="SwordBeerBottle_Physics6" parent="Bottles" unique_id=1395424929 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.7436235, 0, 0.66859865, 0, 1, 0, -0.66859865, 0, 0.7436235, -1.5093256, 0.627885, 0.8146484)
+
+[node name="SwordBeerBottle_Physics7" parent="Bottles" unique_id=1868618236 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.14390704, 0, 0.98959124, 0, 1, 0, -0.98959124, 0, -0.14390704, -1.5956106, 0.627885, 1.1499945)
+
+[node name="SwordBeerBottle_Physics4" parent="Bottles" unique_id=745441627 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.78063774, 0, 0.6249838, 0, 1, 0, -0.6249838, 0, -0.78063774, -1.39733, 1.7390939, 0.937753)
+
+[node name="SwordBeerBottle_Physics8" parent="Bottles" unique_id=1166461990 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.39137357, 0, 0.9202319, 0, 1, 0, -0.9202319, 0, 0.39137357, -1.4142348, 1.7390939, 1.2304927)
+
+[node name="SwordBeerBottle_Physics9" parent="Bottles" unique_id=1879620779 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.9895711, 0, 0.14404547, 0, 1, 0, -0.14404547, 0, 0.9895711, -1.4230815, 1.7390939, 0.5850663)
+
+[node name="SwordBeerBottle_Physics5" parent="Bottles" unique_id=1988296737 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.51599526, 0, 0.85659146, 0, 1, 0, -0.85659146, 0, -0.51599526, -1.5815691, 1.7373096, 1.3611398)
+
+[node name="MysticsBeerBottle_Physics2" parent="Bottles" unique_id=1538882004 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.47008786, 0, 0.8826196, 0, 1, 0, -0.8826196, 0, 0.47008786, -1.3847581, 0.627552, -0.7989797)
+
+[node name="MysticsBeerBottle_Physics3" parent="Bottles" unique_id=423281794 instance=ExtResource("5_f372n")]
+transform = Transform3D(-0.54579484, 0, 0.8379188, 0, 1, 0, -0.8379188, 0, -0.54579484, -1.45142, 0.627552, -1.30287)
+
+[node name="MysticsBeerBottle_Physics4" parent="Bottles" unique_id=2144700823 instance=ExtResource("5_f372n")]
+transform = Transform3D(-0.67416054, 0, 0.7385848, 0, 1, 0, -0.7385848, 0, -0.67416054, -1.45142, 1.18288, -1.30287)
+
+[node name="MysticsBeerBottle_Physics5" parent="Bottles" unique_id=1106575638 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.530008, 0, 0.8479926, 0, 1, 0, -0.8479926, 0, 0.530008, -1.5048101, 1.18288, 0.6235218)
+
+[node name="MysticsBeerBottle_Physics7" parent="Bottles" unique_id=122734044 instance=ExtResource("5_f372n")]
+transform = Transform3D(-0.7370651, 0, 0.6758218, 0, 1, 0, -0.6758218, 0, -0.7370651, -1.4571972, 0.6277428, 1.1141689)
+
+[node name="MysticsBeerBottle_Physics9" parent="Bottles" unique_id=518916200 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.3370131, 0, 0.94149995, 0, 1, 0, -0.94149995, 0, 0.3370131, -1.3981433, 0.6277428, 0.89127654)
+
+[node name="MysticsBeerBottle_Physics10" parent="Bottles" unique_id=1686374087 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.3370131, 0, 0.94149995, 0, 1, 0, -0.94149995, 0, 0.3370131, -1.6034815, 0.6277428, 0.6333422)
+
+[node name="MysticsBeerBottle_Physics8" parent="Bottles" unique_id=1158196818 instance=ExtResource("5_f372n")]
+transform = Transform3D(-0.43406796, 0, 0.9008801, 0, 1, 0, -0.9008801, 0, -0.43406796, -1.4080826, 0.6277429, 1.3852681)
+
+[node name="SwordBeerBottle_Physics16" parent="Bottles" unique_id=124941089 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.7436235, 0, 0.66859865, 0, 1, 0, -0.66859865, 0, 0.7436235, -1.5306268, 0.627885, -1.1917942)
+
+[node name="SwordBeerBottle_Physics17" parent="Bottles" unique_id=792406013 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.14390704, 0, 0.98959124, 0, 1, 0, -0.98959124, 0, -0.14390704, -1.6169118, 0.627885, -0.85644805)
+
+[node name="MysticsBeerBottle_Physics12" parent="Bottles" unique_id=24816156 instance=ExtResource("5_f372n")]
+transform = Transform3D(-0.7370651, 0, 0.6758218, 0, 1, 0, -0.6758218, 0, -0.7370651, -1.4784983, 0.6277428, -0.89227366)
+
+[node name="MysticsBeerBottle_Physics13" parent="Bottles" unique_id=1406351834 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.3370131, 0, 0.94149995, 0, 1, 0, -0.94149995, 0, 0.3370131, -1.4194444, 0.6277428, -1.115166)
+
+[node name="MysticsBeerBottle_Physics14" parent="Bottles" unique_id=339834969 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.3370131, 0, 0.94149995, 0, 1, 0, -0.94149995, 0, 0.3370131, -1.6247827, 0.6277428, -1.3731003)
+
+[node name="MysticsBeerBottle_Physics15" parent="Bottles" unique_id=1931790221 instance=ExtResource("5_f372n")]
+transform = Transform3D(-0.43406796, 0, 0.9008801, 0, 1, 0, -0.9008801, 0, -0.43406796, -1.4293838, 0.6277429, -0.62117445)
+
+[node name="MysticsBeerBottle_Physics6" parent="Bottles" unique_id=1968923257 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.41232538, 0, 0.9110367, 0, 1, 0, -0.9110367, 0, 0.41232538, -1.6014719, 1.7364843, 0.5684325)
+
+[node name="WhiskeyBottle_Physics11" parent="Bottles" unique_id=1875873082 instance=ExtResource("3_2iyaj")]
+transform = Transform3D(0.9975603, 0, 0.06980869, 0, 1, 0, -0.06980869, 0, 0.9975603, -1.5342437, 1.7376559, -0.9408561)
+
+[node name="Glass_Physics12" parent="Bottles" unique_id=1097215645 instance=ExtResource("7_qe1lq")]
+transform = Transform3D(-0.43711594, 0, -0.8994053, 0, 1, 0, 0.8994053, 0, -0.43711594, -1.4171457, 1.7472665, -1.199064)
+
+[node name="SwordBeerBottle_Physics10" parent="Bottles" unique_id=653477475 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.78063774, 0, 0.6249838, 0, 1, 0, -0.6249838, 0, -0.78063774, -1.39733, 1.7390939, -1.0318086)
+
+[node name="SwordBeerBottle_Physics11" parent="Bottles" unique_id=869475502 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.39137357, 0, 0.9202319, 0, 1, 0, -0.9202319, 0, 0.39137357, -1.4142348, 1.7390939, -0.739069)
+
+[node name="SwordBeerBottle_Physics12" parent="Bottles" unique_id=896384266 instance=ExtResource("6_18p7x")]
+transform = Transform3D(0.9895711, 0, 0.14404547, 0, 1, 0, -0.14404547, 0, 0.9895711, -1.4230815, 1.7390939, -1.3844954)
+
+[node name="SwordBeerBottle_Physics13" parent="Bottles" unique_id=269608566 instance=ExtResource("6_18p7x")]
+transform = Transform3D(-0.51599526, 0, 0.85659146, 0, 1, 0, -0.85659146, 0, -0.51599526, -1.5815691, 1.7373096, -0.6084219)
+
+[node name="MysticsBeerBottle_Physics11" parent="Bottles" unique_id=456957789 instance=ExtResource("5_f372n")]
+transform = Transform3D(0.41232538, 0, 0.9110367, 0, 1, 0, -0.9110367, 0, 0.41232538, -1.6014719, 1.7364843, -1.4011292)
 
 [connection signal="body_entered" from="Mirror" to="Mirror" method="_on_body_entered"]

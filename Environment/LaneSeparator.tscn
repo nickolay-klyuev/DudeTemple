@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://df7d18e1tdr7m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tjci0"]
+seed = 78
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w0gyb"]
+noise = SubResource("FastNoiseLite_tjci0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nma52"]
+albedo_color = Color(0.15966994, 0.091249295, 1.2032688e-08, 1)
+metallic = 0.8
+metallic_specular = 0.8
+metallic_texture = SubResource("NoiseTexture2D_w0gyb")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2uf1j"]
+lightmap_size_hint = Vector2i(97, 4)
+material = SubResource("StandardMaterial3D_nma52")
+add_uv2 = true
+size = Vector2(19.16, 0.48)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tjci0"]
+size = Vector3(19.161427, 0.49645996, 0.48034668)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=397328195]
+
+[node name="LaneSeparator" type="MeshInstance3D" parent="." unique_id=322172107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, -1.01036)
+mesh = SubResource("PlaneMesh_2uf1j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=304260374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012149811, -0.25177002, -1.0099487)
+shape = SubResource("BoxShape3D_tjci0")

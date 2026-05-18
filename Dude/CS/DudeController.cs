@@ -94,11 +94,11 @@ public partial class DudeController : CharacterBody3D
 		_bThrowForceBarVisibilityCache = _throwForceBar.Visible;
 	}
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
 		
-        // Adding force to throw
+		// Adding force to throw
 		if (_bIsAddingForce && _currentForce < _throwForce.Y)
 		{
 			_currentForce += (float)delta * _addingForceMod;
@@ -106,9 +106,9 @@ public partial class DudeController : CharacterBody3D
 			_currentForcePercent = (_currentForce - _throwForce.X) / (_throwForce.Y - _throwForce.X);
 			_throwForceBar.SetForcePercentage(_currentForcePercent);
 		}
-    }
+	}
 
-    public override void _PhysicsProcess(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (_bIsDisabled)
 		{

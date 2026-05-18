@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfh3khmwpaung"]
+[gd_scene format=3 uid="uid://bfh3khmwpaung"]
 
 [ext_resource type="Script" uid="uid://bxmiw60fu4jy1" path="res://Dude/CS/DudeController.cs" id="1_blwry"]
 [ext_resource type="Script" uid="uid://bwo1cgxo2p2ps" path="res://Dude/CS/ThrowForce.cs" id="2_8ef73"]
@@ -19,9 +19,9 @@ ProgressBar/styles/background = SubResource("StyleBoxFlat_fp5as")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vrco"]
 radius = 0.35
-height = 1.8
+height = 1.9
 
-[node name="Dude" type="CharacterBody3D" node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_stepsPlayer", "_throwMaxForceLoc", "_throwForceBar", "_crossHair")]
+[node name="Dude" type="CharacterBody3D" unique_id=78855865 node_paths=PackedStringArray("_dudeFace", "_dudeHand", "_aimRaycast", "_grabSocket", "_interactLabel", "_stepsPlayer", "_throwMaxForceLoc", "_throwForceBar", "_crossHair")]
 collision_layer = 0
 script = ExtResource("1_blwry")
 _dudeFace = NodePath("DudeFaceCamera")
@@ -34,7 +34,7 @@ _throwMaxForceLoc = NodePath("ThrowMaxForceLoc")
 _throwForceBar = NodePath("ThrowForce")
 _crossHair = NodePath("CenterPoint")
 
-[node name="CenterPoint" type="Panel" parent="."]
+[node name="CenterPoint" type="Panel" parent="." unique_id=902861354]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -49,7 +49,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pg8y2")
 
-[node name="ThrowForce" type="ProgressBar" parent="."]
+[node name="ThrowForce" type="ProgressBar" parent="." unique_id=1746991297]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -66,7 +66,7 @@ script = ExtResource("2_8ef73")
 _beginColor = Color(0, 0.427451, 0.956863, 1)
 _endColor = Color(0.631373, 0, 0.0705882, 1)
 
-[node name="InteractLabel" type="Label" parent="."]
+[node name="InteractLabel" type="Label" parent="." unique_id=542381873]
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.677469
@@ -82,34 +82,34 @@ size_flags_horizontal = 4
 text = "Press E to interact"
 metadata/_edit_use_anchors_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22154, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1970167880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9699869, 0)
 shape = SubResource("CapsuleShape3D_0vrco")
 
-[node name="DudeFaceCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9119, 0)
+[node name="DudeFaceCamera" type="Camera3D" parent="." unique_id=886211285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
 fov = 60.0
 near = 0.001
 
-[node name="GrabSocket" type="Node3D" parent="DudeFaceCamera"]
+[node name="GrabSocket" type="Node3D" parent="DudeFaceCamera" unique_id=1914134569]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0290618, -0.237393, -0.39012)
 
-[node name="InteractRaycast" type="RayCast3D" parent="DudeFaceCamera"]
+[node name="InteractRaycast" type="RayCast3D" parent="DudeFaceCamera" unique_id=1359677872]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -2, 0)
 collision_mask = 2048
 collide_with_areas = true
 
-[node name="AimRaycast" type="RayCast3D" parent="DudeFaceCamera"]
+[node name="AimRaycast" type="RayCast3D" parent="DudeFaceCamera" unique_id=2093933028]
 transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 0, 0, -0.747919)
 target_position = Vector3(0, -50, 0)
 debug_shape_custom_color = Color(1, 0.239216, 0.513726, 1)
 debug_shape_thickness = 1
 
-[node name="ThrowMaxForceLoc" type="Node3D" parent="."]
+[node name="ThrowMaxForceLoc" type="Node3D" parent="." unique_id=1341900316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273565, 0.960816, 0.417999)
 
-[node name="StepsAudioPlayer" type="AudioStreamPlayer3D" parent="."]
+[node name="StepsAudioPlayer" type="AudioStreamPlayer3D" parent="." unique_id=150869783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326554, 0)
 stream = ExtResource("3_u4pw1")
 max_distance = 3.5
